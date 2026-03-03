@@ -4,57 +4,76 @@
 
 {% block content %}
 <!-- Hero Section -->
-<div class="relative pt-16 pb-32 flex items-center justify-center overflow-hidden w-full">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+<div class="relative pt-24 pb-32 flex items-center justify-center overflow-hidden w-full min-h-[85vh]">
 
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+    <!-- Subtle Grid Background -->
+    <div
+        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTM5IDM5VjFoLTM4djM4aDM4eiIgZmlsbD0iIzMzMyIgZmlsbC1vcGFjaXR5PSIwLjEiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==')] opacity-10 z-0">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#FFF9F0]/80 to-[#FFF9F0] z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
+
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight max-w-4xl text-gray-900">
             Master Any Subject with <br />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-vibrantyellow to-safetyorange">Expert
+            <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-safetyorange to-vibrantyellow drop-shadow-sm">Expert
                 Home Tutors</span>
         </h1>
 
-        <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
+        <p class="text-xl md:text-2xl text-gray-600 mb-14 max-w-3xl mx-auto font-medium">
             Get personalized 1-on-1 tutoring at your doorstep or online. Start your learning journey today.
         </p>
 
         <!-- Search Form / Pre-Lead Capture -->
         <div
-            class="bg-gray-900/50 backdrop-blur-xl p-8 rounded-3xl border border-gray-800 shadow-2xl inline-block w-full max-w-4xl mx-auto">
-            <form id="hero-form" class="grid grid-cols-1 md:grid-cols-4 gap-4"
+            class="bg-white/80 backdrop-blur-2xl p-6 md:p-8 rounded-3xl border border-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] inline-block w-full max-w-5xl mx-auto mt-4 transition-transform hover:scale-[1.01] duration-500">
+            <form id="hero-form" class="grid grid-cols-1 md:grid-cols-4 gap-6 items-center"
                 onsubmit="event.preventDefault(); openLeadModal();">
 
-                <select id="grade"
-                    class="bg-deepblack border border-gray-700 text-white rounded-xl px-4 py-3.5 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full"
-                    required>
-                    <option value="" disabled selected>Select Grade</option>
-                    <option value="Class 1-5">Class 1-5</option>
-                    <option value="Class 6-8">Class 6-8</option>
-                    <option value="Class 9-10">Class 9-10</option>
-                    <option value="Class 11-12">Class 11-12</option>
-                    <option value="College">College</option>
-                </select>
+                <div class="relative">
+                    <select id="grade"
+                        class="bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-4 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full transition-all appearance-none cursor-pointer"
+                        required>
+                        <option value="" disabled selected>Select Grade</option>
+                        <option value="Class 1-5">Class 1-5</option>
+                        <option value="Class 6-8">Class 6-8</option>
+                        <option value="Class 9-10">Class 9-10</option>
+                        <option value="Class 11-12">Class 11-12</option>
+                        <option value="College">College</option>
+                    </select>
+                    <i
+                        class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                </div>
 
-                <select id="subject"
-                    class="bg-deepblack border border-gray-700 text-white rounded-xl px-4 py-3.5 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full"
-                    required>
-                    <option value="" disabled selected>Select Subject</option>
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="Science">Science</option>
-                    <option value="Physics">Physics</option>
-                    <option value="Chemistry">Chemistry</option>
-                    <option value="English">English</option>
-                    <option value="Computer Science">Computer Science</option>
-                </select>
+                <div class="relative">
+                    <select id="subject"
+                        class="bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-4 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full transition-all appearance-none cursor-pointer"
+                        required>
+                        <option value="" disabled selected>Select Subject</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Science">Science</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="English">English</option>
+                        <option value="Computer Science">Computer Science</option>
+                    </select>
+                    <i
+                        class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                </div>
 
-                <input type="text" id="pincode" placeholder="Enter Pincode"
-                    class="bg-deepblack border border-gray-700 text-white rounded-xl px-4 py-3.5 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full"
-                    required>
+                <div class="relative">
+                    <input type="text" id="pincode" placeholder="Enter Pincode"
+                        class="bg-gray-50 border border-gray-200 text-gray-900 rounded-xl px-4 py-4 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full transition-all"
+                        required>
+                </div>
 
-                <!-- Opens Modal immediately taking to the next lead generation step -->
-                <button type="submit"
-                    class="bg-vibrantyellow hover:bg-safetyorange text-deepblack hover:text-white px-2 py-3.5 rounded-xl font-bold transition-all duration-300 w-full text-lg shadow-[0_0_15px_rgba(255,215,0,0.5)] transform hover:scale-105 flex items-center justify-center">
-                    Find Tutors <i class="fas fa-arrow-right ml-2"></i>
-                </button>
+                <div>
+                    <button type="submit"
+                        class="bg-gradient-to-r from-safetyorange to-[#ffaa00] hover:from-vibrantyellow hover:to-safetyorange text-white px-2 py-4 rounded-xl font-bold transition-all duration-300 w-full text-lg shadow-[0_4px_14px_0_rgba(255,140,0,0.39)] transform hover:-translate-y-1 flex items-center justify-center">
+                        Find Tutors <i class="fas fa-arrow-right ml-2 text-sm z-10"></i>
+                    </button>
+                </div>
 
             </form>
         </div>
@@ -62,52 +81,52 @@
 
     <!-- Abstract glowing background element behind Hero -->
     <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-safetyorange opacity-20 rounded-full blur-[120px] -z-10">
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-safetyorange/10 rounded-full blur-[150px] pointer-events-none z-0">
     </div>
 </div>
 
 <!-- Feature Grid -->
-<section class="py-20 bg-deepblack border-t border-b border-gray-900 w-full">
+<section class="py-20 bg-white border-t border-b border-gray-100 w-full">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4">Why Choose Us?</h2>
+            <h2 class="text-4xl font-bold mb-4 text-gray-900">Why Choose Us?</h2>
             <div class="h-1 w-20 bg-safetyorange mx-auto rounded"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
             <!-- Card 1 -->
             <div
-                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-vibrantyellow transition-all duration-300 transform hover:-translate-y-2 group">
+                class="bg-[#FFF9F0] rounded-2xl p-8 border border-gray-100 hover:border-vibrantyellow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group shadow-sm">
                 <div
-                    class="w-16 h-16 bg-safetyorange/10 rounded-2xl flex items-center justify-center mb-6 text-safetyorange group-hover:bg-safetyorange group-hover:text-white transition-colors">
+                    class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 text-safetyorange shadow-sm group-hover:bg-safetyorange group-hover:text-white transition-colors">
                     <i class="fas fa-home text-2xl"></i>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">1-on-1 Home Tuition</h3>
-                <p class="text-gray-400">Personalized attention at the comfort of your home. Customized learning
+                <h3 class="text-2xl font-bold mb-4 text-gray-900">1-on-1 Home Tuition</h3>
+                <p class="text-gray-600">Personalized attention at the comfort of your home. Customized learning
                     pace strictly aligned with the student's needs.</p>
             </div>
 
             <!-- Card 2 -->
             <div
-                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-safetyorange transition-all duration-300 transform hover:-translate-y-2 group">
+                class="bg-[#FFF9F0] rounded-2xl p-8 border border-gray-100 hover:border-safetyorange hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group shadow-sm">
                 <div
-                    class="w-16 h-16 bg-vibrantyellow/10 rounded-2xl flex items-center justify-center mb-6 text-vibrantyellow group-hover:bg-vibrantyellow group-hover:text-deepblack transition-colors">
+                    class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 text-vibrantyellow shadow-sm group-hover:bg-vibrantyellow group-hover:text-deepblack transition-colors">
                     <i class="fas fa-laptop text-2xl"></i>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">Online Classes</h3>
-                <p class="text-gray-400">Interactive live sessions with top-tier educators from across the country
+                <h3 class="text-2xl font-bold mb-4 text-gray-900">Online Classes</h3>
+                <p class="text-gray-600">Interactive live sessions with top-tier educators from across the country
                     via advanced digital whiteboards and video mapping.</p>
             </div>
 
             <!-- Card 3 -->
             <div
-                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-vibrantyellow transition-all duration-300 transform hover:-translate-y-2 group">
+                class="bg-[#FFF9F0] rounded-2xl p-8 border border-gray-100 hover:border-vibrantyellow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group shadow-sm">
                 <div
-                    class="w-16 h-16 bg-safetyorange/10 rounded-2xl flex items-center justify-center mb-6 text-safetyorange group-hover:bg-safetyorange group-hover:text-white transition-colors">
+                    class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 text-safetyorange shadow-sm group-hover:bg-safetyorange group-hover:text-white transition-colors">
                     <i class="fas fa-graduation-cap text-2xl"></i>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">Exam Prep</h3>
-                <p class="text-gray-400">Targeted preparation for board examinations and competitive tests with
+                <h3 class="text-2xl font-bold mb-4 text-gray-900">Exam Prep</h3>
+                <p class="text-gray-600">Targeted preparation for board examinations and competitive tests with
                     extensive mock papers, revisions, and test strategies.</p>
             </div>
         </div>
@@ -115,11 +134,11 @@
 </section>
 
 <!-- Top Tutors Section -->
-<section class="py-20 bg-deepblack w-full">
+<section class="py-20 bg-transparent w-full">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-end mb-12">
             <div>
-                <h2 class="text-4xl font-bold mb-4">Meet Our Top Tutors</h2>
+                <h2 class="text-4xl font-bold mb-4 text-gray-900">Meet Our Top Tutors</h2>
                 <div class="h-1 w-20 bg-vibrantyellow rounded"></div>
             </div>
             <button class="text-safetyorange hover:text-vibrantyellow font-semibold transition flex items-center">
@@ -130,17 +149,17 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <!-- Tutor Card 1 -->
             <div
-                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
+                class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-safetyorange transition-all duration-300 flex flex-col h-full group">
                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=400"
                     alt="Tutor"
                     class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
-                    <h4 class="text-xl font-bold mb-1">Priya Sharma</h4>
+                <div class="p-6 flex flex-col flex-grow relative bg-white">
+                    <h4 class="text-xl font-bold mb-1 text-gray-900">Priya Sharma</h4>
                     <p class="text-safetyorange text-sm font-semibold mb-3">Mathematics & Physics</p>
                     <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        <span class="text-gray-400 text-sm ml-2">(4.8)</span>
+                        <span class="text-gray-500 text-sm ml-2">(4.8)</span>
                     </div>
                     <div class="mt-auto">
                         <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
@@ -153,17 +172,17 @@
 
             <!-- Tutor Card 2 -->
             <div
-                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
+                class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-safetyorange transition-all duration-300 flex flex-col h-full group">
                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600&h=400"
                     alt="Tutor"
                     class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
-                    <h4 class="text-xl font-bold mb-1">Rohan Gupta</h4>
+                <div class="p-6 flex flex-col flex-grow relative bg-white">
+                    <h4 class="text-xl font-bold mb-1 text-gray-900">Rohan Gupta</h4>
                     <p class="text-safetyorange text-sm font-semibold mb-3">Chemistry & Biology</p>
                     <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <span class="text-gray-400 text-sm ml-2">(5.0)</span>
+                        <span class="text-gray-500 text-sm ml-2">(5.0)</span>
                     </div>
                     <div class="mt-auto">
                         <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
@@ -176,17 +195,17 @@
 
             <!-- Tutor Card 3 -->
             <div
-                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
+                class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-safetyorange transition-all duration-300 flex flex-col h-full group">
                 <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&q=80&w=600&h=400"
                     alt="Tutor"
                     class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
-                    <h4 class="text-xl font-bold mb-1">Anita Desai</h4>
+                <div class="p-6 flex flex-col flex-grow relative bg-white">
+                    <h4 class="text-xl font-bold mb-1 text-gray-900">Anita Desai</h4>
                     <p class="text-safetyorange text-sm font-semibold mb-3">English Literature</p>
                     <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="far fa-star"></i>
-                        <span class="text-gray-400 text-sm ml-2">(4.1)</span>
+                            class="fas fa-star"></i><i class="far fa-star text-gray-300"></i>
+                        <span class="text-gray-500 text-sm ml-2">(4.1)</span>
                     </div>
                     <div class="mt-auto">
                         <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
@@ -199,17 +218,17 @@
 
             <!-- Tutor Card 4 -->
             <div
-                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
+                class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-safetyorange transition-all duration-300 flex flex-col h-full group">
                 <img src="https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?auto=format&fit=crop&q=80&w=600&h=400"
                     alt="Tutor"
                     class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
-                    <h4 class="text-xl font-bold mb-1">Vikram Singh</h4>
+                <div class="p-6 flex flex-col flex-grow relative bg-white">
+                    <h4 class="text-xl font-bold mb-1 text-gray-900">Vikram Singh</h4>
                     <p class="text-safetyorange text-sm font-semibold mb-3">Computer Science</p>
                     <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        <span class="text-gray-400 text-sm ml-2">(4.9)</span>
+                        <span class="text-gray-500 text-sm ml-2">(4.9)</span>
                     </div>
                     <div class="mt-auto">
                         <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"

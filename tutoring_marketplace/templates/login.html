@@ -4,8 +4,7 @@
 
 {% block content %}
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full min-h-[70vh] flex items-center justify-center">
-    <div
-        class="bg-gray-900 p-10 rounded-3xl border border-gray-800 shadow-2xl w-full max-w-md relative overflow-hidden">
+    <div class="bg-white p-10 rounded-3xl border border-gray-100 shadow-xl w-full max-w-md relative overflow-hidden">
 
         <!-- Abstract gradient styling exclusively for login box -->
         <div
@@ -16,41 +15,42 @@
         </div>
 
         <div class="text-center mb-8 relative z-10">
-            <h2 class="text-3xl font-extrabold mb-2">Welcome Back</h2>
-            <p class="text-gray-400 text-sm">Sign in to your NamanTutors account</p>
+            <h2 class="text-3xl font-extrabold mb-2 text-gray-900">Welcome Back</h2>
+            <p class="text-gray-500 text-sm">Sign in to your NamanTutors account</p>
         </div>
 
         <form class="space-y-6 relative z-10"
             onsubmit="event.preventDefault(); alert('Login functionality coming soon!');">
             <div>
-                <label class="block text-sm font-medium mb-2 text-gray-300">Email Address</label>
+                <label class="block text-sm font-medium mb-2 text-gray-700">Email Address</label>
                 <div class="relative">
-                    <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     <input type="email" required placeholder="name@example.com"
-                        class="w-full bg-deepblack border border-gray-700 rounded-xl pl-12 pr-4 py-3.5 focus:border-vibrantyellow focus:ring-1 focus:ring-vibrantyellow text-white outline-none transition-all">
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 focus:border-safetyorange focus:ring-1 focus:ring-safetyorange text-gray-900 outline-none transition-all">
                 </div>
             </div>
 
             <div>
                 <div class="flex justify-between items-center mb-2">
-                    <label class="block text-sm font-medium text-gray-300">Password</label>
+                    <label class="block text-sm font-medium text-gray-700">Password</label>
                     <a href="#" class="text-xs text-safetyorange hover:text-vibrantyellow transition">Forgot
                         password?</a>
                 </div>
                 <div class="relative">
-                    <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     <input type="password" required placeholder="••••••••"
-                        class="w-full bg-deepblack border border-gray-700 rounded-xl pl-12 pr-4 py-3.5 focus:border-vibrantyellow focus:ring-1 focus:ring-vibrantyellow text-white outline-none transition-all">
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 focus:border-safetyorange focus:ring-1 focus:ring-safetyorange text-gray-900 outline-none transition-all">
                 </div>
             </div>
 
             <button type="submit"
-                class="w-full bg-vibrantyellow hover:bg-safetyorange text-deepblack hover:text-white py-3.5 rounded-xl font-bold transition-all duration-300 shadow-[0_4px_14px_0_rgba(255,215,0,0.39)] transform hover:scale-105">
+                class="w-full bg-safetyorange hover:bg-vibrantyellow text-white hover:text-deepblack py-3.5 rounded-xl font-bold transition-all duration-300 shadow-md transform hover:scale-105">
                 Sign In
             </button>
 
-            <p class="text-center text-sm text-gray-400 mt-6">
-                Don't have an account? <a href="#" class="text-vibrantyellow hover:text-white font-semibold transition"
+            <p class="text-center text-sm text-gray-500 mt-6">
+                Don't have an account? <a href="#"
+                    class="text-safetyorange hover:text-vibrantyellow font-semibold transition"
                     onclick="document.getElementById('demo-modal').classList.remove('hidden')">Request a Demo</a>
             </p>
         </form>
