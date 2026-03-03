@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NamanTutors - High-Conversion Home Tutoring{% endblock %}</title>
+
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Tailwind Configuration setup -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        deepblack: '#000000',
+                        vibrantyellow: '#FFD700',
+                        safetyorange: '#FF8C00'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom styling to fetch Google Fonts & define specifics skipped in standard Tailwind definitions -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        /* Modern aesthetic bg gradients */
+        .gradient-bg {
+            background: radial-gradient(circle at top right, rgba(255, 140, 0, 0.15), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(255, 215, 0, 0.12), transparent 40%);
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+
+<body class="antialiased gradient-bg">
+
+    <!-- Navbar -->
+    <nav class="border-b border-gray-800 bg-deepblack/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="{{ url_for('index') }}" class="flex-shrink-0 flex items-center">
+                    <span class="text-3xl font-extrabold text-vibrantyellow tracking-tighter">Naman<span
+                            class="text-white">Tutors</span></span>
+                </a>
+
+                <!-- Navbar Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ url_for('index') }}"
+                        class="text-gray-300 hover:text-vibrantyellow transform hover:scale-105 transition font-semibold {% if request.endpoint == 'index' %}text-vibrantyellow border-b-2 border-vibrantyellow{% endif %}">Home</a>
+                    <a href="{{ url_for('about') }}"
+                        class="text-gray-300 hover:text-vibrantyellow transform hover:scale-105 transition font-semibold {% if request.endpoint == 'about' %}text-vibrantyellow border-b-2 border-vibrantyellow{% endif %}">About
+                        Us</a>
+                    <a href="{{ url_for('login') }}"
+                        class="text-gray-300 hover:text-vibrantyellow transform hover:scale-105 transition font-semibold {% if request.endpoint == 'login' %}text-vibrantyellow border-b-2 border-vibrantyellow{% endif %}">Login</a>
+                    <a href="{{ url_for('contact') }}"
+                        class="text-gray-300 hover:text-vibrantyellow transform hover:scale-105 transition font-semibold {% if request.endpoint == 'contact' %}text-vibrantyellow border-b-2 border-vibrantyellow{% endif %}">Contact</a>
+                    <!-- Demo Button -->
+                    <button
+                        class="bg-safetyorange hover:bg-vibrantyellow text-white hover:text-deepblack px-6 py-2.5 rounded-full font-bold transition-all duration-300 shadow-lg shadow-safetyorange/30 transform hover:-translate-y-0.5"
+                        onclick="document.getElementById('demo-modal').classList.remove('hidden')">
+                        Free Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Block -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-deepblack border-t border-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-2xl font-extrabold text-vibrantyellow tracking-tighter mb-4">Naman<span
+                    class="text-white">Tutors</span></h3>
+            <p class="text-gray-500 mb-6">Empowering students through tailored home education.</p>
+            <p class="text-gray-600 text-sm">&copy; 2026 NamanTutors Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/1234567890" target="_blank"
+        class="fixed bottom-6 right-6 bg-[#25D366] text-white w-[60px] h-[60px] rounded-full flex items-center justify-center text-3xl shadow-lg hover:scale-110 hover:shadow-green-500/50 transition-all duration-300 z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Lead Form Modal -->
+    <div id="demo-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+        style="transition: opacity 0.3s ease;">
+        <div class="bg-gray-900 p-8 rounded-2xl border border-gray-700 max-w-md w-full mx-4 relative transform scale-95 transition-transform duration-300"
+            id="modal-content">
+            <button onclick="closeLeadModal()"
+                class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-bold mb-2">Complete Your Request</h3>
+            <p class="text-gray-400 mb-6 text-sm">We just need a few details to connect you with the best tutor match.
+            </p>
+
+            <form onsubmit="submitLeadForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-gray-300">Full Name</label>
+                    <input type="text" id="modal-name" required placeholder="John Doe"
+                        class="w-full bg-deepblack border border-gray-700 rounded-lg px-4 py-3 focus:border-safetyorange focus:ring-1 focus:ring-safetyorange text-white outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-gray-300">Phone Number</label>
+                    <input type="tel" id="modal-phone" required placeholder="+1 123 456 7890"
+                        class="w-full bg-deepblack border border-gray-700 rounded-lg px-4 py-3 focus:border-safetyorange focus:ring-1 focus:ring-safetyorange text-white outline-none transition-all">
+                </div>
+
+                <div id="modal-alert"
+                    class="hidden text-sm bg-green-500/20 text-green-400 p-3 rounded-lg border border-green-500/30">
+                    <!-- Status message placed here -->
+                </div>
+
+                <button type="submit" id="submit-btn"
+                    class="w-full bg-safetyorange hover:bg-vibrantyellow text-white hover:text-deepblack py-3.5 rounded-xl font-bold transition-all duration-300 mt-2 shadow-[0_4px_14px_0_rgba(255,140,0,0.39)]">
+                    Submit Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Frontend logic to wire components -> Flask backend -->
+    <script>
+        let pendingSearchData = {};
+
+        // Helper to handle modal animations
+        const modalContainer = document.getElementById('demo-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openLeadModal() {
+            // Pick up data if the user initiated via hero form (only exists on index)
+            const gradeEl = document.getElementById('grade');
+            const subjectEl = document.getElementById('subject');
+            const pincodeEl = document.getElementById('pincode');
+
+            pendingSearchData = {
+                grade: gradeEl ? gradeEl.value : null,
+                subject: subjectEl ? subjectEl.value : null,
+                pincode: pincodeEl ? pincodeEl.value : null
+            };
+
+            // Show Modal
+            modalContainer.classList.remove('hidden');
+            // Small delay to allow display block to apply before animating opacity
+            setTimeout(() => {
+                modalContainer.classList.remove('opacity-0', 'pointer-events-none');
+                modalContainer.classList.add('opacity-100');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeLeadModal() {
+            modalContainer.classList.remove('opacity-100');
+            modalContainer.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+
+            // Wait for transition before fully hiding
+            setTimeout(() => {
+                modalContainer.classList.add('hidden');
+                document.getElementById('modal-alert').classList.add('hidden');
+            }, 300);
+        }
+
+        async function submitLeadForm(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('modal-name').value;
+            const phone = document.getElementById('modal-phone').value;
+            const btn = document.getElementById('submit-btn');
+
+            // Assemble payload
+            const payload = {
+                name: name,
+                phone: phone,
+                subject: pendingSearchData.subject || 'Not specified',
+                grade: pendingSearchData.grade || 'Not specified',
+                pincode: pendingSearchData.pincode || ''
+            };
+
+            // Change button state
+            btn.innerHTML = `<i class="fas fa-circle-notch fa-spin mr-2"></i> Submitting...`;
+            btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            try {
+                // Post to Flask Route
+                const response = await fetch('/request-tutor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const alertBox = document.getElementById('modal-alert');
+                alertBox.classList.remove('hidden');
+
+                if (response.ok) {
+                    // Success logic
+                    alertBox.textContent = "Request successfully submitted! We'll reach out shortly.";
+                    alertBox.className = "text-sm bg-green-500/20 text-green-400 p-3 rounded-lg border border-green-500/30 block mb-4";
+
+                    setTimeout(() => {
+                        closeLeadModal();
+                        e.target.reset(); // Reset modal form
+                        const heroForm = document.getElementById('hero-form');
+                        if (heroForm) heroForm.reset(); // Reset hero form if it exists
+                    }, 2500);
+                } else {
+                    // Server Error logic
+                    alertBox.textContent = "Failed to submit request. Please try again.";
+                    alertBox.className = "text-sm bg-red-500/20 text-red-500 p-3 rounded-lg border border-red-500/30 block mb-4";
+                }
+            } catch (err) {
+                console.error("Fetch Error: ", err);
+                alert("Network error. Make sure the Flask backend is running.");
+            } finally {
+                // Revert button state
+                btn.innerHTML = `Submit Request`;
+                btn.disabled = false;
+                btn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+        }
+    </script>
+</body>
+
+</html>

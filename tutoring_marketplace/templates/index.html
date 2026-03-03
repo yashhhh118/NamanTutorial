@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block title %}NamanTutors - High-Conversion Home Tutoring{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="relative pt-16 pb-32 flex items-center justify-center overflow-hidden w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+            Master Any Subject with <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-vibrantyellow to-safetyorange">Expert
+                Home Tutors</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
+            Get personalized 1-on-1 tutoring at your doorstep or online. Start your learning journey today.
+        </p>
+
+        <!-- Search Form / Pre-Lead Capture -->
+        <div
+            class="bg-gray-900/50 backdrop-blur-xl p-8 rounded-3xl border border-gray-800 shadow-2xl inline-block w-full max-w-4xl mx-auto">
+            <form id="hero-form" class="grid grid-cols-1 md:grid-cols-4 gap-4"
+                onsubmit="event.preventDefault(); openLeadModal();">
+
+                <select id="grade"
+                    class="bg-deepblack border border-gray-700 text-white rounded-xl px-4 py-3.5 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full"
+                    required>
+                    <option value="" disabled selected>Select Grade</option>
+                    <option value="Class 1-5">Class 1-5</option>
+                    <option value="Class 6-8">Class 6-8</option>
+                    <option value="Class 9-10">Class 9-10</option>
+                    <option value="Class 11-12">Class 11-12</option>
+                    <option value="College">College</option>
+                </select>
+
+                <select id="subject"
+                    class="bg-deepblack border border-gray-700 text-white rounded-xl px-4 py-3.5 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full"
+                    required>
+                    <option value="" disabled selected>Select Subject</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Science">Science</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="English">English</option>
+                    <option value="Computer Science">Computer Science</option>
+                </select>
+
+                <input type="text" id="pincode" placeholder="Enter Pincode"
+                    class="bg-deepblack border border-gray-700 text-white rounded-xl px-4 py-3.5 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full"
+                    required>
+
+                <!-- Opens Modal immediately taking to the next lead generation step -->
+                <button type="submit"
+                    class="bg-vibrantyellow hover:bg-safetyorange text-deepblack hover:text-white px-2 py-3.5 rounded-xl font-bold transition-all duration-300 w-full text-lg shadow-[0_0_15px_rgba(255,215,0,0.5)] transform hover:scale-105 flex items-center justify-center">
+                    Find Tutors <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Abstract glowing background element behind Hero -->
+    <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-safetyorange opacity-20 rounded-full blur-[120px] -z-10">
+    </div>
+</div>
+
+<!-- Feature Grid -->
+<section class="py-20 bg-deepblack border-t border-b border-gray-900 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">Why Choose Us?</h2>
+            <div class="h-1 w-20 bg-safetyorange mx-auto rounded"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Card 1 -->
+            <div
+                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-vibrantyellow transition-all duration-300 transform hover:-translate-y-2 group">
+                <div
+                    class="w-16 h-16 bg-safetyorange/10 rounded-2xl flex items-center justify-center mb-6 text-safetyorange group-hover:bg-safetyorange group-hover:text-white transition-colors">
+                    <i class="fas fa-home text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">1-on-1 Home Tuition</h3>
+                <p class="text-gray-400">Personalized attention at the comfort of your home. Customized learning
+                    pace strictly aligned with the student's needs.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-safetyorange transition-all duration-300 transform hover:-translate-y-2 group">
+                <div
+                    class="w-16 h-16 bg-vibrantyellow/10 rounded-2xl flex items-center justify-center mb-6 text-vibrantyellow group-hover:bg-vibrantyellow group-hover:text-deepblack transition-colors">
+                    <i class="fas fa-laptop text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Online Classes</h3>
+                <p class="text-gray-400">Interactive live sessions with top-tier educators from across the country
+                    via advanced digital whiteboards and video mapping.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-vibrantyellow transition-all duration-300 transform hover:-translate-y-2 group">
+                <div
+                    class="w-16 h-16 bg-safetyorange/10 rounded-2xl flex items-center justify-center mb-6 text-safetyorange group-hover:bg-safetyorange group-hover:text-white transition-colors">
+                    <i class="fas fa-graduation-cap text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Exam Prep</h3>
+                <p class="text-gray-400">Targeted preparation for board examinations and competitive tests with
+                    extensive mock papers, revisions, and test strategies.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Top Tutors Section -->
+<section class="py-20 bg-deepblack w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-4xl font-bold mb-4">Meet Our Top Tutors</h2>
+                <div class="h-1 w-20 bg-vibrantyellow rounded"></div>
+            </div>
+            <button class="text-safetyorange hover:text-vibrantyellow font-semibold transition flex items-center">
+                View All <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Tutor Card 1 -->
+            <div
+                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=400"
+                    alt="Tutor"
+                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
+                    <h4 class="text-xl font-bold mb-1">Priya Sharma</h4>
+                    <p class="text-safetyorange text-sm font-semibold mb-3">Mathematics & Physics</p>
+                    <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span class="text-gray-400 text-sm ml-2">(4.8)</span>
+                    </div>
+                    <div class="mt-auto">
+                        <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
+                            class="w-full border-2 border-safetyorange text-safetyorange hover:bg-safetyorange hover:text-white py-2.5 rounded-xl font-bold transition-all duration-300">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutor Card 2 -->
+            <div
+                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600&h=400"
+                    alt="Tutor"
+                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
+                    <h4 class="text-xl font-bold mb-1">Rohan Gupta</h4>
+                    <p class="text-safetyorange text-sm font-semibold mb-3">Chemistry & Biology</p>
+                    <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span class="text-gray-400 text-sm ml-2">(5.0)</span>
+                    </div>
+                    <div class="mt-auto">
+                        <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
+                            class="w-full border-2 border-safetyorange text-safetyorange hover:bg-safetyorange hover:text-white py-2.5 rounded-xl font-bold transition-all duration-300">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutor Card 3 -->
+            <div
+                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
+                <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&q=80&w=600&h=400"
+                    alt="Tutor"
+                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
+                    <h4 class="text-xl font-bold mb-1">Anita Desai</h4>
+                    <p class="text-safetyorange text-sm font-semibold mb-3">English Literature</p>
+                    <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="far fa-star"></i>
+                        <span class="text-gray-400 text-sm ml-2">(4.1)</span>
+                    </div>
+                    <div class="mt-auto">
+                        <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
+                            class="w-full border-2 border-safetyorange text-safetyorange hover:bg-safetyorange hover:text-white py-2.5 rounded-xl font-bold transition-all duration-300">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutor Card 4 -->
+            <div
+                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
+                <img src="https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?auto=format&fit=crop&q=80&w=600&h=400"
+                    alt="Tutor"
+                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
+                    <h4 class="text-xl font-bold mb-1">Vikram Singh</h4>
+                    <p class="text-safetyorange text-sm font-semibold mb-3">Computer Science</p>
+                    <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span class="text-gray-400 text-sm ml-2">(4.9)</span>
+                    </div>
+                    <div class="mt-auto">
+                        <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
+                            class="w-full border-2 border-safetyorange text-safetyorange hover:bg-safetyorange hover:text-white py-2.5 rounded-xl font-bold transition-all duration-300">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
