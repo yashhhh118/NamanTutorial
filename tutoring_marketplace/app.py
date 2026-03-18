@@ -43,6 +43,16 @@ def contact():
     """Renders the contact page."""
     return render_template('contact.html')
 
+@app.route('/book-demo')
+def book_demo():
+    """Renders the book free demo page."""
+    return render_template('book_demo.html')
+
+@app.route('/become-tutor')
+def become_tutor():
+    """Renders the become a tutor page."""
+    return render_template('become_tutor.html')
+
 @app.route('/request-tutor', methods=['POST'])
 def request_tutor():
     """Handles API requests to submit tutoring leads."""

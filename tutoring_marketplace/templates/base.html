@@ -4,19 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tutorials Website Courses{% endblock %}</title>
+    <title>{% block title %}Naman Home Tutors - Classes 1-10 in Pune{% endblock %}</title>
     <!-- Tailwind CSS Script -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- Custom Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brandgreen: '#7bc143',      // approx hero bg
-                        navgreen: '#8dc63f',      // Button green
+                        brandgreen: '#7bc143',
+                        navgreen: '#8dc63f',
+                        darkblue: '#1e3a8a',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,61 +28,173 @@
             }
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        main {
-            flex-grow: 1;
-        }
-    </style>
 </head>
 
-<body class="antialiased bg-white text-gray-800">
+<body class="antialiased bg-gray-50 text-gray-800 flex flex-col min-h-screen">
     <!-- Navbar -->
-    <nav class="bg-white sticky top-0 z-50 shadow-[0_2px_10px_rgba(0,0,0,0.05)]">
+    <nav id="navbar"
+        class="bg-white sticky top-0 z-50 shadow-[0_2px_10px_rgba(0,0,0,0.05)] transition-shadow duration-300 w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-[80px]">
                 <!-- Logo -->
                 <a href="{{ url_for('index') }}" class="flex-shrink-0 flex items-center h-full">
-                    <img src="https://www.tutorialswebsite.com/wp-content/uploads/2019/10/logo.png"
-                        alt="Tutorials Website" class="h-10"
-                        onerror="this.src='https://via.placeholder.com/200x50?text=Logo&bg=ffffff'">
+                    <span class="text-2xl font-bold text-gray-900 tracking-tight">
+                        <i class="fas fa-graduation-cap text-brandgreen mr-2"></i>
+                        Naman<span class="text-brandgreen">Tutors</span>
+                    </span>
                 </a>
-                <!-- Navbar Links -->
-                <div class="hidden md:flex items-center space-x-6 lg:space-x-8 h-full">
+
+                <!-- Desktop Navbar Links -->
+                <div class="hidden lg:flex items-center space-x-6 h-full">
                     <a href="{{ url_for('index') }}"
                         class="text-gray-800 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-brandgreen relative top-[1px]">Home</a>
-                    <a href="#"
-                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen">Courses</a>
-                    <a href="#"
-                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen">Articles</a>
-                    <a href="{{ url_for('about') }}"
-                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen">About
-                        Us</a>
-                    <a href="{{ url_for('contact') }}"
-                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen">Contact
-                        Us</a>
+                    <a href="{{ url_for('index') }}#services"
+                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen transition-colors">Services</a>
+                    <a href="{{ url_for('index') }}#subjects"
+                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen transition-colors">Subjects</a>
+                    <a href="{{ url_for('index') }}#areas"
+                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen transition-colors">Areas
+                        We Serve</a>
 
-                    <a href="{{ url_for('login') }}"
-                        class="bg-brandgreen hover:bg-green-500 text-white px-6 py-2 rounded-full font-medium transition-colors ml-4 inline-flex items-center justify-center">
-                        Login/Signup
+                    <a href="{{ url_for('become_tutor') }}"
+                        class="text-brandgreen border border-brandgreen hover:bg-brandgreen hover:text-white px-5 py-2 rounded-full font-medium transition-all ml-2 inline-flex items-center justify-center">
+                        Become a Tutor
+                    </a>
+
+                    <a href="{{ url_for('book_demo') }}"
+                        class="bg-brandgreen hover:bg-[#619a35] shadow-lg shadow-brandgreen/30 text-white px-6 py-2 rounded-full font-medium transition-all ml-2 inline-flex items-center justify-center transform hover:scale-105">
+                        Book Free Demo
                     </a>
                 </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brandgreen focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full">
+            <div class="px-2 pt-2 pb-5 space-y-1 sm:px-3">
+                <a href="{{ url_for('index') }}" class="block px-3 py-2 text-base font-medium text-brandgreen">Home</a>
+                <a href="{{ url_for('index') }}#services"
+                    class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-brandgreen">Services</a>
+                <a href="{{ url_for('index') }}#subjects"
+                    class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-brandgreen">Subjects</a>
+                <a href="{{ url_for('index') }}#areas"
+                    class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-brandgreen">Areas We Serve</a>
+                <a href="{{ url_for('become_tutor') }}"
+                    class="block px-3 py-2 mt-4 text-center text-base font-medium text-brandgreen border border-brandgreen rounded-md">Become
+                    a Tutor</a>
+                <a href="{{ url_for('book_demo') }}"
+                    class="block px-3 py-2 mt-2 text-center text-base font-medium bg-brandgreen text-white rounded-md">Book
+                    Free Demo</a>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main>
+    <main class="flex-grow">
         {% block content %}{% endblock %}
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-1">
+                    <span class="text-2xl font-bold tracking-tight mb-6 inline-block">
+                        <i class="fas fa-graduation-cap text-brandgreen mr-2"></i>
+                        Naman<span class="text-brandgreen">Tutors</span>
+                    </span>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Expert home tuition for Classes 1–10 in Pune. Personalized one-to-one learning with experienced
+                        tutors right at your home.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brandgreen transition-colors"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brandgreen transition-colors"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brandgreen transition-colors"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2 inline-block">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{ url_for('index') }}"
+                                class="text-gray-400 hover:text-brandgreen transition-colors">Home</a></li>
+                        <li><a href="{{ url_for('index') }}#services"
+                                class="text-gray-400 hover:text-brandgreen transition-colors">Our Services</a></li>
+                        <li><a href="{{ url_for('index') }}#subjects"
+                                class="text-gray-400 hover:text-brandgreen transition-colors">Subjects</a></li>
+                        <li><a href="{{ url_for('index') }}#areas"
+                                class="text-gray-400 hover:text-brandgreen transition-colors">Areas We Serve</a></li>
+                    </ul>
+                </div>
+
+                <!-- For Tutors & Parents -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2 inline-block">Action</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{ url_for('book_demo') }}"
+                                class="text-gray-400 hover:text-white transition-colors flex items-center"><i
+                                    class="fas fa-chevron-right text-brandgreen text-xs mr-2"></i> Book Free Demo</a>
+                        </li>
+                        <li><a href="{{ url_for('become_tutor') }}"
+                                class="text-gray-400 hover:text-white transition-colors flex items-center"><i
+                                    class="fas fa-chevron-right text-brandgreen text-xs mr-2"></i> Become a Tutor</a>
+                        </li>
+                        <li><a href="{{ url_for('contact') }}"
+                                class="text-gray-400 hover:text-brandgreen transition-colors flex items-center"><i
+                                    class="fas fa-chevron-right text-brandgreen text-xs mr-2"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2 inline-block">Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 text-brandgreen mr-3 w-5 text-center"></i>
+                            <span class="text-gray-400">Pune, Maharashtra, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-brandgreen mr-3 w-5 text-center"></i>
+                            <span class="text-gray-400">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-brandgreen mr-3 w-5 text-center"></i>
+                            <span class="text-gray-400">info@namantutors.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>&copy; 2026 Naman Home Tutors. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float hover-card"
+        aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
 </html>
