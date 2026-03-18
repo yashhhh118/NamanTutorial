@@ -1,244 +1,118 @@
 {% extends 'base.html' %}
 
-{% block title %}NamanTutors - High-Conversion Home Tutoring{% endblock %}
+{% block title %}Tutorials Website Courses{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<div class="relative pt-24 pb-32 flex items-center justify-center overflow-hidden w-full min-h-[85vh]">
-
-    <!-- Subtle Grid Background -->
+<div class="w-full bg-[#82c91e] relative overflow-hidden flex items-center" style="min-height: calc(100vh - 80px);">
     <div
-        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTM5IDM5VjFoLTM4djM4aDM4eiIgZmlsbD0iIzMzMyIgZmlsbC1vcGFjaXR5PSIwLjEiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==')] opacity-30 z-0">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/80 to-[#050505] z-0"></div>
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col md:flex-row items-center justify-between">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
+        <!-- Text Content -->
+        <div class="md:w-1/2 text-white pr-4 lg:pr-12 z-20 pt-10 md:pt-0 pb-16 md:pb-0">
+            <p class="text-lg md:text-xl font-medium mb-3 text-white/90">#1 TutorialsWebsite Courses</p>
+            <h1
+                class="text-4xl md:text-5xl lg:text-[64px] font-semibold mb-6 leading-[1.1] tracking-tight drop-shadow-sm">
+                Your Bright Future is<br>Our Mission</h1>
+            <p class="text-[17px] md:text-xl mb-10 text-white leading-relaxed font-light max-w-[500px]">
+                India's best plateform to learn programming with high quality videos from the comforts of your drawing
+                rooms at your own place.
+            </p>
 
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight max-w-4xl">
-            Master Any Subject with <br />
-            <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-safetyorange to-vibrantyellow drop-shadow-lg">Expert
-                Home Tutors</span>
-        </h1>
-
-        <p class="text-xl md:text-2xl text-gray-400 mb-14 max-w-3xl mx-auto font-medium">
-            Get personalized 1-on-1 tutoring at your doorstep or online. Start your learning journey today.
-        </p>
-
-        <!-- Search Form / Pre-Lead Capture -->
-        <div
-            class="bg-[#111111]/80 backdrop-blur-2xl p-6 md:p-8 rounded-3xl border border-gray-800 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)] inline-block w-full max-w-5xl mx-auto mt-4 transition-transform hover:scale-[1.01] duration-500">
-            <form id="hero-form" class="grid grid-cols-1 md:grid-cols-4 gap-6 items-center"
-                onsubmit="event.preventDefault(); openLeadModal();">
-
-                <div class="relative">
-                    <select id="grade"
-                        class="bg-black/50 border border-gray-700 text-gray-300 rounded-xl px-4 py-4 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full transition-all appearance-none cursor-pointer"
-                        required>
-                        <option value="" disabled selected>Select Grade</option>
-                        <option value="Class 1-5">Class 1-5</option>
-                        <option value="Class 6-8">Class 6-8</option>
-                        <option value="Class 9-10">Class 9-10</option>
-                        <option value="Class 11-12">Class 11-12</option>
-                        <option value="College">College</option>
-                    </select>
+            <!-- Play Button Container -->
+            <div class="flex items-center">
+                <button
+                    class="w-[72px] h-[72px] bg-[#9dd549] hover:bg-[#a6db57] rounded-full flex items-center justify-center transition-all duration-300 group shadow-[0_8px_20px_rgba(0,0,0,0.1)] focus:outline-none ring-[12px] ring-[#9dd549]/20 hover:ring-[#a6db57]/40">
                     <i
-                        class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                </div>
-
-                <div class="relative">
-                    <select id="subject"
-                        class="bg-black/50 border border-gray-700 text-gray-300 rounded-xl px-4 py-4 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full transition-all appearance-none cursor-pointer"
-                        required>
-                        <option value="" disabled selected>Select Subject</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Science">Science</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="English">English</option>
-                        <option value="Computer Science">Computer Science</option>
-                    </select>
-                    <i
-                        class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                </div>
-
-                <div class="relative">
-                    <input type="text" id="pincode" placeholder="Enter Pincode"
-                        class="bg-black/50 border border-gray-700 text-white rounded-xl px-4 py-4 focus:outline-none focus:border-safetyorange focus:ring-1 focus:ring-safetyorange w-full transition-all"
-                        required>
-                </div>
-
-                <div>
-                    <button type="submit"
-                        class="bg-gradient-to-r from-safetyorange to-[#ffaa00] hover:from-vibrantyellow hover:to-safetyorange text-black px-2 py-4 rounded-xl font-bold transition-all duration-300 w-full text-lg shadow-[0_0_20px_rgba(255,140,0,0.3)] transform hover:-translate-y-1 flex items-center justify-center">
-                        Find Tutors <i class="fas fa-arrow-right ml-2 text-sm z-10"></i>
-                    </button>
-                </div>
-
-            </form>
+                        class="fas fa-play text-white text-2xl ml-2 group-hover:scale-[1.15] transition-transform duration-300"></i>
+                </button>
+            </div>
         </div>
-    </div>
 
-    <!-- Abstract glowing background element behind Hero -->
-    <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-safetyorange/10 rounded-full blur-[150px] pointer-events-none z-0">
+        <!-- Graphic / Illustration Content (Placeholder CSS representation) -->
+        <div class="md:w-[45%] relative flex justify-center items-center h-[500px] hidden md:flex">
+            <!-- Glowing green sphere effect from screenshot -->
+            <div
+                class="absolute w-[450px] h-[450px] bg-gradient-to-tr from-[#98d563] to-[#d6faab] rounded-full top-[10%] left-[5%] shadow-[inset_-30px_-30px_60px_rgba(0,0,0,0.1),inset_10px_10px_60px_rgba(255,255,255,0.8)] opacity-95">
+            </div>
+
+            <!-- Stylized abstract representation of the illustration using CSS and Icons -->
+            <div class="relative z-20 w-full h-full">
+                <!-- Main computer window -->
+                <div
+                    class="absolute right-[5%] top-[20%] w-[320px] h-[220px] bg-[#2d3748] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-t-[30px] border-[#4a5568] transform rotate-12 rotate-y-12 perspective-1000 z-10 hover:rotate-6 transition-transform duration-700">
+                    <div class="absolute top-[-22px] left-3 flex space-x-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                    </div>
+                    <div class="p-5 flex flex-col space-y-3">
+                        <div class="flex items-center space-x-2"><span
+                                class="text-blue-400 font-mono text-xs font-bold">const</span>
+                            <div class="h-2 w-1/2 bg-[#4a5568] rounded"></div>
+                        </div>
+                        <div class="h-2 w-3/4 bg-blue-300 rounded ml-4"></div>
+                        <div class="h-2 w-2/3 bg-green-300 rounded ml-4"></div>
+                        <div class="h-2 w-5/6 bg-[#4a5568] rounded ml-4"></div>
+                        <div class="h-2 w-1/3 bg-yellow-300 rounded mt-4"></div>
+                        <div class="flex items-center space-x-2 mt-4"><span
+                                class="text-purple-400 font-mono text-xs font-bold">function</span>
+                            <div class="h-2 w-1/2 bg-[#4a5568] rounded"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Tags -->
+                <div
+                    class="absolute left-[0%] top-[35%] bg-blue-500 text-white font-bold py-2.5 px-6 rounded-lg shadow-xl transform -rotate-12 z-20 hover:scale-110 transition-transform duration-300 border-[3px] border-white/30">
+                    PHP
+                </div>
+                <div
+                    class="absolute right-[25%] top-[10%] bg-red-500 text-white font-bold py-2.5 px-6 rounded-lg shadow-xl transform rotate-6 z-20 hover:scale-110 transition-transform duration-300 border-[3px] border-white/30">
+                    JAVA
+                </div>
+
+                <!-- Floating Desk/Laptop representation -->
+                <div
+                    class="absolute left-[15%] bottom-[15%] w-[220px] h-[160px] bg-white rounded-xl shadow-2xl border-b-[6px] border-gray-300 p-4 transform -rotate-[10deg] transition-transform hover:rotate-0 duration-700 z-30 flex flex-col group">
+                    <!-- Screen -->
+                    <div
+                        class="w-full flex-grow bg-blue-50 rounded border-[3px] border-gray-200 flex items-center justify-center p-2 group-hover:bg-blue-100 transition-colors">
+                        <div
+                            class="w-full h-full border-2 border-dashed border-blue-200 rounded flex items-center justify-center bg-white">
+                            <i
+                                class="fas fa-code text-[#7bc143] text-4xl transform group-hover:scale-110 transition-transform"></i>
+                        </div>
+                    </div>
+                    <!-- Keyboard -->
+                    <div class="w-full h-3 mt-3 bg-gray-200 rounded-full"></div>
+                </div>
+
+                <!-- Gear icons floating -->
+                <div class="absolute bottom-[5%] right-[15%] z-20">
+                    <i class="fas fa-cog text-white text-[50px] opacity-70 animate-spin-slow"></i>
+                </div>
+                <div class="absolute bottom-[20%] right-[30%] z-10">
+                    <i class="fas fa-cog text-white text-[35px] opacity-50 animate-spin-slow"
+                        style="animation-direction: reverse;"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Feature Grid -->
-<section class="py-20 bg-deepblack border-t border-b border-gray-900 w-full">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4">Why Choose Us?</h2>
-            <div class="h-1 w-20 bg-safetyorange mx-auto rounded"></div>
-        </div>
+<style>
+    @keyframes spin-slow {
+        from {
+            transform: rotate(0deg);
+        }
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <!-- Card 1 -->
-            <div
-                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-vibrantyellow transition-all duration-300 transform hover:-translate-y-2 group">
-                <div
-                    class="w-16 h-16 bg-safetyorange/10 rounded-2xl flex items-center justify-center mb-6 text-safetyorange group-hover:bg-safetyorange group-hover:text-white transition-colors">
-                    <i class="fas fa-home text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">1-on-1 Home Tuition</h3>
-                <p class="text-gray-400">Personalized attention at the comfort of your home. Customized learning
-                    pace strictly aligned with the student's needs.</p>
-            </div>
+        to {
+            transform: rotate(360deg);
+        }
+    }
 
-            <!-- Card 2 -->
-            <div
-                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-safetyorange transition-all duration-300 transform hover:-translate-y-2 group">
-                <div
-                    class="w-16 h-16 bg-vibrantyellow/10 rounded-2xl flex items-center justify-center mb-6 text-vibrantyellow group-hover:bg-vibrantyellow group-hover:text-deepblack transition-colors">
-                    <i class="fas fa-laptop text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">Online Classes</h3>
-                <p class="text-gray-400">Interactive live sessions with top-tier educators from across the country
-                    via advanced digital whiteboards and video mapping.</p>
-            </div>
-
-            <!-- Card 3 -->
-            <div
-                class="bg-gray-900 rounded-2xl p-8 border-2 border-transparent hover:border-vibrantyellow transition-all duration-300 transform hover:-translate-y-2 group">
-                <div
-                    class="w-16 h-16 bg-safetyorange/10 rounded-2xl flex items-center justify-center mb-6 text-safetyorange group-hover:bg-safetyorange group-hover:text-white transition-colors">
-                    <i class="fas fa-graduation-cap text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">Exam Prep</h3>
-                <p class="text-gray-400">Targeted preparation for board examinations and competitive tests with
-                    extensive mock papers, revisions, and test strategies.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Top Tutors Section -->
-<section class="py-20 bg-deepblack w-full">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-end mb-12">
-            <div>
-                <h2 class="text-4xl font-bold mb-4">Meet Our Top Tutors</h2>
-                <div class="h-1 w-20 bg-vibrantyellow rounded"></div>
-            </div>
-            <button class="text-safetyorange hover:text-vibrantyellow font-semibold transition flex items-center">
-                View All <i class="fas fa-arrow-right ml-2"></i>
-            </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <!-- Tutor Card 1 -->
-            <div
-                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=400"
-                    alt="Tutor"
-                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
-                    <h4 class="text-xl font-bold mb-1">Priya Sharma</h4>
-                    <p class="text-safetyorange text-sm font-semibold mb-3">Mathematics & Physics</p>
-                    <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        <span class="text-gray-400 text-sm ml-2">(4.8)</span>
-                    </div>
-                    <div class="mt-auto">
-                        <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
-                            class="w-full border-2 border-safetyorange text-safetyorange hover:bg-safetyorange hover:text-white py-2.5 rounded-xl font-bold transition-all duration-300">
-                            Book Now
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tutor Card 2 -->
-            <div
-                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600&h=400"
-                    alt="Tutor"
-                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
-                    <h4 class="text-xl font-bold mb-1">Rohan Gupta</h4>
-                    <p class="text-safetyorange text-sm font-semibold mb-3">Chemistry & Biology</p>
-                    <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <span class="text-gray-400 text-sm ml-2">(5.0)</span>
-                    </div>
-                    <div class="mt-auto">
-                        <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
-                            class="w-full border-2 border-safetyorange text-safetyorange hover:bg-safetyorange hover:text-white py-2.5 rounded-xl font-bold transition-all duration-300">
-                            Book Now
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tutor Card 3 -->
-            <div
-                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
-                <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&q=80&w=600&h=400"
-                    alt="Tutor"
-                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
-                    <h4 class="text-xl font-bold mb-1">Anita Desai</h4>
-                    <p class="text-safetyorange text-sm font-semibold mb-3">English Literature</p>
-                    <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="far fa-star"></i>
-                        <span class="text-gray-400 text-sm ml-2">(4.1)</span>
-                    </div>
-                    <div class="mt-auto">
-                        <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
-                            class="w-full border-2 border-safetyorange text-safetyorange hover:bg-safetyorange hover:text-white py-2.5 rounded-xl font-bold transition-all duration-300">
-                            Book Now
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tutor Card 4 -->
-            <div
-                class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-safetyorange transition-colors duration-300 flex flex-col h-full group">
-                <img src="https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?auto=format&fit=crop&q=80&w=600&h=400"
-                    alt="Tutor"
-                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="p-6 flex flex-col flex-grow relative bg-gray-900">
-                    <h4 class="text-xl font-bold mb-1">Vikram Singh</h4>
-                    <p class="text-safetyorange text-sm font-semibold mb-3">Computer Science</p>
-                    <div class="flex items-center space-x-1 text-vibrantyellow mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        <span class="text-gray-400 text-sm ml-2">(4.9)</span>
-                    </div>
-                    <div class="mt-auto">
-                        <button onclick="document.getElementById('demo-modal').classList.remove('hidden')"
-                            class="w-full border-2 border-safetyorange text-safetyorange hover:bg-safetyorange hover:text-white py-2.5 rounded-xl font-bold transition-all duration-300">
-                            Book Now
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    .animate-spin-slow {
+        animation: spin-slow 10s linear infinite;
+    }
+</style>
 {% endblock %}
