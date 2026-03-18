@@ -4,63 +4,103 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="bg-gray-50 pt-20 pb-24 lg:pt-32 lg:pb-36 overflow-hidden relative">
-    <div class="absolute inset-y-0 right-0 w-1/2 bg-brandgreen/10 rounded-l-[100px] hidden lg:block"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-            <div class="text-center lg:text-left">
+<div class="w-full bg-[#82c91e] relative overflow-hidden flex items-center" style="min-height: calc(100vh - 80px);">
+    <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col md:flex-row items-center justify-between">
+
+        <!-- Text Content -->
+        <div class="md:w-1/2 text-white pr-4 lg:pr-12 z-20 pt-10 md:pt-0 pb-16 md:pb-0" data-aos="fade-right">
+            <p class="text-lg md:text-xl font-medium mb-3 text-white/90">#1 Naman Home Tutors</p>
+            <h1
+                class="text-4xl md:text-5xl lg:text-[64px] font-semibold mb-6 leading-[1.1] tracking-tight drop-shadow-sm">
+                Expert Home Tuition<br>in Pune
+            </h1>
+            <p class="text-[17px] md:text-xl mb-10 text-white leading-relaxed font-light max-w-[500px]">
+                Personalized one-to-one learning with experienced tutors from the comfort of your home. We focus on
+                academic excellence for Classes 1 to 10.
+            </p>
+
+            <!-- Play Button Container for Booking -->
+            <a href="{{ url_for('book_demo') }}"
+                class="flex items-center gap-5 group w-fit cursor-pointer outline-none">
+                <button type="button"
+                    class="w-[72px] h-[72px] bg-[#9dd549] group-hover:bg-[#a6db57] rounded-full flex items-center justify-center transition-all duration-300 shadow-[0_8px_20px_rgba(0,0,0,0.1)] focus:outline-none ring-[12px] ring-[#9dd549]/20 group-hover:ring-[#a6db57]/40 pointer-events-none">
+                    <i
+                        class="fas fa-play text-white text-2xl ml-2 group-hover:scale-[1.15] transition-transform duration-300"></i>
+                </button>
                 <span
-                    class="text-brandgreen font-semibold tracking-wider uppercase text-sm bg-brandgreen/10 px-4 py-2 rounded-full inline-block mb-6">Pune's
-                    #1 Tutors</span>
-                <h1
-                    class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-[4rem] leading-tight mb-6">
-                    Expert Home Tuition for <span class="text-brandgreen">Classes 1–10</span> in Pune
-                </h1>
-                <p
-                    class="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-8 leading-relaxed">
-                    Personalized one-to-one learning with experienced tutors at your home. We focus on helping students
-                    improve academic performance through customized learning.
-                </p>
-                <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
-                    <a href="{{ url_for('book_demo') }}"
-                        class="w-full sm:w-auto flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-full text-white bg-brandgreen hover:bg-[#619a35] shadow-lg shadow-brandgreen/30 transition-all hover:scale-105 md:text-lg mb-4 sm:mb-0">
-                        Book Free Demo Class
-                    </a>
-                    <a href="{{ url_for('become_tutor') }}"
-                        class="w-full sm:w-auto flex items-center justify-center px-8 py-4 border-2 border-brandgreen text-base font-medium rounded-full text-brandgreen bg-white hover:bg-gray-50 transition-all md:text-lg">
-                        Become a Tutor
-                    </a>
-                </div>
+                    class="text-2xl font-bold tracking-tight text-white group-hover:underline drop-shadow-sm transition-all duration-300">
+                    Book Free Demo Class
+                </span>
+            </a>
+        </div>
+
+        <!-- Graphic / Illustration Content -->
+        <div class="md:w-[45%] relative flex justify-center items-center h-[500px] hidden md:flex" data-aos="fade-left"
+            data-aos-delay="200">
+            <!-- Glowing green sphere effect from screenshot -->
+            <div
+                class="absolute w-[450px] h-[450px] bg-gradient-to-tr from-[#98d563] to-[#d6faab] rounded-full top-[10%] left-[5%] shadow-[inset_-30px_-30px_60px_rgba(0,0,0,0.1),inset_10px_10px_60px_rgba(255,255,255,0.8)] opacity-95">
             </div>
 
-            <div class="mt-16 lg:mt-0 relative hidden md:block">
+            <div class="relative z-20 w-full h-full flex items-center justify-center">
+                <!-- Teacher & Student Photo Window -->
                 <div
-                    class="absolute inset-0 bg-gradient-to-tr from-brandgreen to-green-300 rounded-full blur-3xl opacity-30 animate-pulse">
+                    class="absolute right-[5%] top-[20%] w-[350px] h-[250px] bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-[8px] border-white transform rotate-3 z-10 hover:rotate-0 transition-transform duration-700 overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80"
+                        alt="Tutor and Student"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                 </div>
-                <img class="relative w-full rounded-2xl shadow-2xl animate-float border-8 border-white object-cover h-[500px]"
-                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
-                    alt="Students learning with a tutor">
 
-                <!-- Floating Badge -->
-                <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl flex items-center gap-4 border border-gray-100 animate-float"
-                    style="animation-delay: 1s;">
-                    <div class="bg-yellow-100 p-3 rounded-full text-yellow-500">
-                        <i class="fas fa-star text-xl"></i>
+                <!-- Floating Tags -->
+                <div
+                    class="absolute left-[-5%] top-[35%] bg-blue-500 text-white font-bold py-2.5 px-6 rounded-lg shadow-xl transform -rotate-12 z-20 hover:scale-110 transition-transform duration-300 border-[3px] border-white/30">
+                    Maths & Science
+                </div>
+                <div
+                    class="absolute right-[25%] top-[10%] bg-pink-500 text-white font-bold py-2.5 px-6 rounded-lg shadow-xl transform rotate-6 z-20 hover:scale-110 transition-transform duration-300 border-[3px] border-white/30">
+                    Class 1-10
+                </div>
+
+                <!-- Floating Book/Focus tag -->
+                <div
+                    class="absolute left-[15%] bottom-[15%] bg-white rounded-xl shadow-2xl border-b-[6px] border-gray-200 p-4 transform -rotate-[10deg] transition-transform hover:rotate-0 duration-700 z-30 flex items-center gap-3">
+                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-book-reader text-orange-500 text-xl"></i>
                     </div>
                     <div>
-                        <p class="font-bold text-gray-900">4.9/5 Rating</p>
-                        <p class="text-sm text-gray-500">From 500+ Parents</p>
+                        <p class="font-bold text-gray-800 leading-tight">1-on-1 Focus</p>
+                        <p class="text-xs text-brandgreen font-bold">Personalized</p>
                     </div>
+                </div>
+
+                <!-- Star icons floating (Education theme) -->
+                <div class="absolute bottom-[10%] right-[10%] z-20">
+                    <i
+                        class="fas fa-star text-yellow-300 text-[50px] opacity-90 drop-shadow-lg animate-[spin_10s_linear_infinite]"></i>
+                </div>
+                <div class="absolute top-[30%] left-[10%] z-10">
+                    <i class="fas fa-star text-yellow-300 text-[35px] opacity-70 drop-shadow-md animate-[spin_8s_linear_infinite]"
+                        style="animation-direction: reverse;"></i>
                 </div>
             </div>
         </div>
     </div>
-</section>
+
+    <!-- Beautiful SVG Wave Divider -->
+    <div class="absolute bottom-0 w-full left-0 leading-[0] z-20 pointer-events-none transform translate-y-[2px]">
+        <svg viewBox="0 0 1440 120" class="w-full h-[50px] md:h-[90px] lg:h-[120px] block" preserveAspectRatio="none">
+            <path
+                d="M0,60L60,65.3C120,71,240,82,360,74.7C480,67,600,43,720,40C840,37,960,53,1080,56C1200,59,1320,48,1380,42.7L1440,37.3L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+                fill="#ffffff"></path>
+        </svg>
+    </div>
+</div>
 
 <!-- Why Choose Us -->
 <section id="services" class="section bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Benefits</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                 Why Choose Naman Home Tutors
@@ -70,7 +110,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
             <!-- Box 1 -->
             <div class="bg-gray-50 rounded-2xl p-8 hover-card border border-gray-100">
                 <div class="w-14 h-14 bg-brandgreen/10 rounded-xl flex items-center justify-center mb-6">
@@ -137,7 +177,7 @@
 <!-- Subjects Covered -->
 <section id="subjects" class="section bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Curriculum</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                 Subjects Covered
@@ -147,7 +187,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="100">
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover-card">
                 <div
                     class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600">
@@ -202,7 +242,7 @@
 <!-- How It Works -->
 <section class="section bg-white overflow-hidden relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Process</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                 How It Works
@@ -214,7 +254,7 @@
             <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 transform -translate-y-1/2 z-0">
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10" data-aos="fade-up" data-aos-delay="100">
                 <!-- Step 1 -->
                 <div class="text-center relative">
                     <div
@@ -253,14 +293,14 @@
 <!-- Areas We Serve -->
 <section id="areas" class="section bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Locations</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                 Areas We Serve in Pune
             </p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" data-aos="fade-up" data-aos-delay="100">
             <div
                 class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-200 font-semibold text-gray-700 hover:text-brandgreen hover:border-brandgreen transition-colors cursor-pointer">
                 Kharadi
@@ -289,14 +329,14 @@
 <!-- Testimonials -->
 <section class="section bg-white text-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Reviews</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
                 What Parents Say
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="100">
             <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 shadow-sm relative">
                 <i class="fas fa-quote-left text-4xl text-brandgreen/20 absolute top-6 left-6"></i>
                 <div class="relative z-10 pt-4">
@@ -345,7 +385,7 @@
     <div class="absolute -right-20 -top-20 w-64 h-64 border-[30px] border-white/10 rounded-full"></div>
     <div class="absolute -left-20 -bottom-20 w-80 h-80 border-[40px] border-white/10 rounded-full"></div>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10" data-aos="zoom-in">
         <h2 class="text-3xl font-extrabold text-white sm:text-5xl mb-6 shadow-sm">
             Give Your Child to the Best Education
         </h2>
