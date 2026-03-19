@@ -21,6 +21,20 @@
             </p>
 
             <!-- Play Button Container for Booking -->
+            {% if session.get('user') %}
+            <a href="{{ url_for('book_tutor') }}"
+                class="flex items-center gap-5 group w-fit cursor-pointer outline-none">
+                <button type="button"
+                    class="w-[72px] h-[72px] bg-[#9dd549] group-hover:bg-[#a6db57] rounded-full flex items-center justify-center transition-all duration-300 shadow-[0_8px_20px_rgba(0,0,0,0.1)] focus:outline-none ring-[12px] ring-[#9dd549]/20 group-hover:ring-[#a6db57]/40 pointer-events-none">
+                    <i
+                        class="fas fa-chalkboard-teacher text-white text-[28px] group-hover:scale-[1.15] -ml-1 transition-transform duration-300"></i>
+                </button>
+                <span
+                    class="text-[22px] md:text-2xl font-bold tracking-tight text-white group-hover:underline drop-shadow-sm transition-all duration-300">
+                    Book Your Tutor
+                </span>
+            </a>
+            {% else %}
             <a href="{{ url_for('book_demo') }}"
                 class="flex items-center gap-5 group w-fit cursor-pointer outline-none">
                 <button type="button"
@@ -29,10 +43,11 @@
                         class="fas fa-play text-white text-2xl ml-2 group-hover:scale-[1.15] transition-transform duration-300"></i>
                 </button>
                 <span
-                    class="text-2xl font-bold tracking-tight text-white group-hover:underline drop-shadow-sm transition-all duration-300">
+                    class="text-[22px] md:text-2xl font-bold tracking-tight text-white group-hover:underline drop-shadow-sm transition-all duration-300">
                     Book Free Demo Class
                 </span>
             </a>
+            {% endif %}
         </div>
 
         <!-- Graphic / Illustration Content -->
@@ -52,27 +67,32 @@
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                 </div>
 
-                <!-- Floating Tags -->
-                <div
-                    class="absolute left-[-5%] top-[35%] bg-blue-500 text-white font-bold py-2.5 px-6 rounded-lg shadow-xl transform -rotate-12 z-20 hover:scale-110 transition-transform duration-300 border-[3px] border-white/30">
+                <!-- Floating Tags (Clickable Buttons) -->
+                <button
+                    onclick="openTagModal('Maths &amp; Science', 'Our expert tutors provide deep conceptual clarity in fundamental subjects like Mathematics and Science, ensuring students don\'t just memorize, but actually understand the logic behind every formula and theorem.', 'fas fa-flask text-blue-500')"
+                    class="absolute left-[-5%] top-[35%] bg-blue-500 text-white font-bold py-3 px-6 rounded-xl shadow-[0_10px_20px_rgba(59,130,246,0.3)] transform -rotate-12 z-20 hover:scale-110 hover:-rotate-6 active:translate-y-1 active:border-b-2 transition-all duration-300 border-[3px] border-blue-400 border-b-[6px] border-b-blue-700 focus:outline-none">
                     Maths & Science
-                </div>
-                <div
-                    class="absolute right-[25%] top-[10%] bg-pink-500 text-white font-bold py-2.5 px-6 rounded-lg shadow-xl transform rotate-6 z-20 hover:scale-110 transition-transform duration-300 border-[3px] border-white/30">
-                    Class 1-10
-                </div>
+                </button>
 
-                <!-- Floating Book/Focus tag -->
-                <div
-                    class="absolute left-[15%] bottom-[15%] bg-white rounded-xl shadow-2xl border-b-[6px] border-gray-200 p-4 transform -rotate-[10deg] transition-transform hover:rotate-0 duration-700 z-30 flex items-center gap-3">
-                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                <button
+                    onclick="openTagModal('Class 1-10', 'We specialize in early and mid-level education. Building a strong foundation from Class 1 to 10 is crucial because these formative years dictate a student\'s analytical skills for higher education.', 'fas fa-graduation-cap text-pink-500')"
+                    class="absolute right-[20%] top-[10%] bg-pink-500 text-white font-bold py-3 px-6 rounded-xl shadow-[0_10px_20px_rgba(236,72,153,0.3)] transform rotate-6 z-20 hover:scale-110 hover:rotate-12 active:translate-y-1 active:border-b-2 transition-all duration-300 border-[3px] border-pink-400 border-b-[6px] border-b-pink-700 focus:outline-none">
+                    Class 1-10
+                </button>
+
+                <!-- Floating Book/Focus tag (Clickable Button) -->
+                <button
+                    onclick="openTagModal('1-on-1 Focus', 'In a typical classroom, a child might hesitate to ask questions. Our 1-on-1 personalized home tutoring gives them 100% of the teacher\'s attention, allowing them to learn openly at their own customized pace.', 'fas fa-user-graduate text-orange-500')"
+                    class="absolute left-[15%] bottom-[15%] bg-white rounded-2xl shadow-2xl border-2 border-gray-100 border-b-[6px] border-b-gray-300 p-4 transform -rotate-[10deg] transition-all hover:scale-105 hover:rotate-0 active:translate-y-1 active:border-b-2 duration-300 z-30 flex items-center gap-3 focus:outline-none text-left w-[220px]">
+                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book-reader text-orange-500 text-xl"></i>
                     </div>
                     <div>
                         <p class="font-bold text-gray-800 leading-tight">1-on-1 Focus</p>
-                        <p class="text-xs text-brandgreen font-bold">Personalized</p>
+                        <p class="text-[11px] text-brandgreen font-bold uppercase tracking-wider mt-0.5">Personalized
+                        </p>
                     </div>
-                </div>
+                </button>
 
                 <!-- Star icons floating (Education theme) -->
                 <div class="absolute bottom-[10%] right-[10%] z-20">
@@ -87,19 +107,29 @@
         </div>
     </div>
 
-    <!-- Beautiful SVG Wave Divider -->
+    <!-- Animated SVG Water Waves -->
     <div class="absolute bottom-0 w-full left-0 leading-[0] z-20 pointer-events-none transform translate-y-[2px]">
-        <svg viewBox="0 0 1440 120" class="w-full h-[50px] md:h-[90px] lg:h-[120px] block" preserveAspectRatio="none">
-            <path
-                d="M0,60L60,65.3C120,71,240,82,360,74.7C480,67,600,43,720,40C840,37,960,53,1080,56C1200,59,1320,48,1380,42.7L1440,37.3L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
-                fill="#ffffff"></path>
+        <svg class="w-full h-[40px] md:h-[80px] lg:h-[110px] block" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none"
+            shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="animated-waves">
+                <use href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+                <use href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use href="#gentle-wave" x="48" y="7" fill="#ffffff" />
+            </g>
         </svg>
     </div>
 </div>
 
 <!-- Why Choose Us -->
-<section id="services" class="section bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="services" class="section bg-white bg-dot-pattern-gray relative">
+    <i
+        class="fas fa-chalkboard-teacher absolute -left-20 -top-10 text-[350px] text-gray-50 z-0 pointer-events-none transform -rotate-12"></i>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Benefits</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -175,8 +205,10 @@
 </section>
 
 <!-- Subjects Covered -->
-<section id="subjects" class="section bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="subjects" class="section bg-gray-50 bg-dot-pattern relative">
+    <i
+        class="fas fa-book-open absolute -right-20 top-20 text-[400px] text-gray-200/50 z-0 pointer-events-none transform rotate-12"></i>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Curriculum</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -240,50 +272,59 @@
 </section>
 
 <!-- How It Works -->
-<section class="section bg-white overflow-hidden relative">
+<section class="section bg-darkblue overflow-hidden relative">
+    <!-- Decorative background elements -->
+    <div
+        class="absolute top-0 right-0 -mx-20 -my-20 w-80 h-80 bg-brandgreen/20 rounded-full blur-3xl z-0 pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 -mx-20 -my-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl z-0 pointer-events-none">
+    </div>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Process</h2>
-            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
                 How It Works
             </p>
         </div>
 
         <div class="relative">
             <!-- Connecting Line -->
-            <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 transform -translate-y-1/2 z-0">
+            <div
+                class="hidden md:block absolute top-[40px] left-0 w-full h-[2px] bg-gradient-to-r from-darkblue via-brandgreen/50 to-darkblue z-0">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10" data-aos="fade-up" data-aos-delay="100">
                 <!-- Step 1 -->
                 <div class="text-center relative">
                     <div
-                        class="w-20 h-20 mx-auto bg-white border-4 border-brandgreen rounded-full flex items-center justify-center shadow-lg shadow-brandgreen/20 mb-6">
+                        class="w-20 h-20 mx-auto bg-darkblue border-2 border-brandgreen rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(123,193,67,0.3)] mb-6 text-white relative z-10 hover:shadow-[0_0_30px_rgba(123,193,67,0.6)] transition-all">
                         <span class="text-2xl font-bold text-brandgreen">1</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Request Demo Class</h3>
-                    <p class="text-gray-500">Fill out our simple form to request a free trial class for your child.</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Request Demo Class</h3>
+                    <p class="text-blue-100">Fill out our simple form to request a free trial class for your child.</p>
                 </div>
 
                 <!-- Step 2 -->
                 <div class="text-center relative">
                     <div
-                        class="w-20 h-20 mx-auto bg-brandgreen border-4 border-brandgreen rounded-full flex items-center justify-center shadow-lg shadow-brandgreen/20 mb-6 text-white">
+                        class="w-20 h-20 mx-auto bg-brandgreen border-2 border-brandgreen rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(123,193,67,0.5)] mb-6 text-white relative z-10 hover:shadow-[0_0_40px_rgba(123,193,67,0.8)] transition-all transform scale-110">
                         <span class="text-2xl font-bold">2</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">We Match a Tutor</h3>
-                    <p class="text-gray-500">We analyze your requirements and assign the perfect tutor for your area.
+                    <h3 class="text-xl font-bold text-white mb-3">We Match a Tutor</h3>
+                    <p class="text-blue-100">We analyze your requirements and assign the perfect tutor for your area.
                     </p>
                 </div>
 
                 <!-- Step 3 -->
                 <div class="text-center relative">
                     <div
-                        class="w-20 h-20 mx-auto bg-white border-4 border-brandgreen rounded-full flex items-center justify-center shadow-lg shadow-brandgreen/20 mb-6">
+                        class="w-20 h-20 mx-auto bg-darkblue border-2 border-brandgreen rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(123,193,67,0.3)] mb-6 text-white relative z-10 hover:shadow-[0_0_30px_rgba(123,193,67,0.6)] transition-all">
                         <span class="text-2xl font-bold text-brandgreen">3</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Start Learning</h3>
-                    <p class="text-gray-500">Watch your child's confidence and grades improve with home guidance.</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Start Learning</h3>
+                    <p class="text-blue-100">Watch your child's confidence and grades improve with home guidance.</p>
                 </div>
             </div>
         </div>
@@ -291,8 +332,10 @@
 </section>
 
 <!-- Areas We Serve -->
-<section id="areas" class="section bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="areas" class="section bg-gray-50 bg-dot-pattern relative">
+    <i
+        class="fas fa-map-marker-alt absolute -left-10 top-1/4 text-[300px] text-gray-200/40 z-0 pointer-events-none transform -rotate-6"></i>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Locations</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -327,8 +370,10 @@
 </section>
 
 <!-- Testimonials -->
-<section class="section bg-white text-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="section bg-[#f4faee] text-gray-900 relative pb-28 md:pb-40">
+    <i
+        class="fas fa-quote-right absolute -right-10 top-20 text-[400px] text-brandgreen/[0.04] z-0 pointer-events-none"></i>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Reviews</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
@@ -376,6 +421,24 @@
             </div>
         </div>
     </div>
+
+    <!-- Animated SVG Water Waves (Transition into CTA Green) -->
+    <div class="absolute bottom-0 w-full left-0 leading-[0] z-20 pointer-events-none transform translate-y-[2px]">
+        <svg class="w-full h-[40px] md:h-[80px] lg:h-[110px] block" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none"
+            shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave-bottom"
+                    d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="animated-waves">
+                <use href="#gentle-wave-bottom" x="48" y="0" fill="rgba(123,193,67,0.7)" />
+                <use href="#gentle-wave-bottom" x="48" y="3" fill="rgba(123,193,67,0.5)" />
+                <use href="#gentle-wave-bottom" x="48" y="5" fill="rgba(123,193,67,0.3)" />
+                <use href="#gentle-wave-bottom" x="48" y="7" fill="#7bc143" />
+            </g>
+        </svg>
+    </div>
 </section>
 
 <!-- Call to Action -->
@@ -398,4 +461,68 @@
         </a>
     </div>
 </section>
+
+<!-- Tag Info Modal Overlay -->
+<div id="tagInfoModal"
+    class="fixed inset-0 z-[9999] hidden flex justify-center items-center bg-gray-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl shadow-2xl w-[90%] max-w-sm md:max-w-md p-8 transform scale-95 opacity-0 transition-all duration-300 relative border border-gray-100"
+        id="tagModalContent">
+        <!-- Close button -->
+        <button onclick="closeTagModal()"
+            class="absolute top-4 right-4 w-10 h-10 bg-gray-50 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full flex items-center justify-center transition-colors focus:outline-none">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+
+        <div class="w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-sm border border-gray-100"
+            id="modalIconContainer">
+            <i id="modalIcon" class="fas fa-info-circle text-3xl"></i>
+        </div>
+
+        <h3 id="modalTitle" class="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">Title</h3>
+        <p id="modalDesc" class="text-gray-600 text-[1.1rem] leading-relaxed mb-8">Description goes here.</p>
+
+        <button onclick="closeTagModal()"
+            class="w-full bg-brandgreen hover:bg-[#619a35] active:scale-95 text-white font-bold py-4 rounded-xl shadow-lg transition-all focus:outline-none">
+            Got it!
+        </button>
+    </div>
+</div>
+
+<script>
+    function openTagModal(title, description, iconClasses) {
+        const modal = document.getElementById('tagInfoModal');
+        const modalContent = document.getElementById('tagModalContent');
+
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalDesc').innerText = description;
+        document.getElementById('modalIcon').className = iconClasses;
+
+        // Match icon container color dynamically based on icon text color (blue/pink/orange)
+        const iconContainer = document.getElementById('modalIconContainer');
+        iconContainer.className = 'w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-sm border border-gray-100 ' +
+            (iconClasses.includes('orange') ? 'bg-orange-50' :
+                iconClasses.includes('pink') ? 'bg-pink-50' : 'bg-blue-50');
+
+        modal.classList.remove('hidden');
+        // prompt a layout reflow
+        void modal.offsetWidth;
+        modal.classList.remove('opacity-0');
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+    }
+
+    function closeTagModal() {
+        const modal = document.getElementById('tagInfoModal');
+        const modalContent = document.getElementById('tagModalContent');
+
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        modalContent.classList.add('scale-95', 'opacity-0');
+
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300); // 300ms matches the tailwind duration-300 transition class
+    }
+</script>
+
 {% endblock %}

@@ -58,6 +58,56 @@
                         class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen transition-colors">Areas
                         We Serve</a>
 
+                    {% if session.get('user') %}
+                    <div class="relative ml-2 group">
+                        <button
+                            class="w-[42px] h-[42px] rounded-full overflow-hidden border-2 border-brandgreen hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-brandgreen/50 cursor-pointer">
+                            <img src="{{ session.user.avatar }}" alt="Profile Avatar"
+                                class="w-full h-full object-cover">
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div
+                            class="absolute right-0 top-[120%] w-[320px] bg-white rounded-2xl shadow-[0_15px_40px_-15px_rgba(0,0,0,0.2)] py-5 px-5 hidden group-hover:block transition-all opacity-0 group-hover:opacity-100 z-50 border border-gray-100 transform origin-top-right scale-95 group-hover:scale-100">
+                            <!-- Arrow -->
+                            <div
+                                class="absolute -top-2 right-4 w-4 h-4 bg-white rotate-45 border-l border-t border-gray-100">
+                            </div>
+
+                            <div
+                                class="flex items-center space-x-4 mb-4 border-b border-gray-100 pb-4 relative z-10 bg-white">
+                                <img src="{{ session.user.avatar }}" alt="Profile Avatar"
+                                    class="w-14 h-14 rounded-full border border-gray-200">
+                                <div>
+                                    <p class="font-bold text-brandgreen text-lg leading-tight">{{
+                                        session.user.student_name }}</p>
+                                    <p class="text-xs text-gray-500 font-medium">@{{ session.user.username }}</p>
+                                </div>
+                            </div>
+                            <div
+                                class="space-y-3 mb-5 text-sm text-gray-600 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                <p class="flex items-center"><i class="fas fa-school w-6 text-gray-400 text-center"></i>
+                                    <span class="font-medium text-gray-800">{{ session.user.school_name }} ({{
+                                        session.user.class_grade }})</span>
+                                </p>
+                                <p class="flex items-center"><i
+                                        class="fas fa-user-friends w-6 text-gray-400 text-center"></i> <span>Parent: {{
+                                        session.user.parent_name }}</span></p>
+                                <p class="flex items-center"><i class="fas fa-phone w-6 text-gray-400 text-center"></i>
+                                    <span>{{ session.user.phone }}</span>
+                                </p>
+                                <p class="flex items-center"><i
+                                        class="fas fa-envelope w-6 text-gray-400 text-center"></i> <span
+                                        class="truncate">{{ session.user.email }}</span></p>
+                                <p class="flex items-start"><i
+                                        class="fas fa-map-marker-alt w-6 text-gray-400 text-center mt-1"></i> <span
+                                        class="leading-tight">{{ session.user.address }}</span></p>
+                            </div>
+                            <a href="{{ url_for('logout') }}"
+                                class="block w-full text-center bg-red-50 hover:bg-red-100 text-red-600 font-bold py-2.5 rounded-lg transition-colors text-sm">Sign
+                                Out</a>
+                        </div>
+                    </div>
+                    {% else %}
                     <a href="{{ url_for('become_tutor') }}"
                         class="text-brandgreen border border-brandgreen hover:bg-brandgreen hover:text-white px-5 py-2 rounded-full font-medium transition-all ml-2 inline-flex items-center justify-center">
                         Become a Tutor
@@ -67,6 +117,7 @@
                         class="bg-brandgreen hover:bg-[#619a35] shadow-lg shadow-brandgreen/30 text-white px-6 py-2 rounded-full font-medium transition-all ml-2 inline-flex items-center justify-center transform hover:scale-105">
                         Book Free Demo
                     </a>
+                    {% endif %}
                 </div>
 
                 <!-- Mobile menu button -->
@@ -88,12 +139,29 @@
                     class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-brandgreen">Subjects</a>
                 <a href="{{ url_for('index') }}#areas"
                     class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-brandgreen">Areas We Serve</a>
+
+                {% if session.get('user') %}
+                <div class="border-t border-gray-100 mt-4 pt-4 pb-2">
+                    <div class="flex items-center px-3 mb-4">
+                        <img src="{{ session.user.avatar }}" alt="Profile"
+                            class="w-10 h-10 rounded-full border border-gray-200">
+                        <div class="ml-3">
+                            <p class="font-bold text-gray-900 text-sm leading-tight">{{ session.user.student_name }}</p>
+                            <p class="text-xs text-gray-500">@{{ session.user.username }}</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url_for('logout') }}"
+                    class="block px-3 py-2 mt-2 text-center text-base font-bold bg-red-50 text-red-600 rounded-md">Sign
+                    Out</a>
+                {% else %}
                 <a href="{{ url_for('become_tutor') }}"
                     class="block px-3 py-2 mt-4 text-center text-base font-medium text-brandgreen border border-brandgreen rounded-md">Become
                     a Tutor</a>
                 <a href="{{ url_for('book_demo') }}"
                     class="block px-3 py-2 mt-2 text-center text-base font-medium bg-brandgreen text-white rounded-md">Book
                     Free Demo</a>
+                {% endif %}
             </div>
         </div>
     </nav>

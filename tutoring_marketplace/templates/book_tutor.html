@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Book a Tutor - Naman Home Tutors{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50 py-16 min-h-[85vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12" data-aos="fade-up">
+            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Select Your Expert</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Book Your Tutor
+            </p>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                Welcome back, {{ session.user.student_name }}! Choose from our highly qualified pool of home tutors
+                tailored to your child's specific needs.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
+            {% for tutor in tutors %}
+            <div
+                class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="{{ tutor.photo_url }}" alt="{{ tutor.name }}" class="w-full h-full object-cover">
+                    <div
+                        class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-gray-800 shadow-sm flex items-center gap-1">
+                        <i class="fas fa-star text-yellow-400"></i> {{ tutor.rating }}
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-2xl font-bold text-gray-900">{{ tutor.name }}</h3>
+                    <p class="text-brandgreen font-semibold mb-4">{{ tutor.subject }}</p>
+
+                    <div class="flex items-center text-gray-600 mb-6 text-sm">
+                        <i class="fas fa-briefcase w-5"></i>
+                        <span>{{ tutor.experience }}</span>
+                    </div>
+
+                    <div class="mt-auto pt-4 border-t border-gray-100">
+                        <button onclick="bookTutor('{{ tutor.name }}')"
+                            class="w-full py-3 bg-brandgreen hover:bg-[#619a35] text-white rounded-xl font-bold transition-colors shadow-sm cursor-pointer">
+                            Book {{ tutor.name.split(' ')[0] }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Simple SweetAlert Style Modal Logic -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function bookTutor(tutorName) {
+        Swal.fire({
+            title: 'Tutor Requested!',
+            text: 'You have successfully booked ' + tutorName + ' for a demo session.',
+            icon: 'success',
+            confirmButtonColor: '#7bc143',
+            confirmButtonText: 'Great!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ url_for('index') }}";
+            }
+        });
+    }
+</script>
+{% endblock %}

@@ -11,11 +11,25 @@ body {
 }
 
 /* Custom colors based on project */
-.text-brandgreen { color: #7bc143; }
-.bg-brandgreen { background-color: #7bc143; }
-.hover\:bg-brandgreen-dark:hover { background-color: #619a35; }
-.border-brandgreen { border-color: #7bc143; }
-.ring-brandgreen { --tw-ring-color: #7bc143; }
+.text-brandgreen {
+    color: #7bc143;
+}
+
+.bg-brandgreen {
+    background-color: #7bc143;
+}
+
+.hover\:bg-brandgreen-dark:hover {
+    background-color: #619a35;
+}
+
+.border-brandgreen {
+    border-color: #7bc143;
+}
+
+.ring-brandgreen {
+    --tw-ring-color: #7bc143;
+}
 
 /* Floating WhatsApp Button */
 .whatsapp-float {
@@ -49,14 +63,22 @@ body {
 
 .hover-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 /* Image Float */
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 .animate-float {
@@ -65,6 +87,55 @@ body {
 
 /* Section padding */
 .section {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    min-height: auto;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Patterns */
+.bg-dot-pattern {
+    background-image: radial-gradient(rgba(123, 193, 67, 0.15) 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+}
+
+.bg-dot-pattern-gray {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+}
+
+/* Animated Waves */
+.animated-waves>use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.animated-waves>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+
+.animated-waves>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+
+.animated-waves>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+
+.animated-waves>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
 }
