@@ -16,42 +16,48 @@
 
         <div class="text-center mb-8 relative z-10">
             <h2 class="text-3xl font-extrabold mb-2 text-gray-900">Welcome Back</h2>
-            <p class="text-gray-500 text-sm">Sign in to your NamanTutors account</p>
+            <p class="text-gray-500 text-sm">Sign in to your Naman Home Tutors account</p>
         </div>
 
-        <form class="space-y-6 relative z-10"
-            onsubmit="event.preventDefault(); alert('Login functionality coming soon!');">
+        {% if error %}
+        <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-r">
+            <p class="text-sm font-bold">{{ error }}</p>
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('login') }}" method="POST" class="space-y-6 relative z-10">
             <div>
-                <label class="block text-sm font-medium mb-2 text-gray-700">Email Address</label>
+                <label class="block text-sm font-bold mb-2 text-gray-700">Phone, Email, Name, or Username</label>
                 <div class="relative">
-                    <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="email" required placeholder="name@example.com"
-                        class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 focus:border-safetyorange focus:ring-1 focus:ring-safetyorange text-gray-900 outline-none transition-all">
+                    <i class="fas fa-user-circle absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" name="identifier" required placeholder="Enter any account detail"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 focus:border-brandgreen focus:ring-1 focus:ring-brandgreen text-gray-900 outline-none transition-all shadow-sm">
                 </div>
             </div>
 
             <div>
                 <div class="flex justify-between items-center mb-2">
-                    <label class="block text-sm font-medium text-gray-700">Password</label>
-                    <a href="#" class="text-xs text-safetyorange hover:text-vibrantyellow transition">Forgot
+                    <label class="block text-sm font-bold text-gray-700">Password</label>
+                    <a href="#" class="text-xs text-brandgreen hover:text-black transition">Forgot
                         password?</a>
                 </div>
                 <div class="relative">
                     <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="password" required placeholder="••••••••"
-                        class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 focus:border-safetyorange focus:ring-1 focus:ring-safetyorange text-gray-900 outline-none transition-all">
+                    <input type="password" name="password" required placeholder="••••••••"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 focus:border-brandgreen focus:ring-1 focus:ring-brandgreen text-gray-900 outline-none transition-all shadow-sm">
                 </div>
             </div>
 
             <button type="submit"
-                class="w-full bg-safetyorange hover:bg-vibrantyellow text-white hover:text-deepblack py-3.5 rounded-xl font-bold transition-all duration-300 shadow-md transform hover:scale-105">
+                class="w-full bg-brandgreen hover:bg-[#619a35] text-white py-3.5 rounded-xl font-bold transition-all duration-300 shadow-lg transform hover:scale-[1.02]">
                 Sign In
             </button>
 
             <p class="text-center text-sm text-gray-500 mt-6">
-                Don't have an account? <a href="#"
-                    class="text-safetyorange hover:text-vibrantyellow font-semibold transition"
-                    onclick="document.getElementById('demo-modal').classList.remove('hidden')">Request a Demo</a>
+                Don't have an account? <br>
+                <a href="{{ url_for('book_demo') }}"
+                    class="text-brandgreen hover:text-[#558a2d] font-semibold transition mt-2 inline-block">Book a Demo
+                    Class to Register</a>
             </p>
         </form>
     </div>

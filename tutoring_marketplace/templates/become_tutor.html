@@ -26,10 +26,12 @@
             <div class="p-10">
                 <form action="{{ url_for('submit_application') }}" method="POST" enctype="multipart/form-data"
                     class="space-y-6">
+
                     <h3 class="text-lg font-bold text-gray-900 border-b pb-2">Basic Information</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full
+                                Name</label>
                             <input type="text" id="name" name="name"
                                 class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brandgreen/50 outline-none transition-colors shadow-sm"
                                 placeholder="e.g. Rahul Sharma" required>
@@ -43,9 +45,11 @@
                         </div>
                     </div>
 
-                    <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mt-4">Upload Curriculum Vitae (CV)</h3>
+                    <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mt-4">Upload Curriculum Vitae (CV)
+                    </h3>
                     <div class="pb-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Attach your detailed CV</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Attach your detailed
+                            CV</label>
 
                         <!-- File Upload UI -->
                         <div class="mt-1 flex justify-center px-6 pt-6 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-brandgreen/70 transition-colors bg-gray-50/50 cursor-pointer"
@@ -71,9 +75,11 @@
                     <div class="bg-[#fff9e6] border border-[#f5e3a9] p-5 rounded-2xl flex items-start gap-4 shadow-sm">
                         <i class="fas fa-exclamation-circle text-amber-500 text-2xl mt-0.5"></i>
                         <div>
-                            <h3 class="text-amber-900 font-bold text-base mb-1">Important Details Required in CV:</h3>
+                            <h3 class="text-amber-900 font-bold text-base mb-1">Important Details Required in
+                                CV:</h3>
                             <p class="text-amber-800 text-sm leading-relaxed mb-3">
-                                Please ensure your uploaded CV document <strong>strictly contains</strong> the following
+                                Please ensure your uploaded CV document <strong>strictly contains</strong> the
+                                following
                                 information before uploading:
                             </p>
                             <ul class="list-disc ml-5 text-[15px] font-medium text-amber-900 space-y-1">
