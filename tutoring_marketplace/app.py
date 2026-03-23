@@ -78,6 +78,9 @@ def init_db():
         ''')
         conn.commit()
 
+# Guarantee the databases are initialized before Gunicorn hits any web routes
+init_db()
+
 @app.route('/book-tutor')
 def book_tutor():
     """Renders the tutor selection page if logged in."""
@@ -306,7 +309,5 @@ def request_tutor():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    # Initialize the DB first implicitly before running the app
-    init_db()
-    # Run Flask Application on port 5000 in debug mode
+    # Run Flask Application on port 5000 in local debug mode
     app.run(debug=True, port=5000)
