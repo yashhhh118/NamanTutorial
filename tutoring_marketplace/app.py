@@ -194,9 +194,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # ==========================================
 # EMAIL CONFIGURATION
 # ==========================================
-SENDER_EMAIL = "yashhhwhat@gmail.com" # Updated automatically!
-SENDER_PASSWORD = "cfarabhwskwajvmr"  # Removed the spaces for standard API compliance
-RECEIVER_EMAIL = "yashhhwhat@gmail.com"
+SENDER_EMAIL = "namanhometutors@gmail.com" # Updated automatically!
+SENDER_PASSWORD = "vbwhkleylfrswrvv "  # Removed the spaces for standard API compliance
+RECEIVER_EMAIL = "namanhometutors@gmail.com"
 
 @app.route('/submit-application', methods=['POST'])
 def submit_application():
