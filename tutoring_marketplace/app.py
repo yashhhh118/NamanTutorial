@@ -277,6 +277,60 @@ def submit_application():
         '''
     return "Invalid form or file.", 400
 
+@app.route('/submit-contact', methods=['POST'])
+def submit_contact():
+    """Handles contact form submissions and sends an email."""
+    name = request.form.get('name')
+    email = request.form.get('email')
+    phone = request.form.get('phone')
+    message = request.form.get('message')
+    
+    if not name or not message:
+        return "Invalid form.", 400
+
+    msg = EmailMessage()
+    msg['Subject'] = f"💬 New Contact Message from: {name}"
+    msg['From'] = SENDER_EMAIL
+    msg['To'] = RECEIVER_EMAIL
+    
+    msg.set_content(f"""
+    New Contact Form Submission Received!
+    
+    Name: {name}
+    Email: {email}
+    Phone: {phone}
+    
+    Message:
+    {message}
+    """)
+    
+    try:
+        if SENDER_EMAIL != "your-email@gmail.com":
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(SENDER_EMAIL, SENDER_PASSWORD)
+                smtp.send_message(msg)
+            print("📧 CONTACT EMAIL SENT SUCCESSFULLY!")
+        else:
+            print("⚠️ APP PASSWORD NOT CONFIGURED YET! Email skipped.")
+    except Exception as e:
+        print(f"FAILED TO SEND EMAIL: {str(e)}")
+        
+    return '''
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <body style="background:#f9fafb; font-family:sans-serif;"></body>
+    <script>
+        Swal.fire({
+            title: 'Message Sent!',
+            text: 'Thank you for reaching out. We will get back to you shortly.',
+            icon: 'success',
+            confirmButtonColor: '#111827',
+            confirmButtonText: 'Return Home'
+        }).then(() => {
+            window.location.href = "/";
+        });
+    </script>
+    '''
+
 @app.route('/request-tutor', methods=['POST'])
 def request_tutor():
     """Handles API requests to submit tutoring leads."""
