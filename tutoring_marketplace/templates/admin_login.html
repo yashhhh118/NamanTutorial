@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Naman Tutors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandgreen: '#7bc143',
+                        darkblue: '#1e3a8a',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 h-screen flex justify-center items-center">
+    <div class="bg-white p-10 rounded-2xl shadow-xl w-[90%] max-w-md">
+        <div class="text-center mb-8">
+            <span class="text-3xl font-bold text-gray-900 tracking-tight">
+                Naman<span class="text-brandgreen">Tutors</span>
+            </span>
+            <p class="text-gray-500 mt-2 flex items-center justify-center font-medium">
+                <i class="fas fa-lock text-brandgreen mr-2"></i> Admin Portal
+            </p>
+        </div>
+
+        {% if error %}
+        <div class="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6 text-sm">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('admin_login') }}" method="POST" class="space-y-6">
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Passcode</label>
+                <input type="password" id="password" name="password" required autofocus
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brandgreen focus:border-brandgreen transition-colors">
+            </div>
+            <button type="submit"
+                class="w-full bg-gray-900 hover:bg-black text-white font-bold py-3 rounded-full transition-colors flex justify-center items-center shadow-lg">
+                Authenticate Securely
+            </button>
+            <a href="{{ url_for('index') }}" class="block text-center text-sm text-gray-500 hover:text-brandgreen mt-4">
+                &larr; Return to Main Site
+            </a>
+        </form>
+    </div>
+</body>
+</html>

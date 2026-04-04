@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
 import sqlite3
 import os
 
@@ -35,7 +35,21 @@ def init_db():
                 class_grade TEXT,
                 school_name TEXT,
                 address TEXT,
-                avatar TEXT
+                avatar TEXT,
+                subject TEXT,
+                time TEXT,
+                tuition_place TEXT,
+                tuition_details TEXT
+            )
+        ''')
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS contact_messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                phone TEXT NOT NULL,
+                message TEXT NOT NULL,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ''')
         cursor.execute('''
@@ -151,16 +165,23 @@ def book_demo():
             'email': form_data.get('email'),
             'class_grade': form_data.get('class_grade'),
             'school_name': form_data.get('school_name'),
-            'address': form_data.get('address')
+            'address': form_data.get('address'),
+            'subject': form_data.get('subject'),
+            'time': form_data.get('time'),
+            'tuition_place': request.form.getlist('tuition_place'), 
+            'tuition_details': form_data.get('tuition_details')
         }
+        
+        # Convert list of places to string
+        user_dict['tuition_place'] = ", ".join(user_dict['tuition_place'])
         
         try:
             # Store permanently in the database
             with sqlite3.connect(DATABASE) as conn:
                 cursor = conn.cursor()
                 cursor.execute('''
-                    INSERT INTO users (username, password, student_name, parent_name, phone, email, class_grade, school_name, address, avatar)
-                    VALUES (:username, :password, :student_name, :parent_name, :phone, :email, :class_grade, :school_name, :address, :avatar)
+                    INSERT INTO users (username, password, student_name, parent_name, phone, email, class_grade, school_name, address, avatar, subject, time, tuition_place, tuition_details)
+                    VALUES (:username, :password, :student_name, :parent_name, :phone, :email, :class_grade, :school_name, :address, :avatar, :subject, :time, :tuition_place, :tuition_details)
                 ''', user_dict)
                 conn.commit()
         except sqlite3.IntegrityError:
@@ -304,6 +325,15 @@ def submit_contact():
     {message}
     """)
     
+    # Save to Database so Admin can read it later
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO contact_messages (name, email, phone, message)
+            VALUES (?, ?, ?, ?)
+        ''', (name, email, phone, message))
+        conn.commit()
+    
     try:
         if SENDER_EMAIL != "your-email@gmail.com":
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
@@ -361,6 +391,117 @@ def request_tutor():
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/admin-login', methods=['GET', 'POST'])
+def admin_login():
+    """Admin login page."""
+    if request.method == 'POST':
+        password = request.form.get('password')
+        if password == 'admin123':  # The secure passcode
+            session['is_admin'] = True
+            return redirect(url_for('admin_dashboard'))
+        else:
+            return render_template('admin_login.html', error="Invalid password provided.")
+    return render_template('admin_login.html')
+
+@app.route('/admin-logout')
+def admin_logout():
+    """Logs out the admin."""
+    session.pop('is_admin', None)
+    return redirect(url_for('admin_login'))
+
+@app.route('/admin')
+def admin_dashboard():
+    """Renders the secure admin dashboard."""
+    if not session.get('is_admin'):
+        return redirect(url_for('admin_login'))
+    
+    with sqlite3.connect(DATABASE) as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        try:
+            cursor.execute("SELECT * FROM users ORDER BY id DESC")
+            students = cursor.fetchall()
+        except:
+            students = []
+            
+        try:
+            cursor.execute("SELECT * FROM contact_messages ORDER BY timestamp DESC")
+            messages = cursor.fetchall()
+        except:
+            messages = []
+            
+    with sqlite3.connect(APPLICANTS_DB) as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        try:
+            cursor.execute("SELECT * FROM applicants ORDER BY timestamp DESC")
+            applicants = cursor.fetchall()
+        except:
+            applicants = []
+
+    return render_template('admin_dashboard.html', 
+                           students=students, 
+                           messages=messages, 
+                           applicants=applicants)
+
+@app.route('/admin/download-cv/<int:applicant_id>')
+def download_cv(applicant_id):
+    """Securely serves the CV file to the admin."""
+    if not session.get('is_admin'):
+        return redirect(url_for('admin_login'))
+    
+    with sqlite3.connect(APPLICANTS_DB) as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("SELECT cv_file_path FROM applicants WHERE id=?", (applicant_id,))
+        applicant = cursor.fetchone()
+        
+        if applicant and applicant['cv_file_path']:
+            filepath = applicant['cv_file_path']
+            directory = os.path.abspath(os.path.dirname(filepath))
+            filename = os.path.basename(filepath)
+            return send_from_directory(directory, filename)
+            
+    return "File not found", 404
+
+@app.route('/admin/delete/<string:record_type>/<int:record_id>', methods=['POST'])
+def admin_delete(record_type, record_id):
+    """Deletes a record from the database."""
+    if not session.get('is_admin'):
+        return jsonify({'error': 'Unauthorized'}), 403
+        
+    try:
+        if record_type == 'student':
+            with sqlite3.connect(DATABASE) as conn:
+                conn.cursor().execute("DELETE FROM users WHERE id=?", (record_id,))
+                conn.commit()
+        elif record_type == 'applicant':
+            with sqlite3.connect(APPLICANTS_DB) as conn:
+                # Get filepath to optionally delete physical file
+                cursor = conn.cursor()
+                cursor.execute("SELECT cv_file_path FROM applicants WHERE id=?", (record_id,))
+                record = cursor.fetchone()
+                if record and record[0] and os.path.exists(record[0]):
+                    try:
+                        os.remove(record[0])
+                    except:
+                        pass # if file isn't there or locked
+                
+                cursor.execute("DELETE FROM applicants WHERE id=?", (record_id,))
+                conn.commit()
+        elif record_type == 'message':
+            with sqlite3.connect(DATABASE) as conn:
+                conn.cursor().execute("DELETE FROM contact_messages WHERE id=?", (record_id,))
+                conn.commit()
+        else:
+            return jsonify({'error': 'Invalid record type'}), 400
+            
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     # Run Flask Application on port 5000 in local debug mode

@@ -6,30 +6,46 @@
 <section class="bg-gray-50 py-16 min-h-[85vh] flex flex-col justify-center">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full" data-aos="fade-up">
 
-        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 relative">
+        <!-- Headers OUTSIDE the card -->
+        <div class="text-center mb-8">
+            <h1 id="form-title" class="text-4xl md:text-[45px] font-extrabold text-brandgreen mb-3 tracking-tight transition-all duration-300">Book a Free Demo Class</h1>
+            <p id="form-subtitle" class="text-gray-800 text-lg font-medium transition-all duration-300">Submit your learning requirements and find top tutors in your locality</p>
+            <p class="text-sm text-gray-500 mt-2 font-medium">If you are a teacher and want to provide part-time tuition please <a href="{{ url_for('become_tutor') }}" class="text-brandgreen font-bold hover:underline">click here to sign up</a></p>
+        </div>
 
-            <div class="bg-brandgreen py-8 px-10 text-center text-white relative transition-all duration-300">
-                <div class="absolute inset-0 bg-black/5"></div>
-                <!-- Progress Indicator -->
-                <div class="flex justify-center items-center mb-4 relative z-10 gap-2">
-                    <div id="dot-1" class="w-10 h-2 bg-white rounded-full transition-all duration-300"></div>
-                    <div id="dot-2" class="w-4 h-2 bg-white/40 rounded-full transition-all duration-300"></div>
-                </div>
-                <h1 id="form-title" class="text-3xl font-extrabold relative z-10">Book a Free Demo Class</h1>
-                <p id="form-subtitle" class="mt-2 text-brandgreen-100 relative z-10">Step 1: Tell us about your child's
-                    requirements.</p>
+        <!-- The White Form Card frame -->
+        <div class="bg-white rounded-[1.25rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 p-8 md:p-10 relative max-w-2xl mx-auto">
+            
+            <!-- Progress Indicator inside the card -->
+            <div class="flex justify-center items-center mb-8 relative z-10 gap-2">
+                <div id="dot-1" class="w-10 h-1.5 bg-brandgreen rounded-full transition-all duration-300"></div>
+                <div id="dot-2" class="w-4 h-1.5 bg-gray-200 rounded-full transition-all duration-300"></div>
             </div>
 
-            <div class="p-8 md:p-12">
-                <form action="{{ url_for('book_demo') }}" method="POST" id="registration-form" class="space-y-6">
+            <form action="{{ url_for('book_demo') }}" method="POST" id="registration-form" class="space-y-6">
 
                     <!-- ================= STEP 1: DEMO DETAILS ================= -->
-                    <div id="step-1" class="block space-y-6">
+                    <div id="step-1" class="block space-y-7">
+                        
+                        <!-- 1. What do you want to learn -->
+                        <div>
+                            <label class="block text-[16px] font-bold text-[#5c728a] mb-2">What do you want to learn</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                    <i class="fas fa-search text-gray-400 text-lg"></i>
+                                </div>
+                                <input type="text" name="subject" placeholder="Enter your subject"
+                                    class="w-full pl-11 pr-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all placeholder-gray-400 text-gray-800"
+                                    required>
+                            </div>
+                        </div>
+
+                        <!-- 1.5 Class Grade and Time (Per Request) -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Class Grade *</label>
+                                <label class="block text-[16px] font-bold text-[#5c728a] mb-2">Class Grade</label>
                                 <select name="class_grade"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 hover:border-brandgreen/30 outline-none transition-all shadow-sm bg-gray-50 focus:bg-white"
+                                    class="w-full px-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all text-gray-800"
                                     required>
                                     <option value="" disabled selected>Select Class</option>
                                     <option value="1">Class 1</option>
@@ -45,38 +61,58 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Subject Required *</label>
-                                <select name="subject"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 hover:border-brandgreen/30 outline-none transition-all shadow-sm bg-gray-50 focus:bg-white"
-                                    required>
-                                    <option value="" disabled selected>Select Subject</option>
-                                    <option value="Mathematics">Mathematics</option>
-                                    <option value="Science">Science</option>
-                                    <option value="English">English</option>
-                                    <option value="All Subjects">All Subjects</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Time *</label>
+                                <label class="block text-[16px] font-bold text-[#5c728a] mb-2">Time for class</label>
                                 <input type="time" name="time"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 hover:border-brandgreen/30 outline-none transition-all shadow-sm bg-gray-50 focus:bg-white"
-                                    required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Area in Pune *</label>
-                                <input type="text" name="area" placeholder="e.g. Kharadi"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 hover:border-brandgreen/30 outline-none transition-all shadow-sm bg-gray-50 focus:bg-white"
+                                    class="w-full px-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all text-gray-800"
                                     required>
                             </div>
                         </div>
 
-                        <div class="pt-6">
+                        <!-- 2. Tuition Place -->
+                        <div>
+                            <label class="block text-[16px] font-bold text-[#5c728a] mb-4">Tuition Place</label>
+                            <div class="flex flex-wrap gap-8 items-center">
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input type="checkbox" name="tuition_place" value="At tutor's place" class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
+                                    <span class="text-[#002f4b] font-medium transition-colors ml-1">At tutor's place</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input type="checkbox" name="tuition_place" value="At my place" class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
+                                    <span class="text-[#002f4b] font-medium transition-colors ml-1">At my place</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input type="checkbox" name="tuition_place" value="Online" class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
+                                    <span class="text-[#002f4b] font-medium transition-colors ml-1">Online</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 3. Tuition Details -->
+                        <div>
+                            <label class="block text-[16px] font-bold text-[#5c728a] mb-1">Tuition Details</label>
+                            <p class="text-[13px] text-[#7d93a5] mb-2">(Ex: Wanted a Lady Math tutor for 8th Std ICSE Girl Student for 2 days a week)</p>
+                            <div class="relative">
+                                <textarea name="tuition_details" rows="3" placeholder="Enter your requirement in brief" oninput="document.getElementById('char-count').innerText = this.value.length"
+                                    class="w-full px-4 py-4 rounded-[4px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all resize-none placeholder-gray-500 text-gray-800" required></textarea>
+                                <div class="absolute bottom-3 right-3 text-[12px] font-bold text-[#94a8b8]">
+                                    <span id="char-count">0</span> characters Typed
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Consent -->
+                        <div class="pt-2 pb-1">
+                            <label class="flex items-start gap-3 cursor-pointer group">
+                                <input type="checkbox" required checked class="mt-0.5 w-[18px] h-[18px] rounded-[3px] border-orange-400 text-[#ff8c6b] focus:ring-[#ff8c6b] cursor-pointer accent-[#ff8c6b]">
+                                <span class="text-gray-700 text-[15px] leading-tight">I allow Naman Tutors to share my requirement details with other tutors.</span>
+                            </label>
+                        </div>
+
+                        <!-- 5. Next Button -->
+                        <div class="flex justify-center pt-4">
                             <button type="button" onclick="goToStep2()"
-                                class="w-full flex justify-center items-center gap-2 py-4 px-4 border border-transparent rounded-2xl shadow-lg shadow-brandgreen/30 text-lg font-bold text-white bg-brandgreen hover:bg-[#619a35] transition-all hover:scale-[1.02]">
-                                Continue to Account Setup <i class="fas fa-arrow-right"></i>
+                                class="w-48 py-3 rounded-[3px] font-bold text-white text-[15px] bg-[#3ecc7a] hover:bg-[#32ad66] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3ecc7a]">
+                                Next
                             </button>
                         </div>
                     </div>
@@ -86,12 +122,12 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Student Name *</label>
+                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Student Name *</label>
                                 <input type="text" name="student_name" placeholder="Rahul Sharma"
                                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Parent Name *</label>
+                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Parent Name *</label>
                                 <input type="text" name="parent_name" placeholder="Mr. / Mrs. Sharma"
                                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                             </div>
@@ -99,12 +135,12 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">School Name</label>
+                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">School Name</label>
                                 <input type="text" name="school_name" placeholder="e.g. DPS Pune"
                                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Full Home Address *</label>
+                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Full Home Address *</label>
                                 <input type="text" name="address" placeholder="Flat No, Society, Area"
                                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                             </div>
@@ -114,12 +150,12 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Email Address *</label>
                                 <input type="email" name="email" placeholder="email@example.com"
                                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Phone Number *</label>
                                 <div class="flex gap-2">
                                     <input type="tel" name="phone" placeholder="+91"
                                         class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
@@ -131,12 +167,12 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Create Username *</label>
+                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Create Username *</label>
                                 <input type="text" name="username" placeholder="rahul123"
                                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Create Password *</label>
+                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Create Password *</label>
                                 <input type="password" name="password" placeholder="••••••••"
                                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                             </div>
@@ -184,31 +220,44 @@
                         </div>
                     </div>
 
-                </form>
+            </form>
+        </div>
 
-                <div class="mt-8 pt-6 border-t border-gray-100 text-center">
-                    <p class="text-sm text-gray-500">
-                        Already have an account?
-                        <a href="{{ url_for('login') }}"
-                            class="text-brandgreen font-bold hover:underline transition-all duration-200">
-                            Login here
-                        </a>
-                    </p>
-                </div>
-            </div>
+        <!-- Footer Text Out of Card -->
+        <div class="mt-8 text-center space-y-2">
+            <p class="text-[15px] text-gray-600 font-medium">
+                If you are an existing student <a href="{{ url_for('login') }}" class="text-brandgreen font-bold hover:underline">Login Here</a>
+            </p>
+            <p class="text-[15px] text-gray-600 font-medium">
+                If you are facing any problem kindly <a href="{{ url_for('contact') }}" class="text-brandgreen font-bold hover:underline">Contact Us</a> or write to <a href="mailto:namanhometutors@gmail.com" class="text-brandgreen font-bold hover:underline">namanhometutors@gmail.com</a>
+            </p>
         </div>
     </div>
 </section>
 
 <script>
     function goToStep2() {
-        // Simple client side validation check before moving
         const selects = document.querySelectorAll('#step-1 select');
         const inputs = document.querySelectorAll('#step-1 input');
+        const textareas = document.querySelectorAll('#step-1 textarea');
 
         let valid = true;
-        selects.forEach(el => { if (el.required && !el.value) valid = false; el.reportValidity() });
-        inputs.forEach(el => { if (el.required && !el.value) valid = false; el.reportValidity() });
+        
+        selects.forEach(el => { 
+            if (el.required && !el.value) { valid = false; el.reportValidity(); }
+        });
+        
+        textareas.forEach(el => { 
+            if (el.required && !el.value.trim()) { valid = false; el.reportValidity(); }
+        });
+
+        inputs.forEach(el => { 
+            if (el.required) {
+                if (el.type === 'checkbox' && !el.checked) { valid = false; el.reportValidity(); }
+                else if (el.type !== 'checkbox' && !el.value) { valid = false; el.reportValidity(); }
+            }
+        });
+
         if (!valid) return;
 
         // Transitions
@@ -216,8 +265,8 @@
         document.getElementById('step-2').classList.remove('hidden');
 
         // Update dots
-        document.getElementById('dot-1').className = "w-4 h-2 bg-white/40 rounded-full transition-all duration-300";
-        document.getElementById('dot-2').className = "w-10 h-2 bg-white rounded-full transition-all duration-300";
+        document.getElementById('dot-1').className = "w-4 h-1.5 bg-gray-200 rounded-full transition-all duration-300";
+        document.getElementById('dot-2').className = "w-10 h-1.5 bg-brandgreen rounded-full transition-all duration-300";
 
         // Update headers
         document.getElementById('form-title').innerText = "Create Your Account";
@@ -228,8 +277,8 @@
         document.getElementById('step-2').classList.add('hidden');
         document.getElementById('step-1').classList.remove('hidden');
 
-        document.getElementById('dot-2').className = "w-4 h-2 bg-white/40 rounded-full transition-all duration-300";
-        document.getElementById('dot-1').className = "w-10 h-2 bg-white rounded-full transition-all duration-300";
+        document.getElementById('dot-2').className = "w-4 h-1.5 bg-gray-200 rounded-full transition-all duration-300";
+        document.getElementById('dot-1').className = "w-10 h-1.5 bg-brandgreen rounded-full transition-all duration-300";
 
         document.getElementById('form-title').innerText = "Book a Free Demo Class";
         document.getElementById('form-subtitle').innerText = "Step 1: Tell us about your child's requirements.";

@@ -10,14 +10,16 @@
 
         <!-- Text Content -->
         <div class="md:w-1/2 text-white pr-4 lg:pr-12 z-30 pt-10 md:pt-0 pb-20 md:pb-12" data-aos="fade-right">
-            <p class="font-pacifico text-3xl md:text-4xl mb-4 text-[#f0f9b6] tracking-wide"
-                style="text-shadow: 2px 2px 4px rgba(0,0,0,0.15);">#1 Naman Home Tutors</p>
+            <div class="inline-flex items-center gap-2 bg-[#9bd151] px-4 py-2 rounded-full text-sm font-bold text-white tracking-widest uppercase mb-5 shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)] border border-[#a8df5c]">
+                <span>🏆 #1 Naman Home Tutors</span>
+            </div>
+            
             <h1 class="font-bungee font-normal text-4xl md:text-5xl lg:text-[64px] mb-6 leading-[1.1] tracking-normal drop-shadow-sm text-white"
                 style="font-weight: 400; font-style: normal; -webkit-text-stroke: 1px rgba(0,0,0,0.1);">
                 Expert Home Tuition<br>in Pune
             </h1>
-            <p
-                class="font-caveat font-medium text-[26px] md:text-[32px] mb-10 text-white leading-relaxed max-w-[500px]">
+            
+            <p class="font-inter font-medium text-lg md:text-[20px] mb-10 text-white/95 leading-relaxed max-w-[500px]">
                 Personalized one-to-one learning with experienced tutors from the comfort of your home. We focus on
                 academic excellence for Classes 1 to 10.
             </p>
@@ -50,62 +52,66 @@
                 </span>
             </a>
             {% endif %}
+
+            <!-- Social Proof / 400+ Teachers -->
+            <div class="mt-10 lg:mt-12 flex items-center gap-4 bg-white/10 w-fit px-5 py-3.5 rounded-2xl backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/15 transition-colors cursor-default"
+                data-aos="fade-up" data-aos-delay="100">
+                <div class="flex -space-x-3">
+                    <img class="w-11 h-11 rounded-full border-[3px] border-[#82c91e] object-cover shadow-sm bg-gray-200"
+                        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80"
+                        alt="Tutor">
+                    <img class="w-11 h-11 rounded-full border-[3px] border-[#82c91e] object-cover shadow-sm bg-gray-200"
+                        src="https://images.unsplash.com/photo-1580894732444-8ecded790047?auto=format&fit=crop&w=100&q=80"
+                        alt="Tutor">
+                    <img class="w-11 h-11 rounded-full border-[3px] border-[#82c91e] object-cover shadow-sm bg-gray-200"
+                        src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=100&q=80"
+                        alt="Tutor">
+                    <div
+                        class="w-11 h-11 rounded-full border-[3px] border-[#82c91e] bg-[#f0f9b6] flex items-center justify-center text-[12px] font-extrabold text-[#649c17] z-10 shadow-sm relative">
+                        400+</div>
+                </div>
+                <div class="text-white pr-2">
+                    <p class="font-bungee text-[15px] tracking-wide text-[#f0f9b6] leading-tight drop-shadow-sm mb-0.5">
+                        400+ TEACHERS</p>
+                    <p class="font-medium font-inter text-sm opacity-90 leading-tight">Actively teaching in Pune</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- Graphic / Illustration Content -->
-        <div class="md:w-[45%] relative flex justify-center items-center h-[500px] hidden md:flex" data-aos="fade-left"
+        <div class="md:w-[50%] relative flex justify-center items-center h-[550px] hidden md:flex" data-aos="fade-left"
             data-aos-delay="200">
-            <!-- Glowing green sphere effect from screenshot -->
-            <div
-                class="absolute w-[450px] h-[450px] bg-gradient-to-tr from-[#98d563] to-[#d6faab] rounded-full top-[10%] left-[5%] shadow-[inset_-30px_-30px_60px_rgba(0,0,0,0.1),inset_10px_10px_60px_rgba(255,255,255,0.8)] opacity-95">
+            
+            <!-- Massive Organic Blob Background (Full Bleed) -->
+            <div class="absolute right-[-25%] top-[-15%] bottom-[-15%] w-[150%] z-0 pointer-events-none flex items-center justify-center">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="w-full h-full opacity-100 scale-[1.1] origin-right">
+                    <!-- Soft organic blob using warm orange that compliments brandgreen -->
+                    <path fill="#ffe8ce" d="M428.5,321Q398,392,324,424Q250,456,177.5,417.5Q105,379,93,299.5Q81,220,137,162Q193,104,269,96Q345,88,402,143.5Q459,199,428.5,321Z"></path>
+                </svg>
             </div>
 
-            <div class="relative z-20 w-full h-full flex items-center justify-center">
-                <!-- Teacher & Student Photo Window -->
-                <div
-                    class="absolute right-[5%] top-[20%] w-[350px] h-[250px] bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-[8px] border-white transform rotate-3 z-10 hover:rotate-0 transition-transform duration-700 overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80"
-                        alt="Tutor and Student"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                </div>
-
-                <!-- Floating Tags (Clickable Buttons) -->
-                <button
-                    onclick="openTagModal('Maths &amp; Science', 'Our expert tutors provide deep conceptual clarity in fundamental subjects like Mathematics and Science, ensuring students don\'t just memorize, but actually understand the logic behind every formula and theorem.', 'fas fa-flask text-blue-500')"
-                    class="absolute left-[-5%] top-[35%] bg-blue-500 text-white font-bold py-3 px-6 rounded-xl shadow-[0_10px_20px_rgba(59,130,246,0.3)] transform -rotate-12 z-20 hover:scale-110 hover:-rotate-6 active:translate-y-1 active:border-b-2 transition-all duration-300 border-[3px] border-blue-400 border-b-[6px] border-b-blue-700 focus:outline-none">
-                    Maths & Science
-                </button>
-
-                <button
-                    onclick="openTagModal('Class 1-10', 'We specialize in early and mid-level education. Building a strong foundation from Class 1 to 10 is crucial because these formative years dictate a student\'s analytical skills for higher education.', 'fas fa-graduation-cap text-pink-500')"
-                    class="absolute right-[20%] top-[10%] bg-pink-500 text-white font-bold py-3 px-6 rounded-xl shadow-[0_10px_20px_rgba(236,72,153,0.3)] transform rotate-6 z-20 hover:scale-110 hover:rotate-12 active:translate-y-1 active:border-b-2 transition-all duration-300 border-[3px] border-pink-400 border-b-[6px] border-b-pink-700 focus:outline-none">
-                    Class 1-10
-                </button>
-
-                <!-- Floating Book/Focus tag (Clickable Button) -->
-                <button
-                    onclick="openTagModal('1-on-1 Focus', 'In a typical classroom, a child might hesitate to ask questions. Our 1-on-1 personalized home tutoring gives them 100% of the teacher\'s attention, allowing them to learn openly at their own customized pace.', 'fas fa-user-graduate text-orange-500')"
-                    class="absolute left-[15%] bottom-[15%] bg-white rounded-2xl shadow-2xl border-2 border-gray-100 border-b-[6px] border-b-gray-300 p-4 transform -rotate-[10deg] transition-all hover:scale-105 hover:rotate-0 active:translate-y-1 active:border-b-2 duration-300 z-30 flex items-center gap-3 focus:outline-none text-left w-[220px]">
-                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-book-reader text-orange-500 text-xl"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold text-gray-800 leading-tight">1-on-1 Focus</p>
-                        <p class="text-[11px] text-brandgreen font-bold uppercase tracking-wider mt-0.5">Personalized
-                        </p>
-                    </div>
-                </button>
-
-                <!-- Star icons floating (Education theme) -->
-                <div class="absolute bottom-[10%] right-[10%] z-20">
-                    <i
-                        class="fas fa-star text-yellow-300 text-[50px] opacity-90 drop-shadow-lg animate-[spin_10s_linear_infinite]"></i>
-                </div>
-                <div class="absolute top-[30%] left-[10%] z-10">
-                    <i class="fas fa-star text-yellow-300 text-[35px] opacity-70 drop-shadow-md animate-[spin_8s_linear_infinite]"
-                        style="animation-direction: reverse;"></i>
-                </div>
+            <!-- Vector Illustration Image -->
+            <div class="relative z-10 w-[550px] transform transition-transform duration-700 hover:scale-[1.02] translate-x-4">
+                <img src="{{ url_for('static', filename='images/student_vector_transparent.png') }}"
+                    alt="Student studying with tutor - beautifully transparent"
+                    class="w-full h-auto object-contain filter saturate-110 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] opacity-95">
             </div>
+
+            <!-- Decorative Floating Elements (Leaves / Accents) -->
+            <div class="absolute top-[20%] right-[5%] z-20 animate-[bounce_4s_infinite]">
+                <i class="fas fa-leaf text-[#fc7c5c] text-4xl transform rotate-45 opacity-80 drop-shadow-sm"></i>
+            </div>
+            <div class="absolute bottom-[20%] left-[-5%] z-20 animate-[bounce_5s_infinite_reverse]">
+                <i class="fas fa-leaf text-[#fc7c5c] text-5xl transform -rotate-12 opacity-80 drop-shadow-sm"></i>
+            </div>
+            <div class="absolute bottom-[5%] right-[20%] z-20 animate-pulse">
+                <div class="w-6 h-6 rounded-full bg-brandgreen opacity-80"></div>
+            </div>
+            <div class="absolute top-[10%] left-[10%] z-0 animate-pulse" style="animation-delay: 1s;">
+                <div class="w-8 h-8 rounded-full bg-orange-400 opacity-60"></div>
+            </div>
+
         </div>
     </div>
 
