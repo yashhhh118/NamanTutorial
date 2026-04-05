@@ -171,88 +171,107 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <!-- Brand -->
-                <div class="col-span-1 md:col-span-1">
-                    <span class="text-2xl font-bold tracking-tight mb-6 inline-block">
-                        <i class="fas fa-graduation-cap text-brandgreen mr-2"></i>
-                        Naman<span class="text-brandgreen">Tutors</span>
-                    </span>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        Expert home tuition for Classes 1–10 in Pune. Personalized one-to-one learning with experienced
-                        tutors right at your home.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brandgreen transition-colors"><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brandgreen transition-colors"><i
-                                class="fab fa-twitter"></i></a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brandgreen transition-colors"><i
-                                class="fab fa-instagram"></i></a>
+    <!-- Professional Footer -->
+    <footer class="bg-gray-900 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-brandgreen flex items-center gap-2">
+                        <i class="fas fa-graduation-cap"></i> Naman Tutors
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Expert home tuition for classes 1-10 in Pune.
+                        Personalized learning with certified tutors.</p>
+                    <!-- Social Links -->
+                    <div class="flex gap-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-brandgreen transition">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-brandgreen transition">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-brandgreen transition">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-brandgreen transition">
+                            <i class="fab fa-linkedin text-lg"></i>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2 inline-block">Quick Links</h3>
-                    <ul class="space-y-3">
+                    <h4 class="text-lg font-bold mb-4 text-brandgreen">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
                         <li><a href="{{ url_for('index') }}"
-                                class="text-gray-400 hover:text-brandgreen transition-colors">Home</a></li>
-                        <li><a href="{{ url_for('index') }}#services"
-                                class="text-gray-400 hover:text-brandgreen transition-colors">Our Services</a></li>
-                        <li><a href="{{ url_for('index') }}#subjects"
-                                class="text-gray-400 hover:text-brandgreen transition-colors">Subjects</a></li>
-                        <li><a href="{{ url_for('index') }}#areas"
-                                class="text-gray-400 hover:text-brandgreen transition-colors">Areas We Serve</a></li>
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Home
+                            </a></li>
+                        <li><a href="{{ url_for('about') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> About Us
+                            </a></li>
+                        <li><a href="{{ url_for('contact') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Contact
+                            </a></li>
+                        <li><a href="{{ url_for('become_tutor') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Become Tutor
+                            </a></li>
                     </ul>
                 </div>
 
-                <!-- For Tutors & Parents -->
+                <!-- Services -->
                 <div>
-                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2 inline-block">Action</h3>
-                    <ul class="space-y-3">
+                    <h4 class="text-lg font-bold mb-4 text-brandgreen">Services</h4>
+                    <ul class="space-y-3 text-sm">
                         <li><a href="{{ url_for('book_demo') }}"
-                                class="text-gray-400 hover:text-white transition-colors flex items-center"><i
-                                    class="fas fa-chevron-right text-brandgreen text-xs mr-2"></i> Book Free Demo</a>
-                        </li>
-                        <li><a href="{{ url_for('become_tutor') }}"
-                                class="text-gray-400 hover:text-white transition-colors flex items-center"><i
-                                    class="fas fa-chevron-right text-brandgreen text-xs mr-2"></i> Become a Tutor</a>
-                        </li>
-                        <li><a href="{{ url_for('contact') }}"
-                                class="text-gray-400 hover:text-brandgreen transition-colors flex items-center"><i
-                                    class="fas fa-chevron-right text-brandgreen text-xs mr-2"></i> Contact Us</a></li>
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Book Demo Class
+                            </a></li>
+                        <li><a href="{{ url_for('book_tutor') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Find Tutors
+                            </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Online Classes
+                            </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Group Tuition
+                            </a></li>
                     </ul>
                 </div>
 
                 <!-- Contact Info -->
                 <div>
-                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2 inline-block">Contact Us</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 text-brandgreen mr-3 w-5 text-center"></i>
-                            <span class="text-gray-400">Pune, Maharashtra, India</span>
+                    <h4 class="text-lg font-bold mb-4 text-brandgreen">Contact Info</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-brandgreen mt-1"></i>
+                            <span>Pune, Maharashtra, India</span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone-alt text-brandgreen mr-3 w-5 text-center"></i>
-                            <span class="text-gray-400">+91 98765 43210</span>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-brandgreen"></i>
+                            <a href="tel:+919876543210" class="hover:text-brandgreen transition">+91 98765 43210</a>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope text-brandgreen mr-3 w-5 text-center"></i>
-                            <span class="text-gray-400">info@namantutors.com</span>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brandgreen"></i>
+                            <a href="mailto:info@namantutors.com"
+                                class="hover:text-brandgreen transition">info@namantutors.com</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-                <p>&copy; 2026 Naman Home Tutors. All rights reserved.</p>
+            <!-- Bottom Footer -->
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>&copy; 2024 Naman Home Tutors. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-brandgreen transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-brandgreen transition">Terms & Conditions</a>
+                    <a href="#" class="hover:text-brandgreen transition">Disclaimer</a>
+                </div>
             </div>
         </div>
     </footer>
