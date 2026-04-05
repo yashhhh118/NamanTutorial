@@ -93,14 +93,34 @@
                     </div>
 
                     <div class="pt-6">
-                        <button type="submit"
+                        <button type="submit" id="submitBtn"
                             class="w-full flex justify-center items-center gap-2 py-4 px-4 border border-transparent rounded-xl shadow-lg shadow-gray-900/20 text-lg font-bold text-white bg-gray-900 hover:bg-black transition-all hover:scale-[1.01] focus:outline-none">
-                            <i class="fas fa-paper-plane"></i> Send Application & CV to Host
+                            <i id="submitIcon" class="fas fa-paper-plane"></i>
+                            <span id="submitText">Send Application & CV to Host</span>
+                            <span id="submitSpinner" class="hidden">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </span>
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        // Add loading state to submit button
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const submitBtn = document.getElementById('submitBtn');
+            const submitIcon = document.getElementById('submitIcon');
+            const submitText = document.getElementById('submitText');
+            const submitSpinner = document.getElementById('submitSpinner');
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitIcon.style.display = 'none';
+            submitText.textContent = 'Uploading...';
+            submitSpinner.classList.remove('hidden');
+            submitBtn.style.opacity = '0.8';
+        });
+    </script>
 </section>
 {% endblock %}

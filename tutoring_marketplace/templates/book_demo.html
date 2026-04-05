@@ -8,14 +8,38 @@
 
         <!-- Headers OUTSIDE the card -->
         <div class="text-center mb-8">
-            <h1 id="form-title" class="text-4xl md:text-[45px] font-extrabold text-brandgreen mb-3 tracking-tight transition-all duration-300">Book a Free Demo Class</h1>
-            <p id="form-subtitle" class="text-gray-800 text-lg font-medium transition-all duration-300">Submit your learning requirements and find top tutors in your locality</p>
-            <p class="text-sm text-gray-500 mt-2 font-medium">If you are a teacher and want to provide part-time tuition please <a href="{{ url_for('become_tutor') }}" class="text-brandgreen font-bold hover:underline">click here to sign up</a></p>
+            <h1 id="form-title"
+                class="text-4xl md:text-[45px] font-extrabold text-brandgreen mb-3 tracking-tight transition-all duration-300">
+                Book a Free Demo Class</h1>
+            <p id="form-subtitle" class="text-gray-800 text-lg font-medium transition-all duration-300">Submit your
+                learning requirements and find top tutors in your locality</p>
+            <p class="text-sm text-gray-500 mt-2 font-medium">If you are a teacher and want to provide part-time tuition
+                please <a href="{{ url_for('become_tutor') }}" class="text-brandgreen font-bold hover:underline">click
+                    here to sign up</a></p>
         </div>
 
+        <!-- Error Message Block -->
+        {% if error %}
+        <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded shadow-sm max-w-2xl mx-auto">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle text-red-500 mr-3 text-xl"></i>
+                <p class="text-red-700 font-bold">{{ error }}</p>
+            </div>
+            <script>
+                // Make sure step 2 is visible if the error is from step 2 submission
+                document.addEventListener('DOMContentLoaded', function() {
+                    if ("{{ error }}") {
+                        goToStep2();
+                    }
+                });
+            </script>
+        </div>
+        {% endif %}
+
         <!-- The White Form Card frame -->
-        <div class="bg-white rounded-[1.25rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 p-8 md:p-10 relative max-w-2xl mx-auto">
-            
+        <div
+            class="bg-white rounded-[1.25rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 p-8 md:p-10 relative max-w-2xl mx-auto">
+
             <!-- Progress Indicator inside the card -->
             <div class="flex justify-center items-center mb-8 relative z-10 gap-2">
                 <div id="dot-1" class="w-10 h-1.5 bg-brandgreen rounded-full transition-all duration-300"></div>
@@ -24,201 +48,216 @@
 
             <form action="{{ url_for('book_demo') }}" method="POST" id="registration-form" class="space-y-6">
 
-                    <!-- ================= STEP 1: DEMO DETAILS ================= -->
-                    <div id="step-1" class="block space-y-7">
-                        
-                        <!-- 1. What do you want to learn -->
+                <!-- ================= STEP 1: DEMO DETAILS ================= -->
+                <div id="step-1" class="block space-y-7">
+
+                    <!-- 1. What do you want to learn -->
+                    <div>
+                        <label class="block text-[16px] font-bold text-[#5c728a] mb-2">What do you want to learn</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400 text-lg"></i>
+                            </div>
+                            <input type="text" name="subject" placeholder="Enter your subject"
+                                class="w-full pl-11 pr-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all placeholder-gray-400 text-gray-800"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- 1.5 Class Grade and Time (Per Request) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-[16px] font-bold text-[#5c728a] mb-2">What do you want to learn</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                    <i class="fas fa-search text-gray-400 text-lg"></i>
-                                </div>
-                                <input type="text" name="subject" placeholder="Enter your subject"
-                                    class="w-full pl-11 pr-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all placeholder-gray-400 text-gray-800"
-                                    required>
-                            </div>
+                            <label class="block text-[16px] font-bold text-[#5c728a] mb-2">Class Grade</label>
+                            <select name="class_grade"
+                                class="w-full px-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all text-gray-800"
+                                required>
+                                <option value="" disabled selected>Select Class</option>
+                                <option value="1">Class 1</option>
+                                <option value="2">Class 2</option>
+                                <option value="3">Class 3</option>
+                                <option value="4">Class 4</option>
+                                <option value="5">Class 5</option>
+                                <option value="6">Class 6</option>
+                                <option value="7">Class 7</option>
+                                <option value="8">Class 8</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                            </select>
                         </div>
-
-                        <!-- 1.5 Class Grade and Time (Per Request) -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-[16px] font-bold text-[#5c728a] mb-2">Class Grade</label>
-                                <select name="class_grade"
-                                    class="w-full px-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all text-gray-800"
-                                    required>
-                                    <option value="" disabled selected>Select Class</option>
-                                    <option value="1">Class 1</option>
-                                    <option value="2">Class 2</option>
-                                    <option value="3">Class 3</option>
-                                    <option value="4">Class 4</option>
-                                    <option value="5">Class 5</option>
-                                    <option value="6">Class 6</option>
-                                    <option value="7">Class 7</option>
-                                    <option value="8">Class 8</option>
-                                    <option value="9">Class 9</option>
-                                    <option value="10">Class 10</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[16px] font-bold text-[#5c728a] mb-2">Time for class</label>
-                                <input type="time" name="time"
-                                    class="w-full px-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all text-gray-800"
-                                    required>
-                            </div>
-                        </div>
-
-                        <!-- 2. Tuition Place -->
                         <div>
-                            <label class="block text-[16px] font-bold text-[#5c728a] mb-4">Tuition Place</label>
-                            <div class="flex flex-wrap gap-8 items-center">
-                                <label class="flex items-center gap-2 cursor-pointer group">
-                                    <input type="checkbox" name="tuition_place" value="At tutor's place" class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
-                                    <span class="text-[#002f4b] font-medium transition-colors ml-1">At tutor's place</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer group">
-                                    <input type="checkbox" name="tuition_place" value="At my place" class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
-                                    <span class="text-[#002f4b] font-medium transition-colors ml-1">At my place</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer group">
-                                    <input type="checkbox" name="tuition_place" value="Online" class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
-                                    <span class="text-[#002f4b] font-medium transition-colors ml-1">Online</span>
-                                </label>
-                            </div>
+                            <label class="block text-[16px] font-bold text-[#5c728a] mb-2">Time for class</label>
+                            <input type="time" name="time"
+                                class="w-full px-4 py-3 rounded-[3px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all text-gray-800"
+                                required>
                         </div>
+                    </div>
 
-                        <!-- 3. Tuition Details -->
-                        <div>
-                            <label class="block text-[16px] font-bold text-[#5c728a] mb-1">Tuition Details</label>
-                            <p class="text-[13px] text-[#7d93a5] mb-2">(Ex: Wanted a Lady Math tutor for 8th Std ICSE Girl Student for 2 days a week)</p>
-                            <div class="relative">
-                                <textarea name="tuition_details" rows="3" placeholder="Enter your requirement in brief" oninput="document.getElementById('char-count').innerText = this.value.length"
-                                    class="w-full px-4 py-4 rounded-[4px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all resize-none placeholder-gray-500 text-gray-800" required></textarea>
-                                <div class="absolute bottom-3 right-3 text-[12px] font-bold text-[#94a8b8]">
-                                    <span id="char-count">0</span> characters Typed
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 4. Consent -->
-                        <div class="pt-2 pb-1">
-                            <label class="flex items-start gap-3 cursor-pointer group">
-                                <input type="checkbox" required checked class="mt-0.5 w-[18px] h-[18px] rounded-[3px] border-orange-400 text-[#ff8c6b] focus:ring-[#ff8c6b] cursor-pointer accent-[#ff8c6b]">
-                                <span class="text-gray-700 text-[15px] leading-tight">I allow Naman Tutors to share my requirement details with other tutors.</span>
+                    <!-- 2. Tuition Place -->
+                    <div>
+                        <label class="block text-[16px] font-bold text-[#5c728a] mb-4">Tuition Place</label>
+                        <div class="flex flex-wrap gap-8 items-center">
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="checkbox" name="tuition_place" value="At tutor's place"
+                                    class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
+                                <span class="text-[#002f4b] font-medium transition-colors ml-1">At tutor's place</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="checkbox" name="tuition_place" value="At my place"
+                                    class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
+                                <span class="text-[#002f4b] font-medium transition-colors ml-1">At my place</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="checkbox" name="tuition_place" value="Online"
+                                    class="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-brandgreen focus:ring-brandgreen cursor-pointer">
+                                <span class="text-[#002f4b] font-medium transition-colors ml-1">Online</span>
                             </label>
                         </div>
+                    </div>
 
-                        <!-- 5. Next Button -->
-                        <div class="flex justify-center pt-4">
-                            <button type="button" onclick="goToStep2()"
-                                class="w-48 py-3 rounded-[3px] font-bold text-white text-[15px] bg-[#3ecc7a] hover:bg-[#32ad66] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3ecc7a]">
-                                Next
-                            </button>
+                    <!-- 3. Tuition Details -->
+                    <div>
+                        <label class="block text-[16px] font-bold text-[#5c728a] mb-1">Tuition Details</label>
+                        <p class="text-[13px] text-[#7d93a5] mb-2">(Ex: Wanted a Lady Math tutor for 8th Std ICSE Girl
+                            Student for 2 days a week)</p>
+                        <div class="relative">
+                            <textarea name="tuition_details" rows="3" placeholder="Enter your requirement in brief"
+                                oninput="document.getElementById('char-count').innerText = this.value.length"
+                                class="w-full px-4 py-4 rounded-[4px] border border-gray-300 focus:ring-1 focus:ring-[#5c728a] focus:border-[#5c728a] outline-none transition-all resize-none placeholder-gray-500 text-gray-800"
+                                required></textarea>
+                            <div class="absolute bottom-3 right-3 text-[12px] font-bold text-[#94a8b8]">
+                                <span id="char-count">0</span> characters Typed
+                            </div>
                         </div>
                     </div>
 
-                    <!-- ================= STEP 2: REGISTRATION ================= -->
-                    <div id="step-2" class="hidden space-y-6">
+                    <!-- 4. Consent -->
+                    <div class="pt-2 pb-1">
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input type="checkbox" required checked
+                                class="mt-0.5 w-[18px] h-[18px] rounded-[3px] border-orange-400 text-[#ff8c6b] focus:ring-[#ff8c6b] cursor-pointer accent-[#ff8c6b]">
+                            <span class="text-gray-700 text-[15px] leading-tight">I allow Naman Tutors to share my
+                                requirement details with other tutors.</span>
+                        </label>
+                    </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Student Name *</label>
-                                <input type="text" name="student_name" placeholder="Rahul Sharma"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Parent Name *</label>
-                                <input type="text" name="parent_name" placeholder="Mr. / Mrs. Sharma"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
-                            </div>
-                        </div>
+                    <!-- 5. Next Button -->
+                    <div class="flex justify-center pt-4">
+                        <button type="button" onclick="goToStep2()"
+                            class="w-48 py-3 rounded-[3px] font-bold text-white text-[15px] bg-[#3ecc7a] hover:bg-[#32ad66] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3ecc7a]">
+                            Next
+                        </button>
+                    </div>
+                </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">School Name</label>
-                                <input type="text" name="school_name" placeholder="e.g. DPS Pune"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Full Home Address *</label>
-                                <input type="text" name="address" placeholder="Flat No, Society, Area"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
-                            </div>
-                        </div>
+                <!-- ================= STEP 2: REGISTRATION ================= -->
+                <div id="step-2" class="hidden space-y-6">
 
-                        <hr class="border-gray-100 my-6">
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Email Address *</label>
-                                <input type="email" name="email" placeholder="email@example.com"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Phone Number *</label>
-                                <div class="flex gap-2">
-                                    <input type="tel" name="phone" placeholder="+91"
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
-                                    <button type="button" onclick="verifyPhone(this)"
-                                        class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-3 rounded-xl whitespace-nowrap transition-colors border border-gray-200 shadow-sm">Verify</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Create Username *</label>
-                                <input type="text" name="username" placeholder="rahul123"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Create Password *</label>
-                                <input type="password" name="password" placeholder="••••••••"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
-                            </div>
-                        </div>
-
-                        <hr class="border-gray-100 my-6">
-
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-bold text-gray-800 mb-4">Choose Your Hero (Profile Avatar)
+                            <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Student Name
                                 *</label>
-                            <input type="hidden" name="avatar" id="avatar-input"
-                                value="https://api.dicebear.com/7.x/adventurer/svg?seed=Felix">
-                            <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
-                                <!-- Pre-selecting the first one -->
-                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Felix"
-                                    onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Felix')"
-                                    class="avatar-option w-full aspect-square bg-gray-100 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all ring-4 ring-brandgreen/80 shadow-md">
-                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Luna"
-                                    onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Luna')"
-                                    class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
-                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Oliver"
-                                    onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Oliver')"
-                                    class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
-                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Bella"
-                                    onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bella')"
-                                    class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
-                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Jasper"
-                                    onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Jasper')"
-                                    class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
-                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Coco"
-                                    onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Coco')"
-                                    class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
-                            </div>
+                            <input type="text" name="student_name" placeholder="Rahul Sharma"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                         </div>
-
-                        <div class="pt-8 flex flex-col md:flex-row gap-4">
-                            <button type="button" onclick="goToStep1()"
-                                class="py-4 px-8 border-2 border-gray-200 rounded-2xl font-bold text-gray-600 bg-white hover:bg-gray-50 transition-colors">
-                                <i class="fas fa-arrow-left mr-2"></i> Back
-                            </button>
-                            <button type="submit"
-                                class="flex-1 flex justify-center items-center py-4 px-4 border border-transparent rounded-2xl shadow-lg shadow-brandgreen/30 text-lg font-bold text-white bg-brandgreen hover:bg-[#619a35] transition-all hover:scale-[1.02]">
-                                Complete Booking & Registration
-                            </button>
+                        <div>
+                            <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Parent Name
+                                *</label>
+                            <input type="text" name="parent_name" placeholder="Mr. / Mrs. Sharma"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
                         </div>
                     </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">School
+                                Name</label>
+                            <input type="text" name="school_name" placeholder="e.g. DPS Pune"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Full Home
+                                Address *</label>
+                            <input type="text" name="address" placeholder="Flat No, Society, Area"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
+                        </div>
+                    </div>
+
+                    <hr class="border-gray-100 my-6">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Email Address
+                                *</label>
+                            <input type="email" name="email" placeholder="email@example.com"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Phone Number
+                                *</label>
+                            <div class="flex gap-2">
+                                <input type="tel" name="phone" placeholder="+91"
+                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
+                                <button type="button" onclick="verifyPhone(this)"
+                                    class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-3 rounded-xl whitespace-nowrap transition-colors border border-gray-200 shadow-sm">Verify</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Create Username
+                                *</label>
+                            <input type="text" name="username" placeholder="rahul123"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[15px] font-bold text-[#5c728a] mb-2 tracking-wide">Create Password
+                                *</label>
+                            <input type="password" name="password" placeholder="••••••••"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brandgreen/50 outline-none shadow-sm bg-gray-50 focus:bg-white">
+                        </div>
+                    </div>
+
+                    <hr class="border-gray-100 my-6">
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-4">Choose Your Hero (Profile Avatar)
+                            *</label>
+                        <input type="hidden" name="avatar" id="avatar-input"
+                            value="https://api.dicebear.com/7.x/adventurer/svg?seed=Felix">
+                        <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+                            <!-- Pre-selecting the first one -->
+                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Felix"
+                                onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Felix')"
+                                class="avatar-option w-full aspect-square bg-gray-100 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all ring-4 ring-brandgreen/80 shadow-md">
+                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Luna"
+                                onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Luna')"
+                                class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
+                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Oliver"
+                                onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Oliver')"
+                                class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
+                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Bella"
+                                onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bella')"
+                                class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
+                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Jasper"
+                                onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Jasper')"
+                                class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
+                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Coco"
+                                onclick="selectAvatar(this, 'https://api.dicebear.com/7.x/adventurer/svg?seed=Coco')"
+                                class="avatar-option w-full aspect-square bg-gray-50 rounded-2xl cursor-pointer hover:bg-brandgreen/10 transition-all border border-gray-200 hover:border-transparent opacity-80 hover:opacity-100">
+                        </div>
+                    </div>
+
+                    <div class="pt-8 flex flex-col md:flex-row gap-4">
+                        <button type="submit" id="submitBtn"
+                            class="flex-1 flex justify-center items-center py-4 px-4 border border-transparent rounded-2xl shadow-lg shadow-brandgreen/30 text-lg font-bold text-white bg-brandgreen hover:bg-[#619a35] transition-all hover:scale-[1.02]">
+                            <span id="submitText">Complete Booking & Registration</span>
+                            <span id="submitSpinner" class="hidden ml-2">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
 
             </form>
         </div>
@@ -226,10 +265,14 @@
         <!-- Footer Text Out of Card -->
         <div class="mt-8 text-center space-y-2">
             <p class="text-[15px] text-gray-600 font-medium">
-                If you are an existing student <a href="{{ url_for('login') }}" class="text-brandgreen font-bold hover:underline">Login Here</a>
+                If you are an existing student <a href="{{ url_for('login') }}"
+                    class="text-brandgreen font-bold hover:underline">Login Here</a>
             </p>
             <p class="text-[15px] text-gray-600 font-medium">
-                If you are facing any problem kindly <a href="{{ url_for('contact') }}" class="text-brandgreen font-bold hover:underline">Contact Us</a> or write to <a href="mailto:namanhometutors@gmail.com" class="text-brandgreen font-bold hover:underline">namanhometutors@gmail.com</a>
+                If you are facing any problem kindly <a href="{{ url_for('contact') }}"
+                    class="text-brandgreen font-bold hover:underline">Contact Us</a> or write to <a
+                    href="mailto:namanhometutors@gmail.com"
+                    class="text-brandgreen font-bold hover:underline">namanhometutors@gmail.com</a>
             </p>
         </div>
     </div>
@@ -242,16 +285,16 @@
         const textareas = document.querySelectorAll('#step-1 textarea');
 
         let valid = true;
-        
-        selects.forEach(el => { 
+
+        selects.forEach(el => {
             if (el.required && !el.value) { valid = false; el.reportValidity(); }
         });
-        
-        textareas.forEach(el => { 
+
+        textareas.forEach(el => {
             if (el.required && !el.value.trim()) { valid = false; el.reportValidity(); }
         });
 
-        inputs.forEach(el => { 
+        inputs.forEach(el => {
             if (el.required) {
                 if (el.type === 'checkbox' && !el.checked) { valid = false; el.reportValidity(); }
                 else if (el.type !== 'checkbox' && !el.value) { valid = false; el.reportValidity(); }
@@ -308,5 +351,18 @@
             btn.style.pointerEvents = "none";
         }
     }
+
+    // Add loading state to submit button
+    document.getElementById('registration-form').addEventListener('submit', function (e) {
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const submitSpinner = document.getElementById('submitSpinner');
+
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitText.textContent = 'Processing...';
+        submitSpinner.classList.remove('hidden');
+        submitBtn.style.opacity = '0.8';
+    });
 </script>
 {% endblock %}

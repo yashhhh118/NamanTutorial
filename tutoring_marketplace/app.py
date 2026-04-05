@@ -1,9 +1,82 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
 import sqlite3
 import os
+from dotenv import load_dotenv
+from werkzeug.security import generate_password_hash, check_password_hash
+import re
+
+# Load environment variables from .env file
+load_dotenv()
+
+from datetime import timedelta
+# ==========================================
+# INPUT VALIDATION FUNCTIONS
+# ==========================================
+
+def validate_email(email):
+    """Validate email format"""
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+def validate_phone(phone):
+    """Validate Indian phone number (10 digits, starts with 6-9)"""
+    # Remove spaces, dashes, and common prefixes
+    phone = phone.strip().replace(' ', '').replace('-', '')
+    if phone.startswith('+91'):
+        phone = phone[3:]
+    elif phone.startswith('0') and len(phone) > 10:
+        phone = phone[1:]
+        
+    pattern = r'^[6-9]\d{9}$'
+    return re.match(pattern, phone) is not None
+
+def validate_username(username):
+    """Username: 3-20 chars, alphanumeric + underscore"""
+    username = username.strip()
+    pattern = r'^[a-zA-Z0-9_]{3,20}$'
+    return re.match(pattern, username) is not None
+
+def validate_password(password):
+    """Password minimum 6 characters"""
+    if len(password) < 6:
+        return False
+    return True
+
+def validate_name(name):
+    """Name should be 2-50 characters, letters and spaces only"""
+    name = name.strip()
+    if len(name) < 2 or len(name) > 50:
+        return False
+    if not re.match(r"^[a-zA-Z\s'-]+$", name):
+        return False
+    return True
+
+def validate_pincode(pincode):
+    """Validate Indian pincode (6 digits)"""
+    pincode = pincode.strip()
+    pattern = r'^\d{6}$'
+    return re.match(pattern, pincode) is not None
+
+# ==========================================
+# FLASK APP SETUP
+# ==========================================
 
 app = Flask(__name__)
-app.secret_key = 'super_secret_naman_key_123'
+app.secret_key = os.getenv('SECRET_KEY', os.urandom(24)) # CHANGE THIS LINE
+
+# ==========================================
+# SESSION CONFIGURATION (SECURITY)
+# ==========================================
+
+app.config['SESSION_COOKIE_SECURE'] = True  # Only send over HTTPS
+app.config['SESSION_COOKIE_HTTPONLY'] = True  # JavaScript can't access
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # Prevent CSRF attacks
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # Session expires after 7 days
+
+@app.before_request
+def make_session_permanent():
+    """Make session permanent so timeout works"""
+    session.permanent = True
 
 DATABASE = 'tutors.db'
 APPLICANTS_DB = 'tutor_applications.db'
@@ -123,23 +196,56 @@ def about():
 def login():
     """Handles existing student/parent logins across multiple identifiers."""
     if request.method == 'POST':
-        identifier = request.form.get('identifier')
-        password = request.form.get('password')
+        identifier = request.form.get('identifier', '').strip()
+        password = request.form.get('password', '')
         
-        with sqlite3.connect(DATABASE) as conn:
-            conn.row_factory = sqlite3.Row
-            cursor = conn.cursor()
-            cursor.execute('''
-                SELECT * FROM users 
-                WHERE (username=? OR student_name=? OR email=? OR phone=?) AND password=?
-            ''', (identifier, identifier, identifier, identifier, password))
-            user = cursor.fetchone()
-            
-            if user:
-                session['user'] = dict(user)
-                return redirect(url_for('index'))
-            else:
-                return render_template('login.html', error="Invalid credentials. Please check your details and try again.")
+        # ==========================================
+        # VALIDATE INPUTS
+        # ==========================================
+        
+        # Check if fields are empty
+        if not identifier:
+            return render_template('login.html', error="❌ Please enter your username, email, or phone number")
+        
+        if not password:
+            return render_template('login.html', error="❌ Please enter your password")
+        
+        # ==========================================
+        # AUTHENTICATE USER
+        # ==========================================
+        
+        try:
+            with sqlite3.connect(DATABASE) as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                cursor.execute('''
+                    SELECT * FROM users 
+                    WHERE (username=? OR student_name=? OR email=? OR phone=?)
+                ''', (identifier, identifier, identifier, identifier))
+                user = cursor.fetchone()
+                
+                # Check if user exists and password matches
+                if user:
+                    if user['password'].startswith(('scrypt:', 'pbkdf2:')) and check_password_hash(user['password'], password):
+                        is_valid = True
+                    elif user['password'] == password:
+                        is_valid = True
+                    else:
+                        is_valid = False
+
+                    if is_valid:
+                        session['user'] = dict(user)
+                        print(f"✅ User logged in: {identifier}")
+                        return redirect(url_for('index'))
+                    else:
+                        print(f"❌ Failed login attempt for: {identifier}")
+                        return render_template('login.html', error="❌ Invalid username/email or password. Please try again.")
+                else:
+                    return render_template('login.html', error="❌ Invalid username/email or password. Please try again.")
+        
+        except Exception as e:
+            print(f"Login error: {str(e)}")
+            return render_template('login.html', error="❌ Login failed. Please try again later.")
                 
     return render_template('login.html')
 
@@ -154,29 +260,68 @@ def book_demo():
     if request.method == 'POST':
         form_data = request.form.to_dict()
         
-        # Secure the data logically simulating a signup
+        # ==========================================
+        # VALIDATE ALL INPUTS
+        # ==========================================
+        
+        # Validate username
+        username = form_data.get('username', '').strip()
+        if not validate_username(username):
+            return render_template('book_demo.html', error="Username must be 3-20 characters (letters, numbers, underscore only)")
+        
+        # Validate password
+        password = form_data.get('password', '')
+        if not validate_password(password):
+            return render_template('book_demo.html', error="Password must be at least 6 characters")
+        
+        # Validate email
+        email = form_data.get('email', '').strip()
+        if not validate_email(email):
+            return render_template('book_demo.html', error="Please enter a valid email address")
+        
+        # Validate phone
+        phone = form_data.get('phone', '').strip()
+        if not validate_phone(phone):
+            return render_template('book_demo.html', error="Please enter a valid 10-digit Indian phone number (starting with 6-9)")
+        
+        # Validate student name
+        student_name = form_data.get('student_name', '').strip()
+        if not validate_name(student_name):
+            return render_template('book_demo.html', error="Student name must be 2-50 characters (letters and spaces only)")
+        
+        # Validate parent name
+        parent_name = form_data.get('parent_name', '').strip()
+        if parent_name and not validate_name(parent_name):
+            return render_template('book_demo.html', error="Parent name must be 2-50 characters (letters and spaces only)")
+        
+        # Validate address
+        address = form_data.get('address', '').strip()
+        if not address or len(address) < 5:
+            return render_template('book_demo.html', error="Please enter a valid address")
+        
+        # Hash the password
+        hashed_password = generate_password_hash(password)
+        
+        # Prepare user data
         user_dict = {
-            'username': form_data.get('username'),
-            'password': form_data.get('password'),
+            'username': username,
+            'password': hashed_password,
             'avatar': form_data.get('avatar', 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix'),
-            'student_name': form_data.get('student_name'),
-            'parent_name': form_data.get('parent_name'),
-            'phone': form_data.get('phone'),
-            'email': form_data.get('email'),
-            'class_grade': form_data.get('class_grade'),
-            'school_name': form_data.get('school_name'),
-            'address': form_data.get('address'),
-            'subject': form_data.get('subject'),
-            'time': form_data.get('time'),
-            'tuition_place': request.form.getlist('tuition_place'), 
-            'tuition_details': form_data.get('tuition_details')
+            'student_name': student_name,
+            'parent_name': parent_name,
+            'phone': phone,
+            'email': email,
+            'class_grade': form_data.get('class_grade', ''),
+            'school_name': form_data.get('school_name', '').strip(),
+            'address': address,
+            'subject': form_data.get('subject', '').strip(),
+            'time': form_data.get('time', ''),
+            'tuition_place': ", ".join(request.form.getlist('tuition_place')), 
+            'tuition_details': form_data.get('tuition_details', '').strip()
         }
         
-        # Convert list of places to string
-        user_dict['tuition_place'] = ", ".join(user_dict['tuition_place'])
-        
         try:
-            # Store permanently in the database
+            # Store in database
             with sqlite3.connect(DATABASE) as conn:
                 cursor = conn.cursor()
                 cursor.execute('''
@@ -184,12 +329,27 @@ def book_demo():
                     VALUES (:username, :password, :student_name, :parent_name, :phone, :email, :class_grade, :school_name, :address, :avatar, :subject, :time, :tuition_place, :tuition_details)
                 ''', user_dict)
                 conn.commit()
-        except sqlite3.IntegrityError:
-            # Fallback if username already exists
-            pass
             
-        session['user'] = user_dict
-        return redirect(url_for('index'))
+            session['user'] = user_dict
+            return redirect(url_for('index'))
+            
+        except sqlite3.IntegrityError as e:
+            error_str = str(e).lower()
+            
+            # Check which field caused the error
+            if 'username' in error_str:
+                return render_template('book_demo.html', error="❌ This username is already taken. Please choose a different username.")
+            elif 'email' in error_str:
+                return render_template('book_demo.html', error="❌ This email is already registered. Please login instead or use a different email.")
+            else:
+                return render_template('book_demo.html', error="❌ Registration failed. Please try again with different details.")
+        
+        except Exception as e:
+            print(f"Registration error: {str(e)}")
+            return render_template('book_demo.html', error="❌ An error occurred during registration. Please try again.")
+        except Exception as e:
+            return render_template('book_demo.html', error=f"Registration error: Please try again")
+    
     return render_template('book_demo.html')
 
 @app.route('/logout')
@@ -215,30 +375,135 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # ==========================================
 # EMAIL CONFIGURATION
 # ==========================================
-SENDER_EMAIL = "namanhometutors@gmail.com" # Updated automatically!
-SENDER_PASSWORD = "vbwhkleylfrswrvv "  # Removed the spaces for standard API compliance
-RECEIVER_EMAIL = "namanhometutors@gmail.com"
+SENDER_EMAIL = os.getenv('SENDER_EMAIL')
+SENDER_PASSWORD = os.getenv('SENDER_PASSWORD')
+RECEIVER_EMAIL = os.getenv('RECEIVER_EMAIL')
 
 @app.route('/submit-application', methods=['POST'])
 def submit_application():
     """Handles CV upload and sends an ACTUAL email via Gmail SMTP."""
-    name = request.form.get('name')
-    phone = request.form.get('phone')
+    name = request.form.get('name', '').strip()
+    phone = request.form.get('phone', '').strip()
     cv_file = request.files.get('cv_file')
     
-    if cv_file and cv_file.filename != '':
-        filename = secure_filename(cv_file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], f"{name.replace(' ', '_')}_{filename}")
-        cv_file.save(file_path)
+    # ==========================================
+    # VALIDATE INPUTS
+    # ==========================================
+    
+    # Validate name
+    if not validate_name(name):
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Invalid Name!',
+                text: 'Please enter a valid name (2-50 characters, letters only)',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # Validate phone
+    if not validate_phone(phone):
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Invalid Phone Number!',
+                text: 'Please enter a valid 10-digit Indian phone number',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # Validate CV file
+    if not cv_file or cv_file.filename == '':
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'No File Selected!',
+                text: 'Please select a CV file to upload',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # Validate file type (only PDF, DOC, DOCX)
+    allowed_extensions = {'pdf', 'doc', 'docx'}
+    file_ext = cv_file.filename.rsplit('.', 1)[1].lower() if '.' in cv_file.filename else ''
+    
+    if file_ext not in allowed_extensions:
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Invalid File Type!',
+                text: 'Only PDF, DOC, and DOCX files are allowed',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # Validate file size (max 5MB)
+    cv_file.seek(0, 2)  # Seek to end
+    file_size = cv_file.tell()
+    cv_file.seek(0)  # Seek back to start
+    
+    if file_size > 5 * 1024 * 1024:  # 5MB
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'File Too Large!',
+                text: 'File size must be less than 5MB',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # ==========================================
+    # ALL VALIDATIONS PASSED - PROCEED
+    # ==========================================
+    
+    
+    filename = secure_filename(cv_file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], f"{name.replace(' ', '_')}_{filename}")
+    cv_file.save(file_path)
         
-        # Save to separate Tutor Applications Database
-        with sqlite3.connect(APPLICANTS_DB) as conn:
-            cursor = conn.cursor()
-            cursor.execute('''
+    # Save to separate Tutor Applications Database
+    with sqlite3.connect(APPLICANTS_DB) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
                 INSERT INTO applicants (name, phone, cv_file_path)
                 VALUES (?, ?, ?)
             ''', (name, phone, file_path))
-            conn.commit()
+        conn.commit()
         
         # Build the actual email message
         msg = EmailMessage()
@@ -301,14 +566,109 @@ def submit_application():
 @app.route('/submit-contact', methods=['POST'])
 def submit_contact():
     """Handles contact form submissions and sends an email."""
-    name = request.form.get('name')
-    email = request.form.get('email')
-    phone = request.form.get('phone')
-    message = request.form.get('message')
+    name = request.form.get('name', '').strip()
+    email = request.form.get('email', '').strip()
+    phone = request.form.get('phone', '').strip()
+    message = request.form.get('message', '').strip()
     
-    if not name or not message:
-        return "Invalid form.", 400
-
+    # ==========================================
+    # VALIDATE INPUTS
+    # ==========================================
+    
+    # Validate name
+    if not validate_name(name):
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Invalid Name!',
+                text: 'Please enter a valid name (2-50 characters, letters only)',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # Validate email
+    if not validate_email(email):
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Invalid Email!',
+                text: 'Please enter a valid email address',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # Validate phone (optional but if provided, must be valid)
+    if phone and not validate_phone(phone):
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Invalid Phone Number!',
+                text: 'Please enter a valid 10-digit Indian phone number',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # Validate message length (minimum 10 characters, maximum 1000)
+    if not message or len(message) < 10:
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Message Too Short!',
+                text: 'Please write a message with at least 10 characters',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    if len(message) > 1000:
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Message Too Long!',
+                text: 'Please keep your message under 1000 characters',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 400
+    
+    # ==========================================
+    # ALL VALIDATIONS PASSED - PROCEED
+    # ==========================================
+    
+    # Build email message
     msg = EmailMessage()
     msg['Subject'] = f"💬 New Contact Message from: {name}"
     msg['From'] = SENDER_EMAIL
@@ -325,26 +685,47 @@ def submit_contact():
     {message}
     """)
     
-    # Save to Database so Admin can read it later
-    with sqlite3.connect(DATABASE) as conn:
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO contact_messages (name, email, phone, message)
-            VALUES (?, ?, ?, ?)
-        ''', (name, email, phone, message))
-        conn.commit()
-    
+    # Save to Database
     try:
-        if SENDER_EMAIL != "your-email@gmail.com":
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO contact_messages (name, email, phone, message)
+                VALUES (?, ?, ?, ?)
+            ''', (name, email, phone, message))
+            conn.commit()
+    except Exception as e:
+        print(f"Database error: {str(e)}")
+        return '''
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <body style="background:#f9fafb; font-family:sans-serif;"></body>
+        <script>
+            Swal.fire({
+                title: 'Error!',
+                text: 'Could not save your message. Please try again.',
+                icon: 'error',
+                confirmButtonColor: '#111827',
+                confirmButtonText: 'Go Back'
+            }).then(() => {
+                window.history.back();
+            });
+        </script>
+        ''', 500
+    
+    # Try to send email
+    try:
+        if SENDER_EMAIL and SENDER_PASSWORD and SENDER_EMAIL != "your-email@gmail.com":
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                 smtp.login(SENDER_EMAIL, SENDER_PASSWORD)
                 smtp.send_message(msg)
             print("📧 CONTACT EMAIL SENT SUCCESSFULLY!")
         else:
-            print("⚠️ APP PASSWORD NOT CONFIGURED YET! Email skipped.")
+            print("⚠️ EMAIL NOT CONFIGURED YET! Message saved to database.")
     except Exception as e:
         print(f"FAILED TO SEND EMAIL: {str(e)}")
-        
+        # Message is still saved in database, so we show success anyway
+    
+    # Show success message
     return '''
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <body style="background:#f9fafb; font-family:sans-serif;"></body>
@@ -397,7 +778,8 @@ def admin_login():
     """Admin login page."""
     if request.method == 'POST':
         password = request.form.get('password')
-        if password == 'admin123':  # The secure passcode
+        correct_password = os.getenv('ADMIN_PASSWORD')
+        if password == correct_password:  # CHANGE THIS LINE
             session['is_admin'] = True
             return redirect(url_for('admin_dashboard'))
         else:

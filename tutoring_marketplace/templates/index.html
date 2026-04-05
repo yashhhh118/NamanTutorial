@@ -10,15 +10,16 @@
 
         <!-- Text Content -->
         <div class="md:w-1/2 text-white pr-4 lg:pr-12 z-30 pt-10 md:pt-0 pb-20 md:pb-12" data-aos="fade-right">
-            <div class="inline-flex items-center gap-2 bg-[#9bd151] px-4 py-2 rounded-full text-sm font-bold text-white tracking-widest uppercase mb-5 shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)] border border-[#a8df5c]">
+            <div
+                class="inline-flex items-center gap-2 bg-[#9bd151] px-4 py-2 rounded-full text-sm font-bold text-white tracking-widest uppercase mb-5 shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)] border border-[#a8df5c]">
                 <span>🏆 #1 Naman Home Tutors</span>
             </div>
-            
+
             <h1 class="font-bungee font-normal text-4xl md:text-5xl lg:text-[64px] mb-6 leading-[1.1] tracking-normal drop-shadow-sm text-white"
                 style="font-weight: 400; font-style: normal; -webkit-text-stroke: 1px rgba(0,0,0,0.1);">
                 Expert Home Tuition<br>in Pune
             </h1>
-            
+
             <p class="font-inter font-medium text-lg md:text-[20px] mb-10 text-white/95 leading-relaxed max-w-[500px]">
                 Personalized one-to-one learning with experienced tutors from the comfort of your home. We focus on
                 academic excellence for Classes 1 to 10.
@@ -26,6 +27,13 @@
 
             <!-- Play Button Container for Booking -->
             {% if session.get('user') %}
+            <!-- Welcome Message -->
+            <div class="mb-6 bg-green-50 border-l-4 border-brandgreen p-4 rounded-r-lg">
+                <p class="text-brandgreen font-bold">👋 Welcome back, <span class="capitalize">{{
+                        session.user.student_name.split()[0] }}</span>!</p>
+                <p class="text-green-700 text-sm">Ready to book your next tutor session?</p>
+            </div>
+
             <a href="{{ url_for('book_tutor') }}"
                 class="flex items-center gap-5 group w-fit cursor-pointer outline-none">
                 <button type="button"
@@ -82,17 +90,22 @@
         <!-- Graphic / Illustration Content -->
         <div class="md:w-[50%] relative flex justify-center items-center h-[550px] hidden md:flex" data-aos="fade-left"
             data-aos-delay="200">
-            
+
             <!-- Massive Organic Blob Background (Full Bleed) -->
-            <div class="absolute right-[-25%] top-[-15%] bottom-[-15%] w-[150%] z-0 pointer-events-none flex items-center justify-center">
-                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="w-full h-full opacity-100 scale-[1.1] origin-right">
+            <div
+                class="absolute right-[-25%] top-[-15%] bottom-[-15%] w-[150%] z-0 pointer-events-none flex items-center justify-center">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="w-full h-full opacity-100 scale-[1.1] origin-right">
                     <!-- Soft organic blob using warm orange that compliments brandgreen -->
-                    <path fill="#ffe8ce" d="M428.5,321Q398,392,324,424Q250,456,177.5,417.5Q105,379,93,299.5Q81,220,137,162Q193,104,269,96Q345,88,402,143.5Q459,199,428.5,321Z"></path>
+                    <path fill="#ffe8ce"
+                        d="M428.5,321Q398,392,324,424Q250,456,177.5,417.5Q105,379,93,299.5Q81,220,137,162Q193,104,269,96Q345,88,402,143.5Q459,199,428.5,321Z">
+                    </path>
                 </svg>
             </div>
 
             <!-- Vector Illustration Image -->
-            <div class="relative z-10 w-[550px] transform transition-transform duration-700 hover:scale-[1.02] translate-x-4">
+            <div
+                class="relative z-10 w-[550px] transform transition-transform duration-700 hover:scale-[1.02] translate-x-4">
                 <img src="{{ url_for('static', filename='images/student_vector_transparent.png') }}"
                     alt="Student studying with tutor - beautifully transparent"
                     class="w-full h-auto object-contain filter saturate-110 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] opacity-95">
@@ -220,6 +233,7 @@
             perspective: 1000px;
             height: 180px;
         }
+
         .flip-card-inner {
             position: relative;
             width: 100%;
@@ -228,24 +242,29 @@
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
+
         .flip-card:hover .flip-card-inner {
             transform: rotateY(180deg);
         }
-        .flip-card-front, .flip-card-back {
+
+        .flip-card-front,
+        .flip-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
             border-radius: 4px;
         }
+
         .flip-card-front {
             background-color: white;
             border: 1px solid #f0f0f0;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.03);
             display: flex;
             flex-direction: column;
             padding: 24px;
         }
+
         .flip-card-back {
             background-color: #3fd684;
             color: white;
@@ -260,16 +279,19 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center lg:items-start max-w-6xl mx-auto">
-            
+
             <!-- Left Info Panel -->
             <div class="lg:w-[40%] text-center lg:text-left mb-10 lg:mb-0 lg:pt-4" data-aos="fade-right">
-                <h2 class="text-[32px] sm:text-[38px] leading-[1.2] font-extrabold tracking-tight text-gray-800 mb-6 font-inter">
+                <h2
+                    class="text-[32px] sm:text-[38px] leading-[1.2] font-extrabold tracking-tight text-gray-800 mb-6 font-inter">
                     Find qualified Tutors for face-to-face, online and offline tutoring
                 </h2>
                 <p class="text-[16px] text-gray-500 mb-8 leading-relaxed font-medium">
-                    More than 5K students have found tutors already. From English to Mathematics, from Science to Marathi, we have it all. Find a tutor now in less than 60 seconds.
+                    More than 5K students have found tutors already. From English to Mathematics, from Science to
+                    Marathi, we have it all. Find a tutor now in less than 60 seconds.
                 </p>
-                <a href="{{ url_for('login') }}" class="inline-block bg-[#3fd684] hover:bg-[#34bc73] text-white font-bold py-3.5 px-8 rounded flex-shrink-0 font-inter text-[15px] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#3fd684] focus:ring-offset-2">
+                <a href="{{ url_for('login') }}"
+                    class="inline-block bg-[#3fd684] hover:bg-[#34bc73] text-white font-bold py-3.5 px-8 rounded flex-shrink-0 font-inter text-[15px] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#3fd684] focus:ring-offset-2">
                     Login of Student
                 </a>
             </div>
@@ -292,8 +314,10 @@
                                 </div>
                             </div>
                             <div class="flip-card-back">
-                                <p class="font-medium text-[15px] leading-snug">Learn Mathematics with the experts the way it's meant to be learned.</p>
-                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                <p class="font-medium text-[15px] leading-snug">Learn Mathematics with the experts the
+                                    way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
                                     BROWSE TUTORS
                                 </a>
                             </div>
@@ -314,8 +338,10 @@
                                 </div>
                             </div>
                             <div class="flip-card-back">
-                                <p class="font-medium text-[15px] leading-snug">Learn Science with the experts the way it's meant to be learned.</p>
-                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                <p class="font-medium text-[15px] leading-snug">Learn Science with the experts the way
+                                    it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
                                     BROWSE TUTORS
                                 </a>
                             </div>
@@ -336,8 +362,10 @@
                                 </div>
                             </div>
                             <div class="flip-card-back">
-                                <p class="font-medium text-[15px] leading-snug">Learn English with the experts the way it's meant to be learned.</p>
-                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                <p class="font-medium text-[15px] leading-snug">Learn English with the experts the way
+                                    it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
                                     BROWSE TUTORS
                                 </a>
                             </div>
@@ -350,7 +378,8 @@
                             <div class="flip-card-front">
                                 <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
                                 <div class="mt-auto relative z-10">
-                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Social Studies</h3>
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Social Studies
+                                    </h3>
                                     <p class="text-gray-500 text-[13px] mt-0.5">90+ tutors</p>
                                 </div>
                                 <div class="absolute bottom-5 right-5 text-[#f9735a]">
@@ -358,8 +387,10 @@
                                 </div>
                             </div>
                             <div class="flip-card-back">
-                                <p class="font-medium text-[15px] leading-snug">Learn Social Studies with the experts the way it's meant to be learned.</p>
-                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                <p class="font-medium text-[15px] leading-snug">Learn Social Studies with the experts
+                                    the way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
                                     BROWSE TUTORS
                                 </a>
                             </div>
@@ -380,8 +411,10 @@
                                 </div>
                             </div>
                             <div class="flip-card-back">
-                                <p class="font-medium text-[15px] leading-snug">Learn Hindi with the experts the way it's meant to be learned.</p>
-                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                <p class="font-medium text-[15px] leading-snug">Learn Hindi with the experts the way
+                                    it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
                                     BROWSE TUTORS
                                 </a>
                             </div>
@@ -402,8 +435,10 @@
                                 </div>
                             </div>
                             <div class="flip-card-back">
-                                <p class="font-medium text-[15px] leading-snug">Learn Marathi with the experts the way it's meant to be learned.</p>
-                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                <p class="font-medium text-[15px] leading-snug">Learn Marathi with the experts the way
+                                    it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
                                     BROWSE TUTORS
                                 </a>
                             </div>
@@ -589,54 +624,74 @@
 <!-- Final Premium Dual CTAs (Bento Style) -->
 <section class="bg-gray-50 py-20 lg:py-28 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
-            
+
             <!-- Student Card (Deep Green Theme) -->
-            <div class="relative bg-[#0d2a1f] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(63,214,132,0.15)] transition-all duration-500 min-h-[450px] lg:min-h-[500px]" data-aos="fade-up">
+            <div class="relative bg-[#0d2a1f] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(63,214,132,0.15)] transition-all duration-500 min-h-[450px] lg:min-h-[500px]"
+                data-aos="fade-up">
                 <!-- Abstract Mesh Background -->
-                <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-[#3fd684] to-transparent rounded-full blur-3xl opacity-20"></div>
-                <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#3fd684]/10 to-transparent"></div>
-                
+                <div
+                    class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-[#3fd684] to-transparent rounded-full blur-3xl opacity-20">
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#3fd684]/10 to-transparent">
+                </div>
+
                 <div class="relative z-10 w-full md:w-[65%]">
-                    <h2 class="text-[32px] sm:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight mb-5 drop-shadow-md">
+                    <h2
+                        class="text-[32px] sm:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight mb-5 drop-shadow-md">
                         Request tutors <br><span class="text-[#3fd684]">for FREE</span>
                     </h2>
                     <p class="text-[16px] text-gray-300 mb-10 leading-relaxed font-medium">
-                        Post your learning requirement and let expert tutors contact you directly. The first discovery session is on us.
+                        Post your learning requirement and let expert tutors contact you directly. The first discovery
+                        session is on us.
                     </p>
-                    <a href="{{ url_for('book_demo') }}" class="inline-flex items-center justify-center bg-[#3ede84] hover:bg-[#34c272] text-[#0d2a1f] font-extrabold py-3.5 px-8 rounded-full shadow-lg shadow-[#3ede84]/30 text-[15px] transition-all hover:-translate-y-1 ring-1 ring-white/10">
+                    <a href="{{ url_for('book_demo') }}"
+                        class="inline-flex items-center justify-center bg-[#3ede84] hover:bg-[#34c272] text-[#0d2a1f] font-extrabold py-3.5 px-8 rounded-full shadow-lg shadow-[#3ede84]/30 text-[15px] transition-all hover:-translate-y-1 ring-1 ring-white/10">
                         Request a Tutor &nbsp;<i class="fas fa-arrow-right ml-1"></i>
                     </a>
                 </div>
-                
+
                 <!-- Hero Image in Corner -->
-                <div class="absolute bottom-[-5%] right-[-10%] md:right-[-5%] w-[70%] sm:w-[50%] lg:w-[60%] opacity-90 group-hover:scale-[1.03] transition-transform duration-700 pointer-events-none">
-                    <img src="{{ url_for('static', filename='images/student_demo_vector.png') }}" class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]" alt="Student reading">
+                <div
+                    class="absolute bottom-[-5%] right-[-10%] md:right-[-5%] w-[70%] sm:w-[50%] lg:w-[60%] opacity-90 group-hover:scale-[1.03] transition-transform duration-700 pointer-events-none">
+                    <img src="{{ url_for('static', filename='images/student_demo_vector.png') }}"
+                        class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
+                        alt="Student reading">
                 </div>
             </div>
 
             <!-- Tutor Card (Dark Theme) -->
-            <div class="relative bg-[#1a0f2e] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(138,92,252,0.2)] transition-all duration-500 min-h-[450px] lg:min-h-[500px]" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative bg-[#1a0f2e] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(138,92,252,0.2)] transition-all duration-500 min-h-[450px] lg:min-h-[500px]"
+                data-aos="fade-up" data-aos-delay="100">
                 <!-- Abstract Mesh Background -->
-                <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-[#8a5cfc] to-transparent rounded-full blur-3xl opacity-30"></div>
-                <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#8a5cfc]/10 to-transparent"></div>
-                
+                <div
+                    class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-[#8a5cfc] to-transparent rounded-full blur-3xl opacity-30">
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#8a5cfc]/10 to-transparent">
+                </div>
+
                 <div class="relative z-10 w-full md:w-[65%]">
-                    <h2 class="text-[32px] sm:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight mb-5 drop-shadow-md">
+                    <h2
+                        class="text-[32px] sm:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight mb-5 drop-shadow-md">
                         Become a <br><span class="text-[#a47bfe]">verified Tutor</span>
                     </h2>
                     <p class="text-[16px] text-gray-300 mb-10 leading-relaxed font-medium">
-                        Share your expertise, set flexible schedules, and shape futures while earning a premium income from top students.
+                        Share your expertise, set flexible schedules, and shape futures while earning a premium income
+                        from top students.
                     </p>
-                    <a href="{{ url_for('become_tutor') }}" class="inline-flex items-center justify-center bg-[#8a5cfc] hover:bg-[#7246e5] text-white font-bold py-3.5 px-8 rounded-full shadow-lg shadow-[#8a5cfc]/30 text-[15px] transition-all hover:-translate-y-1 ring-1 ring-white/10">
+                    <a href="{{ url_for('become_tutor') }}"
+                        class="inline-flex items-center justify-center bg-[#8a5cfc] hover:bg-[#7246e5] text-white font-bold py-3.5 px-8 rounded-full shadow-lg shadow-[#8a5cfc]/30 text-[15px] transition-all hover:-translate-y-1 ring-1 ring-white/10">
                         Become a Tutor &nbsp;<i class="fas fa-arrow-right ml-1"></i>
                     </a>
                 </div>
-                
+
                 <!-- Hero Image in Corner -->
-                <div class="absolute bottom-[-5%] right-[-10%] md:right-[-5%] w-[75%] sm:w-[50%] lg:w-[65%] opacity-90 group-hover:scale-[1.03] transition-transform duration-700 pointer-events-none">
-                    <img src="{{ url_for('static', filename='images/tutor_teaching_vector.png') }}" class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]" alt="Tutor teaching">
+                <div
+                    class="absolute bottom-[-5%] right-[-10%] md:right-[-5%] w-[75%] sm:w-[50%] lg:w-[65%] opacity-90 group-hover:scale-[1.03] transition-transform duration-700 pointer-events-none">
+                    <img src="{{ url_for('static', filename='images/tutor_teaching_vector.png') }}"
+                        class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
+                        alt="Tutor teaching">
                 </div>
             </div>
 
