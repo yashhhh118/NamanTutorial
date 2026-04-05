@@ -213,67 +213,204 @@
 </section>
 
 <!-- Subjects Covered -->
-<section id="subjects" class="section bg-gray-50 bg-dot-pattern relative">
-    <i
-        class="fas fa-book-open absolute -right-20 top-20 text-[400px] text-gray-200/50 z-0 pointer-events-none transform rotate-12"></i>
+<!-- Subjects Covered -->
+<section id="subjects" class="section bg-white relative py-24 overflow-hidden">
+    <style>
+        .flip-card {
+            perspective: 1000px;
+            height: 180px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 4px;
+        }
+        .flip-card-front {
+            background-color: white;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+        }
+        .flip-card-back {
+            background-color: #3fd684;
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(63, 214, 132, 0.3);
+        }
+    </style>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Curriculum</h2>
-            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                Subjects Covered
-            </p>
-            <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
-                Comprehensive academic support for Classes 1 to 10.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover-card">
-                <div
-                    class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600">
-                    <i class="fas fa-square-root-alt text-xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900">Mathematics</h3>
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center lg:items-start max-w-6xl mx-auto">
+            
+            <!-- Left Info Panel -->
+            <div class="lg:w-[40%] text-center lg:text-left mb-10 lg:mb-0 lg:pt-4" data-aos="fade-right">
+                <h2 class="text-[32px] sm:text-[38px] leading-[1.2] font-extrabold tracking-tight text-gray-800 mb-6 font-inter">
+                    Find qualified Tutors for face-to-face, online and offline tutoring
+                </h2>
+                <p class="text-[16px] text-gray-500 mb-8 leading-relaxed font-medium">
+                    More than 5K students have found tutors already. From English to Mathematics, from Science to Marathi, we have it all. Find a tutor now in less than 60 seconds.
+                </p>
+                <a href="{{ url_for('login') }}" class="inline-block bg-[#3fd684] hover:bg-[#34bc73] text-white font-bold py-3.5 px-8 rounded flex-shrink-0 font-inter text-[15px] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#3fd684] focus:ring-offset-2">
+                    Login of Student
+                </a>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover-card">
-                <div
-                    class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 text-green-600">
-                    <i class="fas fa-flask text-xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900">Science</h3>
-            </div>
+            <!-- Right Grid Panel -->
+            <div class="lg:w-[60%] w-full" data-aos="fade-left" data-aos-delay="100">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover-card">
-                <div
-                    class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 text-red-600">
-                    <i class="fas fa-book font-xl text-xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900">English</h3>
-            </div>
+                    <!-- Subject 1: Mathematics -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Mathematics</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">250+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-calculator text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Mathematics with the experts the way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover-card">
-                <div
-                    class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-yellow-600">
-                    <i class="fas fa-globe-asia text-xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900">Social Studies</h3>
-            </div>
+                    <!-- Subject 2: Science -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Science</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">180+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-flask text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Science with the experts the way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover-card">
-                <div
-                    class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600">
-                    <i class="fas fa-language text-xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900">Hindi</h3>
-            </div>
+                    <!-- Subject 3: English -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">English</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">210+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-font text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn English with the experts the way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover-card">
-                <div
-                    class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">
-                    <i class="fas fa-comments text-xl"></i>
+                    <!-- Subject 4: Social Studies -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Social Studies</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">90+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-globe-asia text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Social Studies with the experts the way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject 5: Hindi -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Hindi</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">140+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-language text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Hindi with the experts the way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject 6: Marathi -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Marathi</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">120+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-comments text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Marathi with the experts the way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}" class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <h3 class="text-lg font-bold text-gray-900">Marathi</h3>
             </div>
         </div>
     </div>
@@ -449,24 +586,61 @@
     </div>
 </section>
 
-<!-- Call to Action -->
-<section class="bg-brandgreen py-20 relative overflow-hidden">
-    <div class="absolute inset-0 bg-black/5"></div>
-    <!-- Decorative circles -->
-    <div class="absolute -right-20 -top-20 w-64 h-64 border-[30px] border-white/10 rounded-full"></div>
-    <div class="absolute -left-20 -bottom-20 w-80 h-80 border-[40px] border-white/10 rounded-full"></div>
+<!-- Final Premium Dual CTAs (Bento Style) -->
+<section class="bg-gray-50 py-20 lg:py-28 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+            
+            <!-- Student Card (Deep Green Theme) -->
+            <div class="relative bg-[#0d2a1f] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(63,214,132,0.15)] transition-all duration-500 min-h-[450px] lg:min-h-[500px]" data-aos="fade-up">
+                <!-- Abstract Mesh Background -->
+                <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-[#3fd684] to-transparent rounded-full blur-3xl opacity-20"></div>
+                <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#3fd684]/10 to-transparent"></div>
+                
+                <div class="relative z-10 w-full md:w-[65%]">
+                    <h2 class="text-[32px] sm:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight mb-5 drop-shadow-md">
+                        Request tutors <br><span class="text-[#3fd684]">for FREE</span>
+                    </h2>
+                    <p class="text-[16px] text-gray-300 mb-10 leading-relaxed font-medium">
+                        Post your learning requirement and let expert tutors contact you directly. The first discovery session is on us.
+                    </p>
+                    <a href="{{ url_for('book_demo') }}" class="inline-flex items-center justify-center bg-[#3ede84] hover:bg-[#34c272] text-[#0d2a1f] font-extrabold py-3.5 px-8 rounded-full shadow-lg shadow-[#3ede84]/30 text-[15px] transition-all hover:-translate-y-1 ring-1 ring-white/10">
+                        Request a Tutor &nbsp;<i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Hero Image in Corner -->
+                <div class="absolute bottom-[-5%] right-[-10%] md:right-[-5%] w-[70%] sm:w-[50%] lg:w-[60%] opacity-90 group-hover:scale-[1.03] transition-transform duration-700 pointer-events-none">
+                    <img src="{{ url_for('static', filename='images/student_demo_vector.png') }}" class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]" alt="Student reading">
+                </div>
+            </div>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10" data-aos="zoom-in">
-        <h2 class="text-3xl font-extrabold text-white sm:text-5xl mb-6 shadow-sm">
-            Give Your Child to the Best Education
-        </h2>
-        <p class="text-xl text-brandgreen-100 mb-10 text-white/90">
-            Join hundreds of parents in Pune who trust Naman Home Tutors for their child's academic success.
-        </p>
-        <a href="{{ url_for('book_demo') }}"
-            class="inline-flex items-center justify-center px-10 py-5 border border-transparent text-lg font-bold rounded-full text-brandgreen bg-white hover:bg-gray-50 shadow-xl transition-transform hover:scale-105">
-            Book a Free Demo Class Now
-        </a>
+            <!-- Tutor Card (Dark Theme) -->
+            <div class="relative bg-[#1a0f2e] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(138,92,252,0.2)] transition-all duration-500 min-h-[450px] lg:min-h-[500px]" data-aos="fade-up" data-aos-delay="100">
+                <!-- Abstract Mesh Background -->
+                <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-[#8a5cfc] to-transparent rounded-full blur-3xl opacity-30"></div>
+                <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#8a5cfc]/10 to-transparent"></div>
+                
+                <div class="relative z-10 w-full md:w-[65%]">
+                    <h2 class="text-[32px] sm:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight mb-5 drop-shadow-md">
+                        Become a <br><span class="text-[#a47bfe]">verified Tutor</span>
+                    </h2>
+                    <p class="text-[16px] text-gray-300 mb-10 leading-relaxed font-medium">
+                        Share your expertise, set flexible schedules, and shape futures while earning a premium income from top students.
+                    </p>
+                    <a href="{{ url_for('become_tutor') }}" class="inline-flex items-center justify-center bg-[#8a5cfc] hover:bg-[#7246e5] text-white font-bold py-3.5 px-8 rounded-full shadow-lg shadow-[#8a5cfc]/30 text-[15px] transition-all hover:-translate-y-1 ring-1 ring-white/10">
+                        Become a Tutor &nbsp;<i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Hero Image in Corner -->
+                <div class="absolute bottom-[-5%] right-[-10%] md:right-[-5%] w-[75%] sm:w-[50%] lg:w-[65%] opacity-90 group-hover:scale-[1.03] transition-transform duration-700 pointer-events-none">
+                    <img src="{{ url_for('static', filename='images/tutor_teaching_vector.png') }}" class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]" alt="Tutor teaching">
+                </div>
+            </div>
+
+        </div>
     </div>
 </section>
 
