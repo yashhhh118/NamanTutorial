@@ -277,6 +277,18 @@
     </script>
     <!-- Main JS -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100,
+            delay: 0
+        });
+    </script>
 </body>
 
 </html>
