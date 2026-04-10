@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Book a Tutor - Naman Home Tutors{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50 py-16 min-h-[85vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12" data-aos="fade-up">
+            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Select Your Expert</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Book Your Tutor
+            </p>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                Welcome back, {{ session.user.student_name }}! Choose from our highly qualified pool of home tutors
+                tailored to your child's specific needs.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
+            {% for tutor in tutors %}
+            <div class="card-modern">
+                <div class="card-image-modern">
+                    <img src="{{ tutor.photo_url }}" alt="{{ tutor.name }}">
+                </div>
+                <div class="card-body-modern">
+                    <span class="badge-modern">⭐ {{ tutor.rating }}</span>
+                    <h3>{{ tutor.name }}</h3>
+                    <p style="color: #7bc143; font-weight: 600; margin-bottom: 8px;">{{ tutor.subject }}</p>
+                    <p>{{ tutor.experience }}</p>
+                    <button onclick="bookTutor('{{ tutor.name }}')" class="btn-modern" style="width: 100%; margin-top: 12px;">Book Tutor</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Simple SweetAlert Style Modal Logic -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function bookTutor(tutorName) {
+        Swal.fire({
+            title: 'Tutor Requested!',
+            text: 'You have successfully booked ' + tutorName + ' for a demo session.',
+            icon: 'success',
+            confirmButtonColor: '#7bc143',
+            confirmButtonText: 'Great!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ url_for('index') }}";
+            }
+        });
+    }
+</script>
+{% endblock %}

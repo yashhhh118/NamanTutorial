@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Become a Tutor - Naman Home Tutors{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50 py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+        <!-- Info Alert -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl mb-8 flex items-start gap-4">
+            <i class="fas fa-info-circle text-blue-500 text-2xl mt-1"></i>
+            <div>
+                <h3 class="text-blue-800 font-bold text-lg mb-2">Tutor Earning Potential</h3>
+                <p class="text-blue-600 text-[15px]">Typical earning range: <strong>₹10,000 – ₹50,000 per month</strong>
+                    depending on experience, subjects taught, and number of students you can handle in your area.</p>
+            </div>
+        </div>
+
+
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+            <div class="bg-gray-900 py-8 px-10 text-center text-white relative">
+                <div class="absolute inset-0 bg-brandgreen/10"></div>
+                <h1 class="text-3xl font-extrabold relative z-10">Join Our Team of Experts</h1>
+                <p class="mt-2 text-gray-300 relative z-10">Apply to become a home tutor with Naman Home Tutors.</p>
+            </div>
+
+            <div class="p-10">
+                <form action="{{ url_for('submit_application') }}" method="POST" enctype="multipart/form-data"
+                    class="space-y-6">
+
+                    <h3 class="text-lg font-bold text-gray-900 border-b pb-2">Basic Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full
+                                Name</label>
+                            <input type="text" id="name" name="name"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brandgreen/50 outline-none transition-colors shadow-sm"
+                                placeholder="e.g. Rahul Sharma" required>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Contact
+                                Number</label>
+                            <input type="tel" id="phone" name="phone"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brandgreen/50 outline-none transition-colors shadow-sm"
+                                placeholder="+91" required>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mt-4">Upload Curriculum Vitae (CV)
+                    </h3>
+                    <div class="pb-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Attach your detailed
+                            CV</label>
+
+                        <!-- File Upload UI -->
+                        <div class="mt-1 flex justify-center px-6 pt-6 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-brandgreen/70 transition-colors bg-gray-50/50 cursor-pointer"
+                            onclick="document.getElementById('cv-upload').click()">
+                            <div class="space-y-2 text-center">
+                                <i class="fas fa-file-pdf text-4xl text-gray-300 mb-2"></i>
+                                <div class="flex text-sm text-gray-600 justify-center">
+                                    <label for="cv-upload"
+                                        class="relative cursor-pointer bg-white rounded-md font-bold text-brandgreen hover:text-[#619a35] focus-within:outline-none px-3 py-1 shadow-sm border border-brandgreen/20">
+                                        <span>Select a file to upload</span>
+                                        <input id="cv-upload" name="cv_file" type="file" class="sr-only"
+                                            accept=".pdf,.doc,.docx" required
+                                            onchange="document.getElementById('file-name').innerHTML = '<span class=\'text-brandgreen font-bold\'><i class=\'fas fa-check-circle mr-1\'></i> File Selected: ' + this.files[0].name + '</span>'">
+                                    </label>
+                                </div>
+                                <p class="text-xs text-gray-500 font-medium" id="file-name" style="margin-top: 10px;">
+                                    Supported formats: PDF or DOCX</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Important Note Box -->
+                    <div class="bg-[#fff9e6] border border-[#f5e3a9] p-5 rounded-2xl flex items-start gap-4 shadow-sm">
+                        <i class="fas fa-exclamation-circle text-amber-500 text-2xl mt-0.5"></i>
+                        <div>
+                            <h3 class="text-amber-900 font-bold text-base mb-1">Important Details Required in
+                                CV:</h3>
+                            <p class="text-amber-800 text-sm leading-relaxed mb-3">
+                                Please ensure your uploaded CV document <strong>strictly contains</strong> the
+                                following
+                                information before uploading:
+                            </p>
+                            <ul class="list-disc ml-5 text-[15px] font-medium text-amber-900 space-y-1">
+                                <li>Previous tutoring or working experience & previous job.</li>
+                                <li>Number of hours per week you can dedicate to Naman Tutors.</li>
+                                <li>Expected Salary / Hourly Rate.</li>
+                                <li>Valid Email ID for communication.</li>
+                                <li>A clear Profile Photo of yourself embedded directly in the CV.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <button type="submit" id="submitBtn"
+                            class="w-full flex justify-center items-center gap-2 py-4 px-4 border border-transparent rounded-xl shadow-lg shadow-gray-900/20 text-lg font-bold text-white bg-gray-900 hover:bg-black transition-all hover:scale-[1.01] focus:outline-none">
+                            <i id="submitIcon" class="fas fa-paper-plane"></i>
+                            <span id="submitText">Send Application & CV to Host</span>
+                            <span id="submitSpinner" class="hidden">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Add loading state to submit button
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const submitBtn = document.getElementById('submitBtn');
+            const submitIcon = document.getElementById('submitIcon');
+            const submitText = document.getElementById('submitText');
+            const submitSpinner = document.getElementById('submitSpinner');
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitIcon.style.display = 'none';
+            submitText.textContent = 'Uploading...';
+            submitSpinner.classList.remove('hidden');
+            submitBtn.style.opacity = '0.8';
+        });
+    </script>
+</section>
+{% endblock %}

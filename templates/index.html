@@ -1,0 +1,1068 @@
+{% extends 'base.html' %}
+
+{% block title %}Naman Home Tutors - Classes 1-10 in Pune{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="w-full relative overflow-hidden flex items-center hero-gradient" style="min-height: calc(100vh - 80px);">
+    <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col md:flex-row items-center justify-between">
+
+        <!-- Text Content -->
+        <div class="md:w-1/2 text-white pr-4 lg:pr-12 z-30 pt-10 md:pt-0 pb-20 md:pb-12" data-aos="fade-right">
+            <div
+                class="inline-flex items-center gap-2 px-0 py-2 text-2xl font-caveat text-white mb-5 transition-all">
+                <span> #1 Naman Home Tutors</span>
+            </div>
+
+            <h1 class="font-bungee font-normal text-4xl md:text-5xl lg:text-[64px] mb-6 leading-[1.1] tracking-normal text-white"
+                style="font-weight: 400; font-style: normal;">
+                EXPERT HOME<br>TUITION<br>IN PUNE
+            </h1>
+
+            <p class="font-caveat font-medium text-2xl md:text-[32px] mb-10 text-white leading-relaxed max-w-[550px]">
+                Personalized one-to-one learning with experienced tutors from the comfort of your home. We focus on
+                academic excellence for Classes 1 to 10.
+            </p>
+
+            <!-- Play Button Container for Booking -->
+            {% if session.get('user') %}
+            <!-- Welcome Message -->
+            <div class="mb-6 bg-green-50 border-l-4 border-brandgreen p-4 rounded-r-lg">
+                <p class="text-brandgreen font-bold">👋 Welcome back, <span class="capitalize">{{
+                        session.user.student_name.split()[0] }}</span>!</p>
+                <p class="text-green-700 text-sm">Ready to book your next tutor session?</p>
+            </div>
+
+            <a href="{{ url_for('book_tutor') }}"
+                class="flex items-center gap-5 group w-fit cursor-pointer outline-none">
+                <button type="button"
+                    class="w-[72px] h-[72px] bg-[#9dd549] group-hover:bg-[#a6db57] rounded-full flex items-center justify-center transition-all duration-300 shadow-[0_8px_20px_rgba(0,0,0,0.1)] focus:outline-none ring-[12px] ring-[#9dd549]/20 group-hover:ring-[#a6db57]/40 pointer-events-none">
+                    <i
+                        class="fas fa-chalkboard-teacher text-white text-[28px] group-hover:scale-[1.15] -ml-1 transition-transform duration-300"></i>
+                </button>
+                <span
+                    class="text-[22px] md:text-2xl font-bold tracking-tight text-white group-hover:underline drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-300">
+                    Book Your Tutor
+                </span>
+            </a>
+            {% else %}
+            <a href="{{ url_for('book_demo') }}"
+                class="flex items-center gap-5 group w-fit cursor-pointer outline-none">
+                <button type="button"
+                    class="w-[72px] h-[72px] bg-[#9dd549] group-hover:bg-[#a6db57] rounded-full flex items-center justify-center transition-all duration-300 shadow-[0_8px_20px_rgba(0,0,0,0.1)] focus:outline-none ring-[12px] ring-[#9dd549]/20 group-hover:ring-[#a6db57]/40 pointer-events-none">
+                    <i
+                        class="fas fa-play text-white text-2xl ml-2 group-hover:scale-[1.15] transition-transform duration-300"></i>
+                </button>
+                <span
+                    class="text-[22px] md:text-2xl font-bold tracking-tight text-white group-hover:underline drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-300">
+                    Book Free Demo Class
+                </span>
+            </a>
+            {% endif %}
+
+            <!-- Social Proof / 400+ Teachers -->
+            <div class="mt-10 lg:mt-12 flex items-center gap-4 bg-white/10 w-fit px-5 py-3.5 rounded-2xl backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/15 transition-colors cursor-default"
+                data-aos="fade-up" data-aos-delay="100">
+                <div class="flex -space-x-3">
+                    <img class="w-11 h-11 rounded-full border-[3px] border-[#82c91e] object-cover shadow-sm bg-gray-200"
+                        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80"
+                        alt="Tutor">
+                    <img class="w-11 h-11 rounded-full border-[3px] border-[#82c91e] object-cover shadow-sm bg-gray-200"
+                        src="https://images.unsplash.com/photo-1580894732444-8ecded790047?auto=format&fit=crop&w=100&q=80"
+                        alt="Tutor">
+                    <img class="w-11 h-11 rounded-full border-[3px] border-[#82c91e] object-cover shadow-sm bg-gray-200"
+                        src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=100&q=80"
+                        alt="Tutor">
+                    <div
+                        class="w-11 h-11 rounded-full border-[3px] border-[#82c91e] bg-[#f0f9b6] flex items-center justify-center text-[12px] font-extrabold text-[#649c17] z-10 shadow-sm relative">
+                        400+</div>
+                </div>
+                <div class="text-white pr-2">
+                    <p class="font-bungee text-[15px] tracking-wide text-white leading-tight drop-shadow-md mb-0.5">
+                        400+ TEACHERS</p>
+                    <p class="font-medium font-inter text-sm opacity-90 leading-tight">Actively teaching in Pune</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Graphic / Illustration Content -->
+        <div class="md:w-[50%] relative flex justify-center items-center h-[550px] hidden md:flex" data-aos="fade-left"
+            data-aos-delay="200">
+
+            <!-- Massive Organic Blob Background (Full Bleed) -->
+            <div
+                class="absolute right-[-25%] top-[-15%] bottom-[-15%] w-[150%] z-0 pointer-events-none flex items-center justify-center">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="w-full h-full opacity-100 scale-[1.1] origin-right">
+                    <!-- Soft organic blob using warm orange that compliments brandgreen -->
+                    <path fill="#ffffff" fill-opacity="0.25"
+                        d="M428.5,321Q398,392,324,424Q250,456,177.5,417.5Q105,379,93,299.5Q81,220,137,162Q193,104,269,96Q345,88,402,143.5Q459,199,428.5,321Z">
+                    </path>
+                </svg>
+            </div>
+
+            <!-- Vector Illustration Image -->
+            <div
+                class="relative z-10 w-[550px] transform transition-transform duration-700 hover:scale-[1.02] translate-x-4">
+                <img src="{{ url_for('static', filename='images/student_vector_transparent.png') }}"
+                    alt="Student studying with tutor - beautifully transparent"
+                    class="w-full h-auto object-contain filter saturate-110 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] opacity-95">
+            </div>
+
+            <!-- Decorative Floating Elements (Leaves / Accents) -->
+            <div class="absolute top-[20%] right-[5%] z-20 animate-[bounce_4s_infinite]">
+                <i class="fas fa-leaf text-[#fc7c5c] text-4xl transform rotate-45 opacity-80 drop-shadow-sm"></i>
+            </div>
+            <div class="absolute bottom-[20%] left-[-5%] z-20 animate-[bounce_5s_infinite_reverse]">
+                <i class="fas fa-leaf text-[#fc7c5c] text-5xl transform -rotate-12 opacity-80 drop-shadow-sm"></i>
+            </div>
+            <div class="absolute bottom-[5%] right-[20%] z-20 animate-pulse">
+                <div class="w-6 h-6 rounded-full bg-brandgreen opacity-80"></div>
+            </div>
+            <div class="absolute top-[10%] left-[10%] z-0 animate-pulse" style="animation-delay: 1s;">
+                <div class="w-8 h-8 rounded-full bg-orange-400 opacity-60"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Animated SVG Water Waves -->
+    <div class="absolute bottom-0 w-full left-0 leading-[0] z-20 pointer-events-none transform translate-y-[1px]">
+        <svg class="w-full h-[50px] md:h-[80px] lg:h-[110px] block" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none"
+            shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="animated-waves">
+                <use href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+                <use href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use href="#gentle-wave" x="48" y="7" fill="#ffffff" />
+            </g>
+        </svg>
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<section class="py-20 bg-white overflow-hidden" style="margin-top: -2px;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <!-- Section Header -->
+        <div class="text-center">
+            <p class="text-brandgreen font-semibold text-sm uppercase tracking-wide">Google Reviews Highlights</p>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-3 mb-4">Real Success Stories</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">See how Naman Home Tutors is making an impact across
+                Pune.</p>
+        </div>
+    </div>
+
+    <!-- Elfsight Google Reviews Widget -->
+    <div class="relative w-full max-w-7xl mx-auto z-20">
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-22470623-560b-4593-9b05-a1c8b6e39052" data-elfsight-app-lazy></div>
+    </div>
+</section>
+
+
+<!-- Trust Badge Marquee -->
+<section class="py-8 bg-gray-50 border-y border-gray-100 overflow-hidden">
+    <div class="relative">
+        <div class="flex animate-marquee gap-12 items-center">
+            <!-- Set 1 -->
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-shield-alt text-brandgreen text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Verified Tutors</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-star text-yellow-400 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">4.8★ Google Rating</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-users text-blue-500 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">5000+ Happy Families</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-award text-purple-500 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Best in Pune 2025</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-graduation-cap text-brandgreen text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">98% Results Improvement</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-clock text-orange-400 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Same-Day Tutor Matching</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-heart text-red-400 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Trusted Since 2020</span>
+            </div>
+            <!-- Set 2 (duplicate for seamless loop) -->
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-shield-alt text-brandgreen text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Verified Tutors</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-star text-yellow-400 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">4.8★ Google Rating</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-users text-blue-500 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">5000+ Happy Families</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-award text-purple-500 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Best in Pune 2025</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-graduation-cap text-brandgreen text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">98% Results Improvement</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-clock text-orange-400 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Same-Day Tutor Matching</span>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap px-6 py-3 bg-white rounded-full shadow-sm border border-gray-100">
+                <i class="fas fa-heart text-red-400 text-xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Trusted Since 2020</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Why Choose Us -->
+<section id="services" class="section bg-white bg-dot-pattern-gray relative">
+    <i
+        class="fas fa-chalkboard-teacher absolute -left-20 -top-10 text-[350px] text-gray-50 z-0 pointer-events-none transform -rotate-12"></i>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Benefits</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Why Choose Naman Home Tutors
+            </p>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                We provide the best educational foundation for your child with our dedicated home tutors.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
+            <!-- Box 1 -->
+            <div class="bg-gray-50 rounded-2xl p-8 tilt-card border border-gray-100 icon-spin-hover reveal">
+                <div class="w-14 h-14 bg-brandgreen/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-chalkboard-teacher text-2xl text-brandgreen"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Experienced Tutors</h3>
+                <p class="text-gray-600 leading-relaxed">Highly qualified and verified tutors with proven teaching
+                    methodologies and excellent track records.</p>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="bg-gray-50 rounded-2xl p-8 tilt-card border border-gray-100 icon-spin-hover reveal">
+                <div class="w-14 h-14 bg-brandgreen/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-user-graduate text-2xl text-brandgreen"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Personalized Learning</h3>
+                <p class="text-gray-600 leading-relaxed">One-to-one attention tailored perfectly to match your child's
+                    learning pace and unique requirements.</p>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="bg-gray-50 rounded-2xl p-8 tilt-card border border-gray-100 icon-spin-hover reveal">
+                <div class="w-14 h-14 bg-brandgreen/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-clock text-2xl text-brandgreen"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Flexible Timing</h3>
+                <p class="text-gray-600 leading-relaxed">Schedule classes at your convenience. Learning that perfectly
+                    seamlessly fits into your daily routine.</p>
+            </div>
+
+            <!-- Box 4 -->
+            <div class="bg-gray-50 rounded-2xl p-8 tilt-card border border-gray-100 icon-spin-hover reveal">
+                <div class="w-14 h-14 bg-brandgreen/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-chart-line text-2xl text-brandgreen"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Progress Tracking</h3>
+                <p class="text-gray-600 leading-relaxed">Regular evaluations, tests, and detailed performance reports to
+                    keep parents constantly updated.</p>
+            </div>
+
+            <!-- Box 5 -->
+            <div class="bg-gray-50 rounded-2xl p-8 tilt-card border border-gray-100 icon-spin-hover reveal">
+                <div class="w-14 h-14 bg-brandgreen/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-wallet text-2xl text-brandgreen"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Affordable Pricing</h3>
+                <p class="text-gray-600 leading-relaxed">Premium educational quality and exclusive home tutoring
+                    services at highly competitive rates.</p>
+            </div>
+
+            <!-- Box 6 -->
+            <div
+                class="bg-brandgreen rounded-2xl p-8 tilt-card shadow-lg shadow-brandgreen/20 text-white flex flex-col justify-center items-center text-center pulse-glow reveal">
+                <h3 class="text-2xl font-bold mb-4">Ready to start?</h3>
+                <p class="mb-6 opacity-90">Experience our teaching methodology before you commit.</p>
+                <a href="{{ url_for('book_demo') }}"
+                    class="bg-white text-brandgreen font-bold py-3 px-6 rounded-full w-full hover:bg-gray-100 transition-colors">Book
+                    Free Demo</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Subjects Covered -->
+<!-- Subjects Covered -->
+<section id="subjects" class="section bg-white relative py-24 overflow-hidden">
+    <style>
+        .flip-card {
+            perspective: 1000px;
+            height: 180px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 4px;
+        }
+
+        .flip-card-front {
+            background-color: white;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+        }
+
+        .flip-card-back {
+            background-color: #3fd684;
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(63, 214, 132, 0.3);
+        }
+    </style>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center lg:items-start max-w-6xl mx-auto">
+
+            <!-- Left Info Panel -->
+            <div class="lg:w-[40%] text-center lg:text-left mb-10 lg:mb-0 lg:pt-4" data-aos="fade-right">
+                <h2
+                    class="text-[32px] sm:text-[38px] leading-[1.2] font-extrabold tracking-tight text-gray-800 mb-6 font-inter">
+                    Find qualified Tutors for face-to-face, online and offline tutoring
+                </h2>
+                <p class="text-[16px] text-gray-500 mb-8 leading-relaxed font-medium">
+                    More than 5K students have found tutors already. From English to Mathematics, from Science to
+                    Marathi, we have it all. Find a tutor now in less than 60 seconds.
+                </p>
+                <a href="{{ url_for('login') }}"
+                    class="inline-block bg-[#3fd684] hover:bg-[#34bc73] text-white font-bold py-3.5 px-8 rounded flex-shrink-0 font-inter text-[15px] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#3fd684] focus:ring-offset-2">
+                    Login of Student
+                </a>
+            </div>
+
+            <!-- Right Grid Panel -->
+            <div class="lg:w-[60%] w-full" data-aos="fade-left" data-aos-delay="100">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+
+                    <!-- Subject 1: Mathematics -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Mathematics</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">250+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-calculator text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Mathematics with the experts the
+                                    way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject 2: Science -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Science</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">180+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-flask text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Science with the experts the way
+                                    it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject 3: English -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">English</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">210+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-font text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn English with the experts the way
+                                    it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject 4: Social Studies -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Social Studies
+                                    </h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">90+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-globe-asia text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Social Studies with the experts
+                                    the way it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject 5: Hindi -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Hindi</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">140+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-language text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Hindi with the experts the way
+                                    it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject 6: Marathi -->
+                    <div class="flip-card cursor-pointer group">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#c5ebd7]"></div>
+                                <div class="mt-auto relative z-10">
+                                    <h3 class="text-[17px] font-extrabold text-gray-800 tracking-tight">Marathi</h3>
+                                    <p class="text-gray-500 text-[13px] mt-0.5">120+ tutors</p>
+                                </div>
+                                <div class="absolute bottom-5 right-5 text-[#f9735a]">
+                                    <i class="fas fa-comments text-[28px] opacity-90"></i>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="font-medium text-[15px] leading-snug">Learn Marathi with the experts the way
+                                    it's meant to be learned.</p>
+                                <a href="{{ url_for('book_tutor') }}"
+                                    class="w-full bg-white text-[#3fd684] hover:bg-gray-50 font-bold text-[13px] tracking-wide text-center py-2.5 rounded shadow-sm mt-auto block transition-colors">
+                                    BROWSE TUTORS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="section bg-darkblue overflow-hidden relative">
+    <!-- Decorative background elements -->
+    <div
+        class="absolute top-0 right-0 -mx-20 -my-20 w-80 h-80 bg-brandgreen/20 rounded-full blur-3xl z-0 pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 -mx-20 -my-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl z-0 pointer-events-none">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Process</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+                How It Works
+            </p>
+        </div>
+
+        <div class="relative">
+            <!-- Connecting Line -->
+            <div
+                class="hidden md:block absolute top-[40px] left-0 w-full h-[2px] bg-gradient-to-r from-darkblue via-brandgreen/50 to-darkblue z-0">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10 stagger-children">
+                <!-- Step 1 -->
+                <div class="text-center relative">
+                    <div
+                        class="w-20 h-20 mx-auto bg-darkblue border-2 border-brandgreen rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(123,193,67,0.3)] mb-6 text-white relative z-10 hover:shadow-[0_0_30px_rgba(123,193,67,0.6)] transition-all">
+                        <span class="text-2xl font-bold text-brandgreen">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Request Demo Class</h3>
+                    <p class="text-blue-100">Fill out our simple form to request a free trial class for your child.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center relative">
+                    <div
+                        class="w-20 h-20 mx-auto bg-brandgreen border-2 border-brandgreen rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(123,193,67,0.5)] mb-6 text-white relative z-10 hover:shadow-[0_0_40px_rgba(123,193,67,0.8)] transition-all transform scale-110">
+                        <span class="text-2xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">We Match a Tutor</h3>
+                    <p class="text-blue-100">We analyze your requirements and assign the perfect tutor for your area.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center relative">
+                    <div
+                        class="w-20 h-20 mx-auto bg-darkblue border-2 border-brandgreen rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(123,193,67,0.3)] mb-6 text-white relative z-10 hover:shadow-[0_0_30px_rgba(123,193,67,0.6)] transition-all">
+                        <span class="text-2xl font-bold text-brandgreen">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Start Learning</h3>
+                    <p class="text-blue-100">Watch your child's confidence and grades improve with home guidance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Areas We Serve -->
+<section id="areas" class="section bg-gray-50 bg-dot-pattern relative">
+    <i
+        class="fas fa-map-marker-alt absolute -left-10 top-1/4 text-[300px] text-gray-200/40 z-0 pointer-events-none transform -rotate-6"></i>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Locations</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Areas We Serve in Pune
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 stagger-children">
+            <div
+                class="area-chip bg-white rounded-lg p-4 text-center shadow-sm border border-gray-200 font-semibold text-gray-700 cursor-pointer reveal">
+                <i class="fas fa-map-pin text-brandgreen mr-1 text-sm"></i> Kharadi
+            </div>
+            <div
+                class="area-chip bg-white rounded-lg p-4 text-center shadow-sm border border-gray-200 font-semibold text-gray-700 cursor-pointer reveal">
+                <i class="fas fa-map-pin text-brandgreen mr-1 text-sm"></i> Wagholi
+            </div>
+            <div
+                class="area-chip bg-white rounded-lg p-4 text-center shadow-sm border border-gray-200 font-semibold text-gray-700 cursor-pointer reveal">
+                <i class="fas fa-map-pin text-brandgreen mr-1 text-sm"></i> Viman Nagar
+            </div>
+            <div
+                class="area-chip bg-white rounded-lg p-4 text-center shadow-sm border border-gray-200 font-semibold text-gray-700 cursor-pointer reveal">
+                <i class="fas fa-map-pin text-brandgreen mr-1 text-sm"></i> Hadapsar
+            </div>
+            <div
+                class="area-chip bg-white rounded-lg p-4 text-center shadow-sm border border-gray-200 font-semibold text-gray-700 cursor-pointer reveal">
+                <i class="fas fa-map-pin text-brandgreen mr-1 text-sm"></i> Magarpatta
+            </div>
+        </div>
+        <p class="text-center mt-8 text-gray-500 font-medium">+ and many nearby areas across Pune</p>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section bg-[#f4faee] text-gray-900 relative pb-28 md:pb-40">
+    <i
+        class="fas fa-quote-right absolute -right-10 top-20 text-[400px] text-brandgreen/[0.04] z-0 pointer-events-none"></i>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Reviews</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
+                What Parents Say
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 shadow-sm relative tilt-card reveal-left">
+                <i class="fas fa-quote-left text-4xl text-brandgreen/20 absolute top-6 left-6"></i>
+                <div class="relative z-10 pt-4">
+                    <p class="text-gray-600 text-lg italic mb-6">"My son in 8th grade was struggling with Mathematics.
+                        The tutor from Naman Tutors helped him understand concepts clearly. From getting 60%, he is now
+                        scoring 85%+ consistently!"</p>
+                    <div class="flex items-center">
+                        <div
+                            class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-gray-600 font-bold text-xl overflow-hidden">
+                            R
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Rahul Sharma</h4>
+                            <p class="text-sm text-gray-500">Parent, Viman Nagar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 shadow-sm relative tilt-card reveal-right">
+                <i class="fas fa-quote-left text-4xl text-brandgreen/20 absolute top-6 left-6"></i>
+                <div class="relative z-10 pt-4">
+                    <p class="text-gray-600 text-lg italic mb-6">"Very professional service. It was so hard to find a
+                        good Science tutor in Kharadi. Now we are very happy with the progress. The home instruction
+                        makes things so convenient."</p>
+                    <div class="flex items-center">
+                        <div
+                            class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-gray-600 font-bold text-xl overflow-hidden">
+                            P
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Priya Patel</h4>
+                            <p class="text-sm text-gray-500">Parent, Kharadi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animated SVG Water Waves (Transition into CTA Green) -->
+    <div class="absolute bottom-0 w-full left-0 leading-[0] z-20 pointer-events-none transform translate-y-[2px]">
+        <svg class="w-full h-[40px] md:h-[80px] lg:h-[110px] block" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none"
+            shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave-bottom"
+                    d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="animated-waves">
+                <use href="#gentle-wave-bottom" x="48" y="0" fill="rgba(123,193,67,0.7)" />
+                <use href="#gentle-wave-bottom" x="48" y="3" fill="rgba(123,193,67,0.5)" />
+                <use href="#gentle-wave-bottom" x="48" y="5" fill="rgba(123,193,67,0.3)" />
+                <use href="#gentle-wave-bottom" x="48" y="7" fill="#7bc143" />
+            </g>
+        </svg>
+    </div>
+</section>
+
+<!-- Student Impact / Results Section -->
+<section class="py-20 bg-white relative overflow-hidden">
+    <div class="absolute -right-20 -top-20 w-80 h-80 bg-brandgreen/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">Impact</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Our Students' Growth
+            </p>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                Real improvements measured across thousands of students in Pune.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+            <!-- Progress Bar 1 -->
+            <div class="reveal" data-aos="fade-right">
+                <div class="flex justify-between mb-2">
+                    <span class="font-bold text-gray-800">Grade Improvement</span>
+                    <span class="font-bold text-brandgreen progress-percent" data-target="92">0%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                    <div class="progress-bar h-full rounded-full bg-gradient-to-r from-brandgreen to-[#a8df5c]" data-width="92" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Progress Bar 2 -->
+            <div class="reveal" data-aos="fade-left">
+                <div class="flex justify-between mb-2">
+                    <span class="font-bold text-gray-800">Parent Satisfaction</span>
+                    <span class="font-bold text-brandgreen progress-percent" data-target="98">0%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                    <div class="progress-bar h-full rounded-full bg-gradient-to-r from-brandgreen to-[#a8df5c]" data-width="98" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Progress Bar 3 -->
+            <div class="reveal" data-aos="fade-right">
+                <div class="flex justify-between mb-2">
+                    <span class="font-bold text-gray-800">Exam Readiness</span>
+                    <span class="font-bold text-brandgreen progress-percent" data-target="88">0%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                    <div class="progress-bar h-full rounded-full bg-gradient-to-r from-blue-400 to-blue-500" data-width="88" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Progress Bar 4 -->
+            <div class="reveal" data-aos="fade-left">
+                <div class="flex justify-between mb-2">
+                    <span class="font-bold text-gray-800">Concept Clarity</span>
+                    <span class="font-bold text-brandgreen progress-percent" data-target="95">0%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                    <div class="progress-bar h-full rounded-full bg-gradient-to-r from-purple-400 to-purple-500" data-width="95" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FAQ Section -->
+<section class="py-20 bg-gray-50 relative overflow-hidden">
+    <div class="absolute left-0 bottom-0 w-72 h-72 bg-brandgreen/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <h2 class="text-brandgreen font-semibold tracking-wide uppercase">FAQ</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Frequently Asked Questions
+            </p>
+        </div>
+
+        <div class="space-y-4" id="faq-accordion">
+            <!-- FAQ 1 -->
+            <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden reveal" data-aos="fade-up">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left group">
+                    <span class="font-bold text-gray-800 text-[16px] group-hover:text-brandgreen transition-colors">How do I book a free demo class?</span>
+                    <div class="faq-icon w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandgreen/10 flex items-center justify-center transition-all duration-300 flex-shrink-0 ml-4">
+                        <i class="fas fa-plus text-sm text-gray-500 group-hover:text-brandgreen transition-all duration-300"></i>
+                    </div>
+                </button>
+                <div class="faq-answer px-6 overflow-hidden transition-all duration-500" style="max-height: 0px;">
+                    <p class="text-gray-600 leading-relaxed pb-5">Simply click the "Book Free Demo" button on our website, fill in your child's details and requirements, and we'll match you with the perfect tutor within 24 hours. The first demo session is completely free!</p>
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden reveal" data-aos="fade-up" data-aos-delay="50">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left group">
+                    <span class="font-bold text-gray-800 text-[16px] group-hover:text-brandgreen transition-colors">Are the tutors verified and qualified?</span>
+                    <div class="faq-icon w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandgreen/10 flex items-center justify-center transition-all duration-300 flex-shrink-0 ml-4">
+                        <i class="fas fa-plus text-sm text-gray-500 group-hover:text-brandgreen transition-all duration-300"></i>
+                    </div>
+                </button>
+                <div class="faq-answer px-6 overflow-hidden transition-all duration-500" style="max-height: 0px;">
+                    <p class="text-gray-600 leading-relaxed pb-5">Yes! Every tutor goes through a rigorous screening process including academic verification, background checks, and a teaching demo. Only the top 5% of applicants make it through.</p>
+                </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden reveal" data-aos="fade-up" data-aos-delay="100">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left group">
+                    <span class="font-bold text-gray-800 text-[16px] group-hover:text-brandgreen transition-colors">What areas in Pune do you cover?</span>
+                    <div class="faq-icon w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandgreen/10 flex items-center justify-center transition-all duration-300 flex-shrink-0 ml-4">
+                        <i class="fas fa-plus text-sm text-gray-500 group-hover:text-brandgreen transition-all duration-300"></i>
+                    </div>
+                </button>
+                <div class="faq-answer px-6 overflow-hidden transition-all duration-500" style="max-height: 0px;">
+                    <p class="text-gray-600 leading-relaxed pb-5">We currently serve Kharadi, Wagholi, Viman Nagar, Hadapsar, Magarpatta, and many surrounding areas. We're constantly expanding to cover more localities across Pune.</p>
+                </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden reveal" data-aos="fade-up" data-aos-delay="150">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left group">
+                    <span class="font-bold text-gray-800 text-[16px] group-hover:text-brandgreen transition-colors">How much does home tuition cost?</span>
+                    <div class="faq-icon w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandgreen/10 flex items-center justify-center transition-all duration-300 flex-shrink-0 ml-4">
+                        <i class="fas fa-plus text-sm text-gray-500 group-hover:text-brandgreen transition-all duration-300"></i>
+                    </div>
+                </button>
+                <div class="faq-answer px-6 overflow-hidden transition-all duration-500" style="max-height: 0px;">
+                    <p class="text-gray-600 leading-relaxed pb-5">Our pricing is competitive and varies based on the subject, grade level, and frequency. We offer packages starting from affordable monthly plans. Contact us for a personalized quote!</p>
+                </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden reveal" data-aos="fade-up" data-aos-delay="200">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left group">
+                    <span class="font-bold text-gray-800 text-[16px] group-hover:text-brandgreen transition-colors">Can I change my tutor if I'm not satisfied?</span>
+                    <div class="faq-icon w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandgreen/10 flex items-center justify-center transition-all duration-300 flex-shrink-0 ml-4">
+                        <i class="fas fa-plus text-sm text-gray-500 group-hover:text-brandgreen transition-all duration-300"></i>
+                    </div>
+                </button>
+                <div class="faq-answer px-6 overflow-hidden transition-all duration-500" style="max-height: 0px;">
+                    <p class="text-gray-600 leading-relaxed pb-5">Absolutely! Your child's comfort is our priority. If you're not happy with the tutor match, we'll provide a replacement tutor at no extra cost until you find the perfect fit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final Premium Dual CTAs (Bento Style) -->
+<section class="bg-gray-50 py-20 lg:py-28 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+
+            <!-- Student Card (Deep Green Theme) -->
+            <div class="relative bg-[#0d2a1f] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(63,214,132,0.15)] transition-all duration-500 min-h-[450px] lg:min-h-[500px]"
+                data-aos="fade-up">
+                <!-- Abstract Mesh Background -->
+                <div
+                    class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-[#3fd684] to-transparent rounded-full blur-3xl opacity-20">
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#3fd684]/10 to-transparent">
+                </div>
+
+                <div class="relative z-10 w-full md:w-[65%]">
+                    <h2
+                        class="text-[32px] sm:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight mb-5 drop-shadow-md">
+                        Request tutors <br><span class="text-[#3fd684]">for FREE</span>
+                    </h2>
+                    <p class="text-[16px] text-gray-300 mb-10 leading-relaxed font-medium">
+                        Post your learning requirement and let expert tutors contact you directly. The first discovery
+                        session is on us.
+                    </p>
+                    <a href="{{ url_for('book_demo') }}"
+                        class="inline-flex items-center justify-center bg-[#3ede84] hover:bg-[#34c272] text-[#0d2a1f] font-extrabold py-3.5 px-8 rounded-full shadow-lg shadow-[#3ede84]/30 text-[15px] transition-all hover:-translate-y-1 ring-1 ring-white/10">
+                        Request a Tutor &nbsp;<i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Hero Image in Corner -->
+                <div
+                    class="absolute bottom-[-5%] right-[-10%] md:right-[-5%] w-[70%] sm:w-[50%] lg:w-[60%] opacity-90 group-hover:scale-[1.03] transition-transform duration-700 pointer-events-none">
+                    <img src="{{ url_for('static', filename='images/student_demo_vector.png') }}"
+                        class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
+                        alt="Student reading">
+                </div>
+            </div>
+
+            <!-- Tutor Card (Dark Theme) -->
+            <div class="relative bg-[#1a0f2e] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(138,92,252,0.2)] transition-all duration-500 min-h-[450px] lg:min-h-[500px]"
+                data-aos="fade-up" data-aos-delay="100">
+                <!-- Abstract Mesh Background -->
+                <div
+                    class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-[#8a5cfc] to-transparent rounded-full blur-3xl opacity-30">
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#8a5cfc]/10 to-transparent">
+                </div>
+
+                <div class="relative z-10 w-full md:w-[65%]">
+                    <h2
+                        class="text-[32px] sm:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight mb-5 drop-shadow-md">
+                        Become a <br><span class="text-[#a47bfe]">verified Tutor</span>
+                    </h2>
+                    <p class="text-[16px] text-gray-300 mb-10 leading-relaxed font-medium">
+                        Share your expertise, set flexible schedules, and shape futures while earning a premium income
+                        from top students.
+                    </p>
+                    <a href="{{ url_for('become_tutor') }}"
+                        class="inline-flex items-center justify-center bg-[#8a5cfc] hover:bg-[#7246e5] text-white font-bold py-3.5 px-8 rounded-full shadow-lg shadow-[#8a5cfc]/30 text-[15px] transition-all hover:-translate-y-1 ring-1 ring-white/10">
+                        Become a Tutor &nbsp;<i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Hero Image in Corner -->
+                <div
+                    class="absolute bottom-[-5%] right-[-10%] md:right-[-5%] w-[75%] sm:w-[50%] lg:w-[65%] opacity-90 group-hover:scale-[1.03] transition-transform duration-700 pointer-events-none">
+                    <img src="{{ url_for('static', filename='images/tutor_teaching_vector.png') }}"
+                        class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
+                        alt="Tutor teaching">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Tag Info Modal Overlay -->
+<div id="tagInfoModal"
+    class="fixed inset-0 z-[9999] hidden flex justify-center items-center bg-gray-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl shadow-2xl w-[90%] max-w-sm md:max-w-md p-8 transform scale-95 opacity-0 transition-all duration-300 relative border border-gray-100"
+        id="tagModalContent">
+        <!-- Close button -->
+        <button onclick="closeTagModal()"
+            class="absolute top-4 right-4 w-10 h-10 bg-gray-50 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full flex items-center justify-center transition-colors focus:outline-none">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+
+        <div class="w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-sm border border-gray-100"
+            id="modalIconContainer">
+            <i id="modalIcon" class="fas fa-info-circle text-3xl"></i>
+        </div>
+
+        <h3 id="modalTitle" class="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">Title</h3>
+        <p id="modalDesc" class="text-gray-600 text-[1.1rem] leading-relaxed mb-8">Description goes here.</p>
+
+        <button onclick="closeTagModal()"
+            class="w-full bg-brandgreen hover:bg-[#619a35] active:scale-95 text-white font-bold py-4 rounded-xl shadow-lg transition-all focus:outline-none">
+            Got it!
+        </button>
+    </div>
+</div>
+
+<script>
+    function openTagModal(title, description, iconClasses) {
+        const modal = document.getElementById('tagInfoModal');
+        const modalContent = document.getElementById('tagModalContent');
+
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalDesc').innerText = description;
+        document.getElementById('modalIcon').className = iconClasses;
+
+        // Match icon container color dynamically based on icon text color (blue/pink/orange)
+        const iconContainer = document.getElementById('modalIconContainer');
+        iconContainer.className = 'w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-sm border border-gray-100 ' +
+            (iconClasses.includes('orange') ? 'bg-orange-50' :
+                iconClasses.includes('pink') ? 'bg-pink-50' : 'bg-blue-50');
+
+        modal.classList.remove('hidden');
+        // prompt a layout reflow
+        void modal.offsetWidth;
+        modal.classList.remove('opacity-0');
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+    }
+
+    function closeTagModal() {
+        const modal = document.getElementById('tagInfoModal');
+        const modalContent = document.getElementById('tagModalContent');
+
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        modalContent.classList.add('scale-95', 'opacity-0');
+
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300); // 300ms matches the tailwind duration-300 transition class
+    }
+</script>
+
+<script>
+    // FAQ Accordion Toggle
+    function toggleFaq(btn) {
+        const faqItem = btn.closest('.faq-item');
+        const answer = faqItem.querySelector('.faq-answer');
+        const icon = faqItem.querySelector('.faq-icon i');
+        const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
+
+        // Close all others
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const ans = item.querySelector('.faq-answer');
+            const ic = item.querySelector('.faq-icon i');
+            ans.style.maxHeight = '0px';
+            ic.classList.remove('fa-minus');
+            ic.classList.add('fa-plus');
+            ic.style.transform = '';
+            item.classList.remove('border-brandgreen', 'shadow-md');
+            item.classList.add('border-gray-100', 'shadow-sm');
+        });
+
+        // Toggle clicked
+        if (!isOpen) {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            icon.classList.remove('fa-plus');
+            icon.classList.add('fa-minus');
+            icon.style.transform = 'rotate(180deg)';
+            faqItem.classList.remove('border-gray-100', 'shadow-sm');
+            faqItem.classList.add('border-brandgreen', 'shadow-md');
+        }
+    }
+
+    // Animated Progress Bars
+    const progressObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bars = entry.target.querySelectorAll('.progress-bar');
+                const percents = entry.target.querySelectorAll('.progress-percent');
+
+                bars.forEach(bar => {
+                    const width = bar.dataset.width;
+                    setTimeout(() => {
+                        bar.style.transition = 'width 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                        bar.style.width = width + '%';
+                    }, 200);
+                });
+
+                percents.forEach(p => {
+                    const target = parseInt(p.dataset.target);
+                    let current = 0;
+                    const duration = 1500;
+                    const start = Date.now();
+
+                    function animate() {
+                        const elapsed = Date.now() - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        current = Math.round(target * eased);
+                        p.textContent = current + '%';
+                        if (progress < 1) requestAnimationFrame(animate);
+                    }
+                    setTimeout(() => requestAnimationFrame(animate), 200);
+                });
+
+                progressObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    const progressSection = document.querySelector('.progress-bar')?.closest('section');
+    if (progressSection) progressObserver.observe(progressSection);
+</script>
+
+{% endblock %}

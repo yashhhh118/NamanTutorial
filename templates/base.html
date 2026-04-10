@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Naman Home Tutors - Classes 1-10 in Pune{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee&family=Caveat:wght@400..700&family=Pacifico&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandgreen: '#7bc143',
+                        navgreen: '#8dc63f',
+                        darkblue: '#1e3a8a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        bungee: ['Bungee', 'sans-serif'],
+                        pacifico: ['Pacifico', 'cursive'],
+                        caveat: ['Caveat', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="antialiased bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="bg-white sticky top-0 z-50 shadow-[0_2px_10px_rgba(0,0,0,0.05)] w-full transition-all duration-500 ease-out">
+        <div class="w-full px-6 sm:px-10 lg:px-16 2xl:px-24">
+            <div class="flex justify-between items-center h-[80px]">
+                <!-- Logo -->
+                <a href="{{ url_for('index') }}" class="flex-shrink-0 flex items-center h-full">
+                    <span class="text-2xl font-bold text-gray-900 tracking-tight">
+                        <i class="fas fa-graduation-cap text-brandgreen mr-2"></i>
+                        Naman<span class="text-brandgreen">Tutors</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Navbar Links -->
+                <div class="hidden lg:flex items-center space-x-6 h-full">
+                    <a href="{{ url_for('index') }}"
+                        class="text-gray-800 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-brandgreen relative top-[1px]">Home</a>
+                    <a href="{{ url_for('about') }}"
+                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen transition-colors">About Us</a>
+                    <a href="{{ url_for('contact') }}"
+                        class="text-gray-600 hover:text-brandgreen font-medium flex items-center h-full border-b-[3px] border-transparent hover:border-brandgreen transition-colors">Contact</a>
+
+                    {% if session.get('user') %}
+                    <div class="relative ml-2 group">
+                        <button
+                            class="w-[42px] h-[42px] rounded-full overflow-hidden border-2 border-brandgreen hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-brandgreen/50 cursor-pointer">
+                            <img src="{{ session.user.avatar }}" alt="Profile Avatar"
+                                class="w-full h-full object-cover">
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div
+                            class="absolute right-0 top-[120%] w-[320px] bg-white rounded-2xl shadow-[0_15px_40px_-15px_rgba(0,0,0,0.2)] py-5 px-5 hidden group-hover:block transition-all opacity-0 group-hover:opacity-100 z-50 border border-gray-100 transform origin-top-right scale-95 group-hover:scale-100">
+                            <!-- Arrow -->
+                            <div
+                                class="absolute -top-2 right-4 w-4 h-4 bg-white rotate-45 border-l border-t border-gray-100">
+                            </div>
+
+                            <div
+                                class="flex items-center space-x-4 mb-4 border-b border-gray-100 pb-4 relative z-10 bg-white">
+                                <img src="{{ session.user.avatar }}" alt="Profile Avatar"
+                                    class="w-14 h-14 rounded-full border border-gray-200">
+                                <div>
+                                    <p class="font-bold text-brandgreen text-lg leading-tight">{{
+                                        session.user.student_name }}</p>
+                                    <p class="text-xs text-gray-500 font-medium">@{{ session.user.username }}</p>
+                                </div>
+                            </div>
+                            <div
+                                class="space-y-3 mb-5 text-sm text-gray-600 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                <p class="flex items-center"><i class="fas fa-school w-6 text-gray-400 text-center"></i>
+                                    <span class="font-medium text-gray-800">{{ session.user.school_name }} ({{
+                                        session.user.class_grade }})</span>
+                                </p>
+                                <p class="flex items-center"><i
+                                        class="fas fa-user-friends w-6 text-gray-400 text-center"></i> <span>Parent: {{
+                                        session.user.parent_name }}</span></p>
+                                <p class="flex items-center"><i class="fas fa-phone w-6 text-gray-400 text-center"></i>
+                                    <span>{{ session.user.phone }}</span>
+                                </p>
+                                <p class="flex items-center"><i
+                                        class="fas fa-envelope w-6 text-gray-400 text-center"></i> <span
+                                        class="truncate">{{ session.user.email }}</span></p>
+                                <p class="flex items-start"><i
+                                        class="fas fa-map-marker-alt w-6 text-gray-400 text-center mt-1"></i> <span
+                                        class="leading-tight">{{ session.user.address }}</span></p>
+                            </div>
+                            <a href="{{ url_for('logout') }}"
+                                class="block w-full text-center bg-red-50 hover:bg-red-100 text-red-600 font-bold py-2.5 rounded-lg transition-colors text-sm"
+                                onclick="return confirm('Are you sure you want to sign out?')">Sign Out</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="{{ url_for('become_tutor') }}"
+                        class="text-brandgreen border border-brandgreen hover:bg-brandgreen hover:text-white px-5 py-2 rounded-full font-medium transition-all ml-2 inline-flex items-center justify-center">
+                        Become a Tutor
+                    </a>
+
+                    <a href="{{ url_for('book_demo') }}"
+                        class="bg-brandgreen hover:bg-[#619a35] shadow-lg shadow-brandgreen/30 text-white px-6 py-2 rounded-full font-medium transition-all ml-2 inline-flex items-center justify-center transform hover:scale-105">
+                        Book Free Demo
+                    </a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brandgreen focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full">
+            <div class="px-2 pt-2 pb-5 space-y-1 sm:px-3">
+                <a href="{{ url_for('index') }}" class="block px-3 py-2 text-base font-medium text-brandgreen">Home</a>
+                <a href="{{ url_for('about') }}"
+                    class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-brandgreen">About Us</a>
+                <a href="{{ url_for('contact') }}"
+                    class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-brandgreen">Contact</a>
+
+                {% if session.get('user') %}
+                <div class="border-t border-gray-100 mt-4 pt-4 pb-2">
+                    <div class="flex items-center px-3 mb-4">
+                        <img src="{{ session.user.avatar }}" alt="Profile"
+                            class="w-10 h-10 rounded-full border border-gray-200">
+                        <div class="ml-3">
+                            <p class="font-bold text-gray-900 text-sm leading-tight">{{ session.user.student_name }}</p>
+                            <p class="text-xs text-gray-500">@{{ session.user.username }}</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url_for('logout') }}"
+                    class="block px-3 py-2 mt-2 text-center text-base font-bold bg-red-50 text-red-600 rounded-md">Sign
+                    Out</a>
+                {% else %}
+                <a href="{{ url_for('become_tutor') }}"
+                    class="block px-3 py-2 mt-4 text-center text-base font-medium text-brandgreen border border-brandgreen rounded-md">Become
+                    a Tutor</a>
+                <a href="{{ url_for('book_demo') }}"
+                    class="block px-3 py-2 mt-2 text-center text-base font-medium bg-brandgreen text-white rounded-md">Book
+                    Free Demo</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Professional Footer -->
+    <footer class="bg-gray-900 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-brandgreen flex items-center gap-2">
+                        <i class="fas fa-graduation-cap"></i> Naman Tutors
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Expert home tuition for classes 1-10 in Pune.
+                        Personalized learning with certified tutors.</p>
+                    <!-- Social Links -->
+                    <div class="flex gap-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-brandgreen transition">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-brandgreen transition">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-brandgreen transition">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-brandgreen transition">
+                            <i class="fab fa-linkedin text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-brandgreen">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="{{ url_for('index') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Home
+                            </a></li>
+                        <li><a href="{{ url_for('about') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> About Us
+                            </a></li>
+                        <li><a href="{{ url_for('contact') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Contact
+                            </a></li>
+                        <li><a href="{{ url_for('become_tutor') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Become Tutor
+                            </a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-brandgreen">Services</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="{{ url_for('book_demo') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Book Demo Class
+                            </a></li>
+                        <li><a href="{{ url_for('book_tutor') }}"
+                                class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Find Tutors
+                            </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Online Classes
+                            </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-brandgreen transition flex items-center gap-2">
+                                <i class="fas fa-chevron-right text-xs"></i> Group Tuition
+                            </a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-brandgreen">Contact Info</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-brandgreen mt-1"></i>
+                            <span>Pune, Maharashtra, India</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-brandgreen"></i>
+                            <a href="tel:+919876543210" class="hover:text-brandgreen transition">+91 98765 43210</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brandgreen"></i>
+                            <a href="mailto:info@namantutors.com"
+                                class="hover:text-brandgreen transition">info@namantutors.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>&copy; 2024 Naman Home Tutors. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-brandgreen transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-brandgreen transition">Terms & Conditions</a>
+                    <a href="#" class="hover:text-brandgreen transition">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float hover-card"
+        aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 800,
+                once: false,
+                offset: 80,
+                easing: 'ease-out-cubic',
+                mirror: true
+            });
+        });
+    </script>
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

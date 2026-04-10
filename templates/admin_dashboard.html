@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Naman Tutors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandgreen: '#7bc143',
+                        darkblue: '#1e3a8a',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen text-gray-800 flex">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 text-white fixed h-full flex flex-col">
+        <div class="h-20 flex flex-col justify-center px-8 border-b border-gray-800">
+            <span class="text-xl font-bold tracking-tight">Naman<span class="text-brandgreen">Tutors</span></span>
+            <span class="text-xs text-gray-400 mt-0.5 tracking-widest uppercase font-semibold text-brandgreen/80 flex items-center">
+                <i class="fas fa-shield-alt text-[10px] mr-1.5"></i> Admin Portal
+            </span>
+        </div>
+        <nav class="flex-1 py-8 space-y-2 px-4">
+            <button onclick="showTab('students')" id="btn-students"
+                class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg bg-gray-800 text-brandgreen hover:bg-gray-800 transition-colors text-left transition-all">
+                <i class="fas fa-user-graduate w-6"></i> Registered Students
+            </button>
+            <button onclick="showTab('tutors')" id="btn-tutors"
+                class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors text-left transition-all">
+                <i class="fas fa-chalkboard-teacher w-6"></i> Tutor Applicants
+            </button>
+            <button onclick="showTab('messages')" id="btn-messages"
+                class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors text-left transition-all">
+                <i class="fas fa-envelope w-6"></i> Contact Messages
+            </button>
+        </nav>
+        <div class="p-4 border-t border-gray-800">
+            <a href="{{ url_for('admin_logout') }}"
+                class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-red-400 hover:bg-red-500/10 transition-colors">
+                <i class="fas fa-sign-out-alt w-6"></i> Logout
+            </a>
+            <a href="{{ url_for('index') }}" class="block mt-4 text-xs text-center text-gray-500 hover:text-white">View
+                Live Site</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 flex-1 p-8 overflow-y-auto">
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-8" id="page-title">Registered Students (Demo Leads)</h1>
+
+        <!-- Tab: Students -->
+        <div id="tab-students" class="block">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Student Name
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Parent</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Contact</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Class/School
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Address</th>
+                                <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase">Reject</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for student in students %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <img class="h-10 w-10 rounded-full bg-gray-100" src="{{ student.avatar }}"
+                                            alt="">
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">{{ student.student_name }}
+                                            </div>
+                                            <div class="text-sm text-gray-500">@{{ student.username }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ student.parent_name }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ student.phone }}</div>
+                                    <div class="text-sm text-gray-500">{{ student.email }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Class: {{ student.class_grade }}</div>
+                                    <div class="text-sm text-gray-500">{{ student.school_name }}</div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600 max-w-xs truncate"
+                                    title="{{ student.address }}">{{ student.address }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                    <button onclick="deleteRecord('student', '{{ student.id }}')"
+                                        class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2.5 rounded-lg transition-colors border border-red-100"
+                                        title="Reject Application">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="px-6 py-8 text-center text-gray-500">No student registrations
+                                    yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Tutors -->
+        <div id="tab-tutors" class="hidden">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Phone</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">CV File</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Date</th>
+                                <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase">Reject</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for app in applicants %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ app.name }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ app.phone }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <a href="{{ url_for('download_cv', applicant_id=app.id) }}" target="_blank"
+                                        class="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:shadow-sm rounded-lg border border-blue-200 font-medium text-xs inline-flex items-center transition-all cursor-pointer">
+                                        <i class="fas fa-file-download mr-1.5"></i> Open CV
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        {{ app.status }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ app.timestamp }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                    <button onclick="deleteRecord('applicant', '{{ app.id }}')"
+                                        class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2.5 rounded-lg transition-colors border border-red-100"
+                                        title="Reject Application">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="px-6 py-8 text-center text-gray-500">No tutor applicants yet.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Messages -->
+        <div id="tab-messages" class="hidden">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Sender</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase w-1/2">Message
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Time</th>
+                                <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for msg in messages %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-bold text-gray-900">{{ msg.name }}</div>
+                                    <div class="text-sm text-gray-500">{{ msg.email }}</div>
+                                    <div class="text-xs text-gray-400 mt-1"><i class="fas fa-phone mr-1"></i>{{
+                                        msg.phone }}</div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                                        {{ msg.message }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">{{ msg.timestamp }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                    <button onclick="deleteRecord('message', '{{ msg.id }}')"
+                                        class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2.5 rounded-lg transition-colors border border-red-100"
+                                        title="Delete Message">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="px-6 py-8 text-center text-gray-500">No contact messages
+                                    received.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('tab-students').classList.add('hidden');
+            document.getElementById('tab-tutors').classList.add('hidden');
+            document.getElementById('tab-messages').classList.add('hidden');
+
+            // Reset buttons
+            const btns = ['students', 'tutors', 'messages'];
+            btns.forEach(btn => {
+                const el = document.getElementById('btn-' + btn);
+                el.classList.remove('bg-gray-800', 'text-brandgreen');
+                el.classList.add('text-gray-400');
+            });
+
+            // Show selected tab
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+
+            // Highlight selected button
+            const activeBtn = document.getElementById('btn-' + tabName);
+            activeBtn.classList.add('bg-gray-800', 'text-brandgreen');
+            activeBtn.classList.remove('text-gray-400');
+
+            // Set Title
+            const titles = {
+                'students': 'Registered Students (Demo Leads)',
+                'tutors': 'Tutor Applications',
+                'messages': 'Contact Messages'
+            };
+            document.getElementById('page-title').innerText = titles[tabName];
+        }
+
+        function deleteRecord(type, id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to recover this record!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Yes, reject it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch('/admin/delete/' + type + '/' + id, {
+                        method: 'POST'
+                    }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire(
+                                    'Removed!',
+                                    'The record has been permanently deleted.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('Error!', data.error || 'Something went wrong.', 'error');
+                            }
+                        });
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
