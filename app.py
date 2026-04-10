@@ -78,8 +78,14 @@ def make_session_permanent():
     """Make session permanent so timeout works"""
     session.permanent = True
 
-DATABASE = 'tutors.db'
-APPLICANTS_DB = 'tutor_applications.db'
+# Use /tmp/ on Vercel (read-only filesystem except /tmp/)
+IS_VERCEL = os.environ.get('VERCEL', False)
+if IS_VERCEL:
+    DATABASE = '/tmp/tutors.db'
+    APPLICANTS_DB = '/tmp/tutor_applications.db'
+else:
+    DATABASE = 'tutors.db'
+    APPLICANTS_DB = 'tutor_applications.db'
 
 def init_db():
     """Initializes SQLite databases."""
@@ -366,7 +372,7 @@ from werkzeug.utils import secure_filename
 import smtplib
 from email.message import EmailMessage
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/tmp/uploads' if IS_VERCEL else 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
