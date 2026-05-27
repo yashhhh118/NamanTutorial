@@ -873,3 +873,105 @@ input[type="radio"] {
     background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 70%);
     pointer-events: none;
 }
+
+/* ========================================
+   MOBILE RESPONSIVENESS FIXES
+   ======================================== */
+
+/* Prevent horizontal scrolling on all screens */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Logo responsive sizing */
+nav img[alt="Naman Home Tutors Logo"] {
+    max-height: 58px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Top contact bar - better wrapping on mobile */
+@media (max-width: 480px) {
+    .top-contact-bar span:not(.keep) {
+        display: none;
+    }
+}
+
+/* Hero section mobile fix */
+@media (max-width: 768px) {
+    .hero-gradient {
+        min-height: auto !important;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    /* Section padding reduction on mobile */
+    .section {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    /* CTA Bento cards - fix image overflow on mobile */
+    .bento-card-image {
+        display: none;
+    }
+}
+
+/* Flip cards on mobile - support touch tap */
+@media (max-width: 1024px) {
+    .flip-card {
+        height: 160px;
+    }
+
+    .flip-card-inner {
+        pointer-events: none;
+    }
+
+    .flip-card.tapped .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+}
+
+/* Better grid responsiveness for subjects */
+@media (max-width: 640px) {
+    .flip-card {
+        height: 150px;
+    }
+}
+
+/* Mobile menu fixes */
+@media (max-width: 1024px) {
+    #mobile-menu {
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+}
+
+/* Footer grid on mobile */
+@media (max-width: 768px) {
+    footer .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    footer .grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* WhatsApp float smaller on mobile */
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 26px;
+        bottom: 20px;
+        right: 16px;
+    }
+
+    /* Reduce section padding on very small screens */
+    .section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}

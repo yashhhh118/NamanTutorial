@@ -308,4 +308,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // 14. INITIAL FIRE — trigger onScroll once
     // ==========================================
     onScroll();
+
+    // ==========================================
+    // 15. FLIP CARD TOUCH SUPPORT (Mobile)
+    // ==========================================
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', function () {
+                // Close all other tapped cards
+                document.querySelectorAll('.flip-card.tapped').forEach(c => {
+                    if (c !== this) c.classList.remove('tapped');
+                });
+                this.classList.toggle('tapped');
+            });
+        });
+    }
+
+    // ==========================================
+    // 16. CLOSE MOBILE MENU ON OUTSIDE CLICK
+    // ==========================================
+    document.addEventListener('click', (e) => {
+        const mobileMenuEl = document.getElementById('mobile-menu');
+        const mobileMenuBtnEl = document.getElementById('mobile-menu-btn');
+        if (mobileMenuEl && !mobileMenuEl.contains(e.target) && !mobileMenuBtnEl.contains(e.target)) {
+            mobileMenuEl.classList.add('hidden');
+        }
+    });
 });

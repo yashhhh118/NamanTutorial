@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Naman Home Tutors - Classes 1-10 in Pune{% endblock %}</title>
+    <title>{% block title %}Naman Home Tutors - KG to Graduation in Pune{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bungee&family=Caveat:wght@400..700&family=Pacifico&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bungee&family=Caveat:wght@400..700&family=Pacifico&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Tailwind CSS Script -->
@@ -31,6 +31,7 @@
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
                         bungee: ['Bungee', 'sans-serif'],
                         pacifico: ['Pacifico', 'cursive'],
                         caveat: ['Caveat', 'cursive'],
@@ -42,6 +43,23 @@
 </head>
 
 <body class="antialiased bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Top Contact Bar -->
+    <div class="bg-[#1e3a8a] text-white text-xs sm:text-sm py-2 px-4 sm:px-6 lg:px-16 flex flex-wrap justify-center sm:justify-end items-center gap-3 sm:gap-6">
+        <a href="tel:+919689383316" class="flex items-center gap-1.5 hover:text-yellow-300 transition-colors">
+            <i class="fas fa-phone-alt text-yellow-400"></i>
+            <span>+91 96893 83316</span>
+        </a>
+        <a href="mailto:namanhometutors@gmail.com" class="flex items-center gap-1.5 hover:text-yellow-300 transition-colors">
+            <i class="fas fa-envelope text-yellow-400"></i>
+            <span>namanhometutors@gmail.com</span>
+        </a>
+        <a href="https://wa.me/919689383316" target="_blank" class="flex items-center gap-1.5 hover:text-yellow-300 transition-colors">
+            <i class="fab fa-whatsapp text-green-400"></i>
+            <span>WhatsApp Us</span>
+        </a>
+    </div>
+
     <!-- Navbar -->
     <nav id="navbar"
         class="bg-white sticky top-0 z-50 shadow-[0_2px_10px_rgba(0,0,0,0.05)] w-full transition-all duration-500 ease-out">
@@ -50,8 +68,8 @@
                 <!-- Logo -->
                 <a href="{{ url_for('index') }}" class="flex-shrink-0 flex items-center h-full">
                     <span class="text-2xl font-bold text-gray-900 tracking-tight">
-                        <i class="fas fa-graduation-cap text-brandgreen mr-2"></i>
-                        Naman<span class="text-brandgreen">Tutors</span>
+                        <i class="fas fa-graduation-cap text-brandgreen mr-1"></i>
+                        Naman<span class="text-brandgreen">HomeTutors</span>
                     </span>
                 </a>
 
@@ -181,10 +199,10 @@
             <div class="grid md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
                 <!-- About -->
                 <div>
-                    <h3 class="text-lg font-bold mb-4 text-brandgreen flex items-center gap-2">
-                        <i class="fas fa-graduation-cap"></i> Naman Tutors
-                    </h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Expert home tuition for classes 1-10 in Pune.
+                    <div class="mb-4">
+                        <img src="{{ url_for('static', filename='images/naman_logo.png') }}" alt="Naman Home Tutors Logo" class="h-16 w-auto object-contain">
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Expert home tuition from KG to Graduation in Pune.
                         Personalized learning with certified tutors.</p>
                     <!-- Social Links -->
                     <div class="flex gap-4 mt-4">
@@ -253,16 +271,16 @@
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li class="flex items-start gap-3">
                             <i class="fas fa-map-marker-alt text-brandgreen mt-1"></i>
-                            <span>Pune, Maharashtra, India</span>
+                            <span>Office No. 403, Shivmalhar Building, Near IHMS Hospital, Kesnand Phata, Wagholi, Pune - 412207</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <i class="fas fa-phone text-brandgreen"></i>
-                            <a href="tel:+919876543210" class="hover:text-brandgreen transition">+91 98765 43210</a>
+                            <a href="tel:+919689383316" class="hover:text-brandgreen transition">+91 96893 83316</a>
                         </li>
                         <li class="flex items-center gap-3">
                             <i class="fas fa-envelope text-brandgreen"></i>
-                            <a href="mailto:info@namantutors.com"
-                                class="hover:text-brandgreen transition">info@namantutors.com</a>
+                            <a href="mailto:namanhometutors@gmail.com"
+                                class="hover:text-brandgreen transition">namanhometutors@gmail.com</a>
                         </li>
                     </ul>
                 </div>
@@ -270,7 +288,7 @@
 
             <!-- Bottom Footer -->
             <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-                <p>&copy; 2024 Naman Home Tutors. All rights reserved.</p>
+                <p>&copy; 2025 Naman Home Tutors. All rights reserved.</p>
                 <div class="flex gap-6 mt-4 md:mt-0">
                     <a href="#" class="hover:text-brandgreen transition">Privacy Policy</a>
                     <a href="#" class="hover:text-brandgreen transition">Terms & Conditions</a>
@@ -281,7 +299,7 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float hover-card"
+    <a href="https://wa.me/919689383316" target="_blank" class="whatsapp-float hover-card"
         aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
